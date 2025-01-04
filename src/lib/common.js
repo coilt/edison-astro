@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import { gsap, Cubic, Linear, Power2, Power3, Power4, Flip, ScrollTrigger } from "/node_modules/gsap/all.js"; 
+import { gsap, Cubic, Linear, Power0, Power1, Power2, Power3, Power4, Flip, ScrollTrigger } from "/node_modules/gsap/all.js"; 
 
-
+import { GridToFullscreenEffect } from '../../public/GridToFullScreen'
  
 
 import '/node_modules/jquery/dist/jquery.js' 
@@ -3746,3 +3746,5 @@ Function Core
 	var PlayVideo = window.PlayVideo;
 	var isMobile = window.isMobile;
 	var Core = window.Core;	
+
+ 

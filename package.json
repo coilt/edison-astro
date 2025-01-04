@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "astro": "^5.1.2",
+    "astro-lenis": "^1.0.0",
     "gsap": "^3.12.5",
     "imagesloaded": "^5.0.0",
     "jquery": "^3.7.1",
+    "lenis": "^1.1.18",
     "three": "^0.172.0"
   },
   "devDependencies": {

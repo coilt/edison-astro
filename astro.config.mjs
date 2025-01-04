@@ -1,6 +1,8 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
- 
+
+import lenis from 'astro-lenis';
+
 export default defineConfig({
   vite: {
     assetsInclude: [
@@ -8,4 +10,6 @@ export default defineConfig({
       '**/*.woff2',
     ],
   },
+
+  integrations: [lenis()],
 });

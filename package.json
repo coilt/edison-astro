@@ -9,6 +9,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.1.2"
+    "astro": "^5.1.2",
+    "gsap": "^3.12.5",
+    "imagesloaded": "^5.0.0",
+    "jquery": "^3.7.1",
+    "three": "^0.172.0"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.32"
   }
 }

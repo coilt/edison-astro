@@ -89,80 +89,106 @@ Function Page Load
 
 	function PageLoad() {
 		
-		gsap.set($(".menu-timeline .before-span"), {y: 120, opacity:0});
+		gsap.set(document.querySelectorAll(".menu-timeline .before-span"), {y: 120, opacity:0});
+		console.log("jquery replaced for before span")
 		
 		// Page Navigation Events
-		$(".preloader-wrap").on('mouseenter', function() {	
+		document.querySelectorAll(".preloader-wrap").forEach(element => {
+			element.addEventListener('mouseenter', function() {
 			var $this = $(this);			
 			gsap.to('#ball', {duration: 0.3, borderWidth: '2px', scale: 1.4, borderColor:"rgba(255,255,255,0)", backgroundColor:"rgba(255,255,255,0.1)"});
 			gsap.to('#ball-loader', {duration: 0.2, borderWidth: '2px', top: 2, left: 2});
-			$("#ball").addClass("with-blur");
-			$( "#ball" ).append( '<p class="center-first">' + $this.data("centerline") + '</p>' );				
+			const ballElement = document.getElementById("ball");
+if (ballElement) {
+    ballElement.classList.add("with-blur");
+}
+			document.getElementById("ball").insertAdjacentHTML('beforeend', '<p class="center-first">' + $this.dataset.centerline + '</p>');
+		});				
 		});
 							
-		$(".preloader-wrap").on('mouseleave', function() {					
-			gsap.to('#ball', {duration: 0.2, borderWidth: '4px', scale:0.5, borderColor:'#999999', backgroundColor:'transparent'});
-			gsap.to('#ball-loader', {duration: 0.2, borderWidth: '4px', top: 0, left: 0});
-			$("#ball").removeClass("with-blur");
-			$('#ball p').remove();			
+		document.querySelectorAll(".preloader-wrap").forEach(element => {
+			element.addEventListener('mouseleave', function() {
+				gsap.to('#ball', {duration: 0.2, borderWidth: '4px', scale:0.5, borderColor:'#999999', backgroundColor:'transparent'});
+				gsap.to('#ball-loader', {duration: 0.2, borderWidth: '4px', top: 0, left: 0});
+				
+				const ball = document.getElementById("ball");
+				if (ball) {
+					ball.classList.remove("with-blur");
+					const ballP = ball.querySelector('p');
+					if (ballP) ballP.remove();
+				}
+			});
 		});
 		
-		$('body').removeClass('hidden').removeClass('hidden-ball');
+		document.body.classList.remove('hidden', 'hidden-ball');
 		
-		gsap.to($("#header-container"), {duration: 0.5, opacity:1, delay:0.2, ease:Power2.easeOut}); 
+		gsap.to(document.getElementById("header-container"), {duration: 0.5, opacity:1, delay:0.2, ease:Power2.easeOut}); 
 		
+		// Cleaned up jQuery ^^^^
 		
 		function initOnFirstLoad() {
 		
 			imagesLoaded('body', function() {
 				gsap.to('#ball', {duration: 0.2, borderWidth: '4px', scale:0.5, borderColor:'#999999', backgroundColor:'transparent'});
 				gsap.to('#ball-loader', {duration: 0.2, borderWidth: '4px', top: 0, left: 0});
-				$('#ball p').remove();
-				gsap.to($(".percentage-wrapper"), {duration: 0.7, x:$(".trackbar").width()*0.5 - $(".percentage-wrapper").width() * 0.5, delay:0.3, ease:Power4.easeOut});
-				gsap.to($(".percentage"), {duration: 0.7, opacity:0, y:-100, delay:1, ease:Power4.easeInOut});
-				gsap.to($(".percentage-intro"), {duration: 0.5, opacity:0, delay:0.6, ease:Power4.easeInOut});
-				gsap.to($(".preloader-intro span"), {duration: 0.7, opacity:0, xPercent: -101, delay:0.3, ease:Power4.easeOut});						
-				gsap.to($(".preloader-wrap"), {duration: 0.7, opacity:0, delay:1.6, ease:Power2.easeOut});
-				gsap.set($(".preloader-wrap"), {visibility:'hidden', delay:2, yPercent: -101});										
+				document.querySelectorAll('#ball p').forEach(el => el.remove());
+				const percentageWrapper = document.querySelector(".percentage-wrapper");
+				const trackbar = document.querySelector(".trackbar");
+				gsap.to(percentageWrapper, {
+					duration: 0.7, 
+					x: trackbar.offsetWidth * 0.5 - percentageWrapper.offsetWidth * 0.5, 
+					delay: 0.3, 
+					ease: Power4.easeOut
+				});
+				
+				gsap.to(document.querySelectorAll(".percentage"), {duration: 0.7, opacity:0, y:-100, delay:1, ease:Power4.easeInOut});
+				gsap.to(document.querySelectorAll(".percentage-intro"), {duration: 0.5, opacity:0, delay:0.6, ease:Power4.easeInOut});
+				gsap.to(document.querySelectorAll(".preloader-intro span"), {duration: 0.7, opacity:0, xPercent: -101, delay:0.3, ease:Power4.easeOut});						
+				gsap.to(document.querySelectorAll(".preloader-wrap"), {duration: 0.7, opacity:0, delay:1.6, ease:Power2.easeOut});
+				gsap.set(document.querySelectorAll(".preloader-wrap"), {visibility:'hidden', delay:2, yPercent: -101});										
 				
 				setTimeout(function(){
-					$("#ball").removeClass("with-blur");
-					
-					gsap.to($(".header-middle, #footer-container"), {duration: 1, opacity:1, delay:0, ease:Power2.easeOut});
-					
-					if( $('.hero-video-wrapper').length > 0 ){
-						$('#hero-image-wrapper').find('video').each(function() {
-							$(this).get(0).play();
-						});
-						gsap.to($(".hero-video-wrapper"), {duration: 0.2, opacity:1, delay:0, ease:Power2.easeOut}); 
+					const ballElement = document.getElementById("ball");
+					if (ballElement) {
+						ballElement.classList.remove("with-blur");
 					}
 					
-					gsap.to($("#main"), {duration: 0, opacity:1, delay:0, ease:Power2.easeOut});
+					gsap.to(document.querySelectorAll(".header-middle, #footer-container"), {duration: 1, opacity:1, delay:0, ease:Power2.easeOut});
 					
-					if( $('#hero').hasClass("has-image")) {								
-						gsap.set($("#hero-bg-image"), {scale:1.1 , opacity:0});
-						gsap.set($("#hero-caption .hero-title span"), {y: 120, opacity:0});					
-						gsap.set($("#hero-caption .hero-subtitle span"), {y: 30, opacity:0});
+					if( document.querySelectorAll('.hero-video-wrapper').length > 0 ){
+						document.getElementById('hero-image-wrapper').querySelectorAll('video').forEach(function(video) { video.play(); });
+						gsap.to(document.querySelectorAll(".hero-video-wrapper"), {duration: 0.2, opacity:1, delay:0, ease:Power2.easeOut}); 
+					}
+					
+					gsap.to(document.getElementById("main"), {duration: 0, opacity:1, delay:0, ease:Power2.easeOut});
+					
+					if( document.getElementById('hero').classList.contains("has-image")) {								
+						gsap.set(document.getElementById("hero-bg-image"), {scale:1.1 , opacity:0});
+						gsap.set(document.querySelectorAll("hero-caption .hero-title span"), {y: 120, opacity:0});					
+						gsap.set(document.querySelectorAll("hero-caption .hero-subtitle span"), {y: 30, opacity:0});
 						
-						gsap.to($("#hero-bg-image"), {duration: 1, scale:1 , opacity:1, delay:0.2, ease:Power2.easeOut});
-						gsap.to($("#hero-caption .caption-timeline span"), {duration: 0.7, y: 0, opacity:1, stagger:0.1, delay:0.7, ease:Power3.easeOut, onComplete: function() {
-							gsap.to($(".hero-footer-left, .hero-footer-right"), {duration: 1, y:0, opacity:1, delay:0, ease:Power2.easeOut});																				
-							gsap.to($("#main-page-content, #page-nav"), {duration: 0.4, opacity:1, delay:0, ease:Power2.easeOut});
+						gsap.to(document.getElementById("#hero-bg-image"), {duration: 1, scale:1 , opacity:1, delay:0.2, ease:Power2.easeOut});
+						gsap.to(document.querySelectorAll("#hero-caption .caption-timeline span"), {duration: 0.7, y: 0, opacity:1, stagger:0.1, delay:0.7, ease:Power3.easeOut, onComplete: function() {
+							gsap.to(document.querySelectorAll(".hero-footer-left, .hero-footer-right"), {duration: 1, y:0, opacity:1, delay:0, ease:Power2.easeOut});																				
+							gsap.to(document.querySelectorAll("#main-page-content, #page-nav"), {duration: 0.4, opacity:1, delay:0, ease:Power2.easeOut});
 						}});
 						
 					} else {													
-						gsap.set($("#hero-caption .hero-title span"), {y: 120, opacity:0});					
-						gsap.set($("#hero-caption .hero-subtitle span"), {y: 30, opacity:0});
+						gsap.set(document.querySelectorAll("#hero-caption .hero-title span"), {y: 120, opacity:0});					
+						gsap.set(document.querySelectorAll("#hero-caption .hero-subtitle span"), {y: 30, opacity:0});
 						
-						gsap.to($("#hero-caption .caption-timeline span"), {duration: 0.7, y: 0, opacity:1, stagger:0.1, delay:0.8, ease:Power3.easeOut, onComplete: function() {							
-							gsap.to($(".error-button"), {duration: 0.3, y: 0, opacity:1, rotation:0, delay:0, ease:Power2.easeOut});
+						gsap.to(document.querySelectorAll("#hero-caption .caption-timeline span"), {duration: 0.7, y: 0, opacity:1, stagger:0.1, delay:0.8, ease:Power3.easeOut, onComplete: function() {							
+							gsap.to(document.querySelectorAll(".error-button"), {duration: 0.3, y: 0, opacity:1, rotation:0, delay:0, ease:Power2.easeOut});
 						}});
 						
-						gsap.to($("#main-page-content, #page-nav"), {duration: 0.3, opacity:1, delay:1.4, ease:Power2.easeOut});
+						gsap.to(document.querySelectorAll("#main-page-content, #page-nav"), {duration: 0.3, opacity:1, delay:1.4, ease:Power2.easeOut});
 						
-						gsap.to($(".hero-footer-left, .hero-footer-right"), {duration: 0.3, y:0, opacity:1, delay:1.3, ease:Power2.easeOut, onComplete: function() {
-							$("#hero-footer.has-border").addClass("visible");																			
-						}});
+						gsap.to(document.querySelectorAll(".hero-footer-left, .hero-footer-right"), {duration: 0.3, y:0, opacity:1, delay:1.3, ease:Power2.easeOut, onComplete: function() {
+							const heroFooter = document.querySelector("#hero-footer.has-border");
+							if (heroFooter) {
+									heroFooter.classList.add("visible");
+							}
+					}});
 										
 					}	
 					
@@ -1670,7 +1696,7 @@ Function Showcase Portfolio
 						trigger: tAnimation,
 						start: "top 100%",
 						stagger:0.5,
-						markers: true,
+						markers: false,
 						onEnter: function() {
 							tAnimation.classList.add('animated');
 							tAnimation.closest('.slide-inner').classList.add('show-caption');

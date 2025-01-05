@@ -1,6 +1,7 @@
 ---
  
 const { title } = Astro.props;
+import Header from "@components/Header.astro";
  
 ---
 <html lang="en">
@@ -11,7 +12,7 @@ const { title } = Astro.props;
   </head>
   <body style="background-color: black;">
  
-    
+    <Header menuColor="#0c0c0c" />
     <article>
       <slot /> <!-- your content is injected here -->
     </article>
@@ -19,5 +20,10 @@ const { title } = Astro.props;
   </body>
   <style>
  
+
+
   </style>
+
+
+
 </html>

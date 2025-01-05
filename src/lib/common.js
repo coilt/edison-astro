@@ -1594,8 +1594,10 @@ Function Scroll Effects
 /*--------------------------------------------------
 Function First Load
 ---------------------------------------------------*/	
-	
-	window.FirstLoad = function() {
+
+
+ 
+const FirstLoad = function() {
 		
 		$(window).on('popstate', function() {
 			location.reload(true);
@@ -1790,7 +1792,10 @@ Function First Load
 		
 	}// End First Load
 	
-	
+	// Legacy compatibility
+window.FirstLoad = FirstLoad;
+
+let firstLoad = FirstLoad;
 
 	
 	
@@ -3746,5 +3751,7 @@ Function Core
 	var PlayVideo = window.PlayVideo;
 	var isMobile = window.isMobile;
 	var Core = window.Core;	
+
+ 
 
  

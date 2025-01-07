@@ -8,14 +8,18 @@ import '../styles/all.min.css'
 import '../styles/shortcodes.css'
 
 
-
-const { menuColor = "#0c0c0c" } = Astro.props;
+interface Props {
+  class?: string;
+  menuColor?: string;
+}
+ 
+const { class: className = "", menuColor = "#000000" } = Astro.props;
 
 
 ---
 
 
-<header class="fullscreen-menu white-header invert-header" data-menucolor="#0c0c0c">
+<header class={className} data-menucolor={menuColor}>
     <div id="header-container">
     
     

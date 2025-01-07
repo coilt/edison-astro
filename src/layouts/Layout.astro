@@ -1,8 +1,19 @@
 ---
  
-const { title } = Astro.props;
+
 import Header from "@components/Header.astro";
- 
+
+
+interface Props {
+  headerClass?: string;
+  title?: string;
+  menuColor?: string;
+}
+const { title } = Astro.props;
+const { headerClass = "" } = Astro.props;
+const { menuColor = "" } = Astro.props;
+
+
 ---
 <html lang="en">
   <head>
@@ -12,7 +23,7 @@ import Header from "@components/Header.astro";
   </head>
   <body style="background-color: black;">
  
-    <Header menuColor="#0c0c0c" />
+    <!-- <Header class={headerClass} menuColor={menuColor} /> -->
     <article>
       <slot /> <!-- your content is injected here -->
     </article>

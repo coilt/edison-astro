@@ -1,0 +1,519 @@
+---
+import { getCollection } from 'astro:content'
+const projects = await getCollection('projects')
+
+import Layout from '../layouts/Layout.astro'
+import Preloader from '@components/Preloader.astro'
+
+import '../styles/globals.css'
+import '../styles/all.min.css'
+import '../styles/shortcodes.css'
+
+interface Props {
+  class?: string
+  menuColor?: string
+}
+
+const { class: className = '', menuColor = '#000000' } = Astro.props
+---
+
+<Layout title="Edison Army Showcase" headerClass="invert-header">
+  <title>Manifesto - Creative Portfolio Template</title>
+  <body class="uppercase-titles" data-primary-color="#8c6144">
+    <main>
+      <Preloader centerLine="Loading" />
+      <div class="cd-index cd-main-content">
+        <!-- Page Content -->
+        <div id="page-content" class="dark-content" data-bgcolor="#f9f9f9">
+          <!-- Content Scroll -->
+          <div id="content-scroll">
+            <!-- Main -->
+            <div id="main">
+              <!-- Hero Section -->
+              <div id="hero">
+                <div id="hero-styles">
+                  <div
+                    id="hero-caption"
+                    class="content-full-width parallax-scroll-caption text-align-center"
+                  >
+                    <div class="inner">
+                      <h1 class="hero-title caption-timeline">
+                        <span><em>Digital Visions</em></span>
+                        <span>Where Technology</span>
+                        <span>Meets Artistry</span>
+                      </h1>
+                      <div class="hero-subtitle caption-timeline">
+                        <span>Exploring the World of Visual Design</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="hero-footer" class="has-border">
+                    <div class="hero-footer-left">
+                      <div class="grid-options-wrapper">
+                        <a class="grid-option list-view" href="#"
+                          ><span class="link" data-hover="Lists View"
+                            >Lists View</span
+                          ><span class="link" data-hover="Grid View"
+                            >Grid View</span
+                          ></a
+                        >
+                        <a class="grid-option shuffle-grid" href="#"
+                          ><span class="link" data-hover="Shuffle Grid"
+                            >Shuffle Grid</span
+                          ></a
+                        >
+                      </div>
+                    </div>
+
+                    <div class="hero-footer-right">
+                      <div class="filters-options-wrapper">
+                        <a
+                          id="all"
+                          class="filter-option is_active"
+                          href="#"
+                          data-filter=""
+                          ><span class="link" data-hover="All">All</span></a
+                        >
+                        <a
+                          class="filter-option"
+                          href="#"
+                          data-filter="design-filter"
+                          ><span class="link" data-hover="Design">Design</span
+                          ></a
+                        >
+                        <a
+                          class="filter-option"
+                          href="#"
+                          data-filter="video-filter"
+                          ><span class="link" data-hover="Video">Video</span></a
+                        >
+                        <a
+                          class="filter-option"
+                          href="#"
+                          data-filter="photo-filter"
+                          ><span class="link" data-hover="Photo">Photo</span></a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/Hero Section -->
+
+              <!-- Main Content -->
+              <div id="main-content">
+                <!-- Main Page Content -->
+                <div id="main-page-content">
+                  <!-- Showcase Portfolio Holder -->
+                  <div id="itemsWrapperLinks">
+                    <div id="itemsWrapper" class="webgl-fitthumbs fx-seven">
+                      <!-- ClaPat Portfolio -->
+                      <div class="showcase-portfolio layout-one">
+                        <div class="clapat-item photo-filter">
+                          <div
+                            class="slide-inner trigger-item"
+                            data-centerLine="OPEN"
+                          >
+                            <div class="img-mask">
+                              <a
+                                class="slide-link"
+                                data-type="page-transition"
+                                href="project01.html"></a>
+                              <div class="section-image trigger-item-link">
+                                <img
+                                  src="images/01hero.jpg"
+                                  class="item-image grid__item-img"
+                                  alt=""
+                                />
+                              </div>
+                              <img
+                                src="images/01hero.jpg"
+                                class="grid__item-img grid__item-img--large"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="slide-caption trigger-item-link-secondary"
+                            >
+                              <div class="slide-title">
+                                <span><em>The</em> Handbag</span>
+                              </div>
+                              <div class="slide-date"><span>2023</span></div>
+                              <div class="slide-cat">
+                                <span>Photography</span>
+                              </div>
+                              <div class="slide-icon">
+                                <i class="arrow-icon-down"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="clapat-item design-filter">
+                          <div
+                            class="slide-inner trigger-item"
+                            data-centerLine="OPEN"
+                          >
+                            <div class="img-mask">
+                              <a
+                                class="slide-link"
+                                data-type="page-transition"
+                                href="project02.html"></a>
+                              <div class="section-image trigger-item-link">
+                                <img
+                                  src="images/02hero.jpg"
+                                  class="item-image grid__item-img"
+                                  alt=""
+                                />
+                              </div>
+                              <img
+                                src="images/02hero.jpg"
+                                class="grid__item-img grid__item-img--large"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="slide-caption trigger-item-link-secondary"
+                            >
+                              <div class="slide-title">
+                                <span><em>Woolen</em> Craft</span>
+                              </div>
+                              <div class="slide-date"><span>2023</span></div>
+                              <div class="slide-cat">
+                                <span>Product Design</span>
+                              </div>
+                              <div class="slide-icon">
+                                <i class="arrow-icon-down"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="clapat-item photo-filter">
+                          <div
+                            class="slide-inner trigger-item"
+                            data-centerLine="OPEN"
+                          >
+                            <div class="img-mask">
+                              <a
+                                class="slide-link"
+                                data-type="page-transition"
+                                href="project03.html"></a>
+                              <div class="section-image trigger-item-link">
+                                <img
+                                  src="images/03hero.jpg"
+                                  class="item-image grid__item-img"
+                                  alt=""
+                                />
+                              </div>
+                              <img
+                                src="images/03hero.jpg"
+                                class="grid__item-img grid__item-img--large"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="slide-caption trigger-item-link-secondary"
+                            >
+                              <div class="slide-title">
+                                <span><em>Urban</em> Edge</span>
+                              </div>
+                              <div class="slide-date"><span>2023</span></div>
+                              <div class="slide-cat">
+                                <span>Photography</span>
+                              </div>
+                              <div class="slide-icon">
+                                <i class="arrow-icon-down"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="clapat-item video-filter">
+                          <div
+                            class="slide-inner trigger-item change-header"
+                            data-centerLine="OPEN"
+                          >
+                            <div class="img-mask">
+                              <a
+                                class="slide-link"
+                                data-type="page-transition"
+                                href="project04.html"></a>
+                              <div class="section-image trigger-item-link">
+                                <img
+                                  src="images/04hero.jpg"
+                                  class="item-image grid__item-img"
+                                  alt=""
+                                />
+                                <div class="hero-video-wrapper">
+                                  <video loop muted class="bgvid">
+                                    <source
+                                      src="images/04hero.mp4"
+                                      type="video/mp4"
+                                    />
+                                  </video>
+                                </div>
+                              </div>
+                              <img
+                                src="images/04hero.jpg"
+                                class="grid__item-img grid__item-img--large"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="slide-caption trigger-item-link-secondary"
+                            >
+                              <div class="slide-title">
+                                <span><em>The</em> Camarades</span>
+                              </div>
+                              <div class="slide-date"><span>2023</span></div>
+                              <div class="slide-cat">
+                                <span>Video Production</span>
+                              </div>
+                              <div class="slide-icon">
+                                <i class="arrow-icon-down"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="clapat-item design-filter">
+                          <div
+                            class="slide-inner align-top trigger-item"
+                            data-centerLine="OPEN"
+                          >
+                            <div class="img-mask">
+                              <a
+                                class="slide-link"
+                                data-type="page-transition"
+                                href="project05.html"></a>
+                              <div class="section-image trigger-item-link">
+                                <img
+                                  src="images/05hero.jpg"
+                                  class="item-image grid__item-img"
+                                  alt=""
+                                />
+                              </div>
+                              <img
+                                src="images/05hero.jpg"
+                                class="grid__item-img grid__item-img--large"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="slide-caption trigger-item-link-secondary"
+                            >
+                              <div class="slide-title">
+                                <span><em>Storm</em> Guard</span>
+                              </div>
+                              <div class="slide-date"><span>2023</span></div>
+                              <div class="slide-cat">
+                                <span>Graphic Design</span>
+                              </div>
+                              <div class="slide-icon">
+                                <i class="arrow-icon-down"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="clapat-item photo-filter">
+                          <div
+                            class="slide-inner trigger-item"
+                            data-centerLine="OPEN"
+                          >
+                            <div class="img-mask">
+                              <a
+                                class="slide-link"
+                                data-type="page-transition"
+                                href="project06.html"></a>
+                              <div class="section-image trigger-item-link">
+                                <img
+                                  src="images/06hero.jpg"
+                                  class="item-image grid__item-img"
+                                  alt=""
+                                />
+                              </div>
+                              <img
+                                src="images/06hero.jpg"
+                                class="grid__item-img grid__item-img--large"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="slide-caption trigger-item-link-secondary"
+                            >
+                              <div class="slide-title">
+                                <span><em>Heritage</em> Car Rides</span>
+                              </div>
+                              <div class="slide-date"><span>2023</span></div>
+                              <div class="slide-cat">
+                                <span>Product Design</span>
+                              </div>
+                              <div class="slide-icon">
+                                <i class="arrow-icon-down"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="clapat-item design-filter">
+                          <div
+                            class="slide-inner trigger-item"
+                            data-centerLine="OPEN"
+                          >
+                            <div class="img-mask">
+                              <a
+                                class="slide-link"
+                                data-type="page-transition"
+                                href="project07.html"></a>
+                              <div class="section-image trigger-item-link">
+                                <img
+                                  src="images/07hero.jpg"
+                                  class="item-image grid__item-img"
+                                  alt=""
+                                />
+                              </div>
+                              <img
+                                src="images/07hero.jpg"
+                                class="grid__item-img grid__item-img--large"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="slide-caption trigger-item-link-secondary"
+                            >
+                              <div class="slide-title">
+                                <span><em>Serene</em> Sheets</span>
+                              </div>
+                              <div class="slide-date"><span>2023</span></div>
+                              <div class="slide-cat">
+                                <span>Graphic Design</span>
+                              </div>
+                              <div class="slide-icon">
+                                <i class="arrow-icon-down"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="clapat-item photo-filter">
+                          <div
+                            class="slide-inner trigger-item"
+                            data-centerLine="OPEN"
+                          >
+                            <div class="img-mask">
+                              <a
+                                class="slide-link"
+                                data-type="page-transition"
+                                href="project08.html"></a>
+                              <div class="section-image trigger-item-link">
+                                <img
+                                  src="images/08hero.jpg"
+                                  class="item-image grid__item-img"
+                                  alt=""
+                                />
+                              </div>
+                              <img
+                                src="images/08hero.jpg"
+                                class="grid__item-img grid__item-img--large"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="slide-caption trigger-item-link-secondary"
+                            >
+                              <div class="slide-title">
+                                <span><em>Rustic</em> Wonders</span>
+                              </div>
+                              <div class="slide-date"><span>2023</span></div>
+                              <div class="slide-cat">
+                                <span>Photography</span>
+                              </div>
+                              <div class="slide-icon">
+                                <i class="arrow-icon-down"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- ClaPat Portfolio -->
+                    </div>
+                  </div>
+                  <!-- Showcase Portfolio Holder -->
+                </div>
+                <!--/Main Page Content -->
+
+                <!-- Page Navigation -->
+                <div id="page-nav">
+                  <div class="page-nav-wrap">
+                    <div
+                      class="page-nav-caption content-full-width text-align-center"
+                    >
+                      <div class="inner">
+                        <a
+                          class="page-title next-ajax-link-page"
+                          data-type="page-transition"
+                          data-centerline="CONTACT"
+                          href="contact.html"
+                        >
+                          <div
+                            class="next-hero-title primary-font-title caption-timeline"
+                          >
+                            <span><em>Let's create</em></span>
+                            <span>something great</span>
+                            <span>together</span>
+                          </div>
+                        </a>
+                        <div class="next-hero-subtitle caption-timeline">
+                          <span
+                            >Contact us and let's bring your vision to life</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--/Page Navigation -->
+              </div>
+              <!--/Main Content -->
+            </div>
+            <!--/Main -->
+          </div>
+          <!--/Content Scroll -->
+
+          <div id="app"></div>
+        </div>
+        <!--/Page Content -->
+      </div>
+    </main>
+
+    
+
+    <div id="clone-image">
+      <div class="hero-translate"></div>
+    </div>
+    <div id="rotate-device"></div>
+  </body>
+</Layout>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js"
+></script>
+
+<script src="../lib/clapat"></script>
+<script src="../../public/plugins"></script>
+
+<script src="../../public/contact"></script>
+
+<script is:inline src="/scripts.js" type="module" "client:load": true;></script>
+
+<script is:inline src="/plugins.js" type="module" "client:load": true;></script>
+
+<script is:inline src="/GridToFullScreen.js" type="module" "client:load": true;
+></script>
+
+<script
+  is:inline
+  src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.4.0/smooth-scrollbar.js"
+  "client:load":
+  true;></script>

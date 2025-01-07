@@ -1,0 +1,37 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project: CollectionEntry<'projects'>) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+ 
+const { project } = Astro.props as Props;
+ 
+---
+
+<div class="clapat-item photo-filter">
+  <div class="slide-inner trigger-item" data-centerLine="OPEN">
+    <div class="img-mask">
+      <a class="slide-link" data-type="page-transition" href={`/projects/${project.slug}`}></a>
+      <div class="section-image trigger-item-link">
+        <img src={project.data.image} class="item-image grid__item-img" alt={project.data.title}>
+      </div>
+      <img src={project.data.image} class="grid__item-img grid__item-img--large" alt={project.data.title}>
+    </div>
+    <div class="slide-caption trigger-item-link-secondary">
+      <div class="slide-title"><span><em>The</em> {project.data.title}</span></div>
+      <div class="slide-date"><span>{project.data.date}</span></div>
+      <div class="slide-cat"><span>{project.data.category}</span></div>
+      <div class="slide-icon"><i class="arrow-icon-down"></i></div>
+    </div>
+  </div>
+</div>

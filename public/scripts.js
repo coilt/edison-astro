@@ -10,7 +10,8 @@ import {
   Power4,
   Flip,
   ScrollTrigger,
-} from '/node_modules/gsap/all.js'
+} from '/node_modules/gsap/all'
+
 import '../src/lib/common.js'
 import '/plugins.js'
 import { ContactForm } from '/contact.js'

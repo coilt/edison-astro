@@ -11,7 +11,7 @@ import {
   Power4,
   Flip,
   ScrollTrigger,
-} from '/node_modules/gsap/all.js'
+} from '/node_modules/gsap/'
 
 import { GridToFullscreenEffect } from '../../public/GridToFullScreen'
 

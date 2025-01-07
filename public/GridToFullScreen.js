@@ -1,15 +1,24 @@
+
 import {
   gsap,
-  Cubic,
-  Linear,
   Power0,
-  Power2,
-  Power3,
-  Power4,
-  Flip,
-  ScrollTrigger,
-} from '/node_modules/gsap/all.js'
-import * as THREE from '/node_modules/three/src/Three'
+} from '/node_modules/gsap/all'
+ 
+import { 
+  WebGLRenderer, 
+  Texture,
+  Scene, 
+  PerspectiveCamera, 
+  PlaneGeometry, 
+  ShaderMaterial, 
+  Mesh, 
+  Vector2, 
+  Vector4,
+  Uniform,
+  DoubleSide,
+  ClampToEdgeWrapping,
+  LinearFilter  
+} from '/node_modules/three/src/Three'
 
 class GridToFullscreenEffect {
   constructor(e, n, t = {}) {
@@ -42,31 +51,30 @@ class GridToFullscreenEffect {
       (t.flipBeizerControls.c1.x = t.flipBeizerControls.c1.x || 0.5),
       (t.flipBeizerControls.c1.y = t.flipBeizerControls.c1.y || 0.5),
       (this.options = t),
-      (this.uniforms = {
-        uImage: new THREE.Uniform(null),
-        uImageRes: new THREE.Uniform(new THREE.Vector2(1, 1)),
-        uImageLarge: new THREE.Uniform(null),
-        uImageLargeRes: new THREE.Uniform(new THREE.Vector2(1, 1)),
-        uProgress: new THREE.Uniform(0),
-        uMeshScale: new THREE.Uniform(new THREE.Vector2(1, 1)),
-        uPlaneCenter: new THREE.Uniform(new THREE.Vector2(0, 0)),
-        uViewSize: new THREE.Uniform(new THREE.Vector2(1, 1)),
-        uScaleToViewSize: new THREE.Uniform(new THREE.Vector2(1, 1)),
-        uClosestCorner: new THREE.Uniform(0),
-        uMouse: new THREE.Uniform(new THREE.Vector2(0, 0)),
-        uSeed: new THREE.Uniform(t.seed),
-        uProgressByParts: new THREE.Uniform('sections' === t.timing.type),
-        uActivationParts: new THREE.Uniform(t.timing.sections),
-        uSyncLatestStart: new THREE.Uniform(t.timing.latestStart),
-        uBeizerControls: new THREE.Uniform(
-          new THREE.Vector4(
-            t.flipBeizerControls.c0.x,
-            t.flipBeizerControls.c0.y,
-            t.flipBeizerControls.c1.x,
-            t.flipBeizerControls.c1.y
+      this.uniforms = {
+        uImage: new Uniform(null),
+        uImageRes: new Uniform(new Vector2(1, 1)),
+        uImageLarge: new Uniform(null),
+        uImageLargeRes: new Uniform(new Vector2(1, 1)),
+        uProgress: new Uniform(0),
+        uMeshScale: new Uniform(new Vector2(1, 1)),
+        uPlaneCenter: new Uniform(new Vector2(0, 0)),
+        uViewSize: new Uniform(new Vector2(1, 1)),
+        uScaleToViewSize: new Uniform(new Vector2(1, 1)),
+        uClosestCorner: new Uniform(0),
+        uMouse: new Uniform(new Vector2(0, 0)),
+        uSeed: new Uniform(this.options.seed),
+        uProgressByParts: new Uniform(this.options.timing.type === "sections"),
+        uActivationParts: new Uniform(this.options.timing.sections),
+        uSyncLatestStart: new Uniform(this.options.timing.latestStart),
+        uBeizerControls: new Uniform(new Vector4(
+          this.options.flipBeizerControls.c0.x,
+          this.options.flipBeizerControls.c0.y,
+          this.options.flipBeizerControls.c1.x,
+          this.options.flipBeizerControls.c1.y
           )
         ),
-      }),
+      },
       (this.textures = []),
       (this.currentImageIndex = -1),
       (this.isFullscreen = !1),
@@ -74,15 +82,15 @@ class GridToFullscreenEffect {
       (this.onResize = this.onResize = this.onResize.bind(this))
   }
   resetUniforms() {
-    ;(this.uniforms.uMeshScale.value = new THREE.Vector2(1, 1)),
-      (this.uniforms.uPlaneCenter.value = new THREE.Vector2(0, 0)),
-      (this.uniforms.uScaleToViewSize.value = new THREE.Vector2(1, 1)),
+    ;(this.uniforms.uMeshScale.value = new Vector2(1, 1)),
+      (this.uniforms.uPlaneCenter.value = new Vector2(0, 0)),
+      (this.uniforms.uScaleToViewSize.value = new Vector2(1, 1)),
       (this.uniforms.uClosestCorner.value = 0),
-      (this.uniforms.uMouse.value = new THREE.Vector2(0, 0)),
+      (this.uniforms.uMouse.value = new Vector2(0, 0)),
       (this.uniforms.uImage.value = null),
-      (this.uniforms.uImageRes.value = new THREE.Vector2(1, 1)),
+      (this.uniforms.uImageRes.value = new Vector2(1, 1)),
       (this.uniforms.uImageLarge.value = null),
-      (this.uniforms.uImageLargeRes.value = new THREE.Vector2(1, 1))
+      (this.uniforms.uImageLargeRes.value = new Vector2(1, 1))
     const e = this.mesh
     ;(e.scale.x = 1e-5),
       (e.scale.y = 1e-5),
@@ -93,15 +101,15 @@ class GridToFullscreenEffect {
     const n = []
     for (let t = 0; t < e.length; t++) {
       const r = e[t],
-        i = new THREE.Texture(r.large.image)
+        i = new Texture(r.large.image)
       ;(i.generateMipmaps = !1),
-        (i.wrapS = i.wrapT = THREE.ClampToEdgeWrapping),
-        (i.minFilter = THREE.LinearFilter),
+        (i.wrapS = i.wrapT = ClampToEdgeWrapping),
+        (i.minFilter = LinearFilter),
         (i.needsUpdate = !0)
-      const o = new THREE.Texture(r.small.image)
+      const o = new Texture(r.small.image)
       ;(o.generateMipmaps = !1),
-        (o.wrapS = o.wrapT = THREE.ClampToEdgeWrapping),
-        (o.minFilter = THREE.LinearFilter),
+        (o.wrapS = o.wrapT = ClampToEdgeWrapping),
+        (o.minFilter = LinearFilter),
         (o.needsUpdate = !0)
       const s = {
         large: { element: r.large.element, texture: i },
@@ -125,12 +133,12 @@ class GridToFullscreenEffect {
       this.isAnimating || this.render()
   }
   init() {
-    ;(this.renderer = new THREE.WebGLRenderer({ alpha: !0, antialias: !0 })),
+    ;(this.renderer = new WebGLRenderer({ alpha: !0, antialias: !0 })),
       this.renderer.setPixelRatio(window.devicePixelRatio),
       this.renderer.setSize(window.innerWidth, window.innerHeight),
       this.container.appendChild(this.renderer.domElement),
-      (this.scene = new THREE.Scene()),
-      (this.camera = new THREE.PerspectiveCamera(
+      (this.scene = new Scene()),
+      (this.camera = new PerspectiveCamera(
         45,
         window.innerWidth / window.innerHeight,
         0.1,
@@ -139,8 +147,8 @@ class GridToFullscreenEffect {
       (this.camera.position.z = 50),
       (this.camera.lookAt = this.scene.position)
     const e = this.getViewSize()
-    this.uniforms.uViewSize.value = new THREE.Vector2(e.width, e.height)
-    var n = new THREE.PlaneGeometry(1, 1, 128, 128)
+    this.uniforms.uViewSize.value = new Vector2(e.width, e.height)
+    var n = new PlaneGeometry(1, 1, 128, 128)
     const t =
       (r = this.options.transformation.type) &&
       '[object Function]' === {}.toString.call(r)
@@ -150,13 +158,13 @@ class GridToFullscreenEffect {
           )
     var r
     const i = generateShaders(activations[this.options.activation.type], t)
-    var o = new THREE.ShaderMaterial({
+    var o = new ShaderMaterial({
       uniforms: this.uniforms,
       vertexShader: i.vertex,
       fragmentShader: i.fragment,
-      side: THREE.DoubleSide,
+      side: DoubleSide,
     })
-    ;(this.mesh = new THREE.Mesh(n, o)),
+    ;(this.mesh = new Mesh(n, o)),
       this.scene.add(this.mesh),
       window.addEventListener('resize', this.onResize),
       this.options.scrollContainer &&
@@ -221,7 +229,7 @@ class GridToFullscreenEffect {
         2 * (n.left > window.innerWidth - (n.left + n.width)) +
         (n.top > window.innerHeight - (n.top + n.height))
     ;(this.uniforms.uClosestCorner.value = r),
-      (this.uniforms.uMouse.value = new THREE.Vector2(t.x, t.y))
+      (this.uniforms.uMouse.value = new Vector2(t.x, t.y))
     const i = this.getViewSize(),
       o = (n.width * i.width) / window.innerWidth,
       s = (n.height * i.height) / window.innerHeight,

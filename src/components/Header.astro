@@ -7,12 +7,11 @@ import '../styles/globals.css';
 import '../styles/all.min.css'
 import '../styles/shortcodes.css'
 
-
 interface Props {
   class?: string;
   menuColor?: string;
 }
- 
+
 const { class: className = "", menuColor = "#000000" } = Astro.props;
 
 
@@ -39,16 +38,8 @@ const { class: className = "", menuColor = "#000000" } = Astro.props;
             <div class="outer">
                 <div class="inner">           
                     <ul data-breakpoint="10025" class="flexnav">
-                        <li class="link menu-timeline"><a class="ajax-link active" data-type="page-transition" href="index.html"><div class="before-span"><span data-hover="Home">Home</span></div></a></li>
-                        <li class="link menu-timeline"><a class="" href="#"><div class="before-span"><span data-hover="Portfolio">Portfolio</span></div></a>
-                            <ul>
-                                <li><a class="ajax-link" href="index-showcase-carousel.html" data-type="page-transition">Showcase Carousel</a></li>
-                                <li><a class="ajax-link" href="index-showcase-grid.html" data-type="page-transition">Portfolio Grid</a></li>
-                                <li><a class="ajax-link" href="index-showcase-slider.html" data-type="page-transition">Fullscreen Slider</a></li>
-                                <li><a class="ajax-link" href="index-showcase-list.html" data-type="page-transition">Infinity List</a></li>
-                                <li><a class="ajax-link" href="index-showcase-gallery.html" data-type="page-transition">Archive Gallery</a></li> 
-                            </ul>
-                        </li>
+                        <li class="link menu-timeline"><a class="ajax-link active" data-type="page-transition" href="/"><div class="before-span"><span data-hover="Home">Home</span></div></a></li>
+                        <li class="link menu-timeline"><a class="ajax-link active" data-type="page-transition" href="/showcase"><div class="before-span"><span data-hover="Showcase">Showcase</span></div></a></li>
                         <li class="link menu-timeline"><a class="ajax-link" data-type="page-transition" href="about.html"><div class="before-span"><span data-hover="About">About</span></div></a></li>
                         <li class="link menu-timeline"><a class="ajax-link" data-type="page-transition" href="contact.html"><div class="before-span"><span data-hover="Contact">Contact</span></div></a></li>
                         <li class="link menu-timeline"><a class="" href="#"><div class="before-span"><span data-hover="More">More</span></div></a>

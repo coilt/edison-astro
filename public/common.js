@@ -1315,7 +1315,9 @@ Function Scroll Effects
         const tl = gsap.timeline({
           repeat: -1,
           onReverseComplete() {
-            this.totalTime(this.rawTime() + this.duration() * 10)
+            gsap.delayedCall(0, () => {
+              this.totalTime(this.rawTime() + this.duration() * 10)
+            })
           },
         })
         vars = vars || {}
@@ -2902,27 +2904,9 @@ Function Shortcodes
           'mouseenter',
           function () {
             var $this = $(this)
-            gsap.to('#ball', {
-              duration: 0.3,
-              borderWidth: '2px',
-              scale: 1.2,
-              borderColor: $('body').data('primary-color'),
-              backgroundColor: $('body').data('primary-color'),
-            })
-            gsap.to('#ball-loader', {
-              duration: 0.2,
-              borderWidth: '2px',
-              top: 2,
-              left: 2,
-            })
-            $('#ball').append(
-              '<p class="first">' +
-                $this.data('firstline') +
-                '</p>' +
-                '<p>' +
-                $this.data('secondline') +
-                '</p>'
-            )
+     
+       
+       
           }
         )
 

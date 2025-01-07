@@ -1,5 +1,7 @@
 /* FlexNav  */
 
+import '/node_modules/jquery/dist/jquery.js' 
+
 !function () {
   var a
   ;(a = jQuery),
@@ -16,7 +18,7 @@
             calcItemWidths: !1,
             hover: !0,
           },
-          b
+          b,
         )),
         (c = a(this)),
         c.addClass('with-js'),
@@ -38,7 +40,7 @@
                   .stop(!0, !0)
                   .animate(
                     { height: ['toggle', 'swing'], opacity: 'toggle' },
-                    k.animationSpeed
+                    k.animationSpeed,
                   )
               : a(this)
                   .find('>ul')
@@ -58,7 +60,7 @@
                   .stop(!0, !0)
                   .animate(
                     { height: ['toggle', 'swing'], opacity: 'toggle' },
-                    k.animationSpeed
+                    k.animationSpeed,
                   )
               : a(this)
                   .find('>ul')
@@ -104,7 +106,7 @@
         a(k.buttonSelector).data('navEl', c),
         (n = '.item-with-ul, ' + k.buttonSelector),
         a(n).append(
-          '<span class="touch-button"><i class="navicon">&#9660;</i></span>'
+          '<span class="touch-button"><i class="navicon">&#9660;</i></span>',
         ),
         (m = k.buttonSelector + ', ' + k.buttonSelector + ' .touch-button'),
         a(m).on('click', function (b) {
@@ -116,7 +118,7 @@
             (e = k.buttonSelector),
             (c = a(this).is(e) ? a(this) : a(this).parent(e)),
             (d = c.data('navEl')),
-            d.toggleClass('flexnav-show')
+            a(d).toggleClass('flexnav-show')
           )
         }),
         a('.touch-button').on('click', function () {
@@ -135,9 +137,9 @@
               ? (b.removeClass('flexnav-show').slideUp(k.animationSpeed),
                 d.removeClass('active'))
               : b.hasClass('flexnav-show') === !1
-              ? (b.addClass('flexnav-show').slideDown(k.animationSpeed),
-                d.addClass('active'))
-              : void 0
+                ? (b.addClass('flexnav-show').slideDown(k.animationSpeed),
+                  d.addClass('active'))
+                : void 0
           )
         }),
         c.find('.item-with-ul *').focus(function () {
@@ -190,8 +192,8 @@
             (d = arguments[0].each),
             (c = arguments[0].finished))
           : 1 === arguments.length && 'boolean' === a.type(arguments[0])
-          ? (e = arguments[0])
-          : ((c = arguments[0]), (d = arguments[1]), (e = arguments[2])),
+            ? (e = arguments[0])
+            : ((c = arguments[0]), (d = arguments[1]), (e = arguments[2])),
         (c = c || a.noop),
         (d = d || a.noop),
         (e = !!e),
@@ -265,18 +267,18 @@
   'function' == typeof define && define.amd
     ? define(['jquery'], e)
     : 'object' == typeof module && module.exports
-    ? (module.exports = function (t, i) {
-        return (
-          void 0 === i &&
-            (i =
-              'undefined' != typeof window
-                ? require('jquery')
-                : require('jquery')(t)),
-          e(i),
-          i
-        )
-      })
-    : e(jQuery)
+      ? (module.exports = function (t, i) {
+          return (
+            void 0 === i &&
+              (i =
+                'undefined' != typeof window
+                  ? require('jquery')
+                  : require('jquery')(t)),
+            e(i),
+            i
+          )
+        })
+      : e(jQuery)
 })(function (g) {
   var r = function (t, i) {
     ;(this.settings = i),
@@ -301,7 +303,7 @@
         phase: 0,
         timeSlot: 150,
         $el: g(
-          '<div class="spinner"><span></span><span></span><span></span></div>'
+          '<div class="spinner"><span></span><span></span><span></span></div>',
         ),
         intervalId: null,
       }),
@@ -387,7 +389,7 @@
               a,
               g.proxy(function () {
                 this.showImg(t, l), t.data('jg.loaded', !0)
-              }, this)
+              }, this),
             )
           : this.showImg(t, l)
       } else this.showImg(t)
@@ -422,7 +424,7 @@
             .stop()
             .fadeTo(
               this.settings.captionSettings.animationDuration,
-              this.settings.captionSettings.visibleOpacity
+              this.settings.captionSettings.visibleOpacity,
             )
     }),
     (r.prototype.onEntryMouseLeaveForCaption = function (t) {
@@ -433,7 +435,7 @@
             .stop()
             .fadeTo(
               this.settings.captionSettings.animationDuration,
-              this.settings.captionSettings.nonVisibleOpacity
+              this.settings.captionSettings.nonVisibleOpacity,
             )
     }),
     (r.prototype.addCaptionEventsHandlers = function (t) {
@@ -551,13 +553,13 @@
               this.offY,
               i.data('jg.jwidth'),
               i.data('jg.jheight'),
-              this.buildingRow.height
+              this.buildingRow.height,
             ),
             (r += i.data('jg.jwidth') + n.margins)
         ;(this.galleryHeightToSet =
           this.offY + this.buildingRow.height + this.border),
           this.setGalleryTempHeight(
-            this.galleryHeightToSet + this.getSpinnerHeight()
+            this.galleryHeightToSet + this.getSpinnerHeight(),
           ),
           (!t || (this.buildingRow.height <= n.rowHeight && e)) &&
             ((this.offY += this.buildingRow.height + n.margins),
@@ -594,7 +596,7 @@
               : ((this.scrollBarOn = e()), (this.galleryWidth = t))
           }
         }, this),
-        this.settings.refreshTime
+        this.settings.refreshTime,
       )
     }),
     (r.prototype.isSpinnerActive = function () {
@@ -607,7 +609,7 @@
       clearInterval(this.spinner.intervalId),
         (this.spinner.intervalId = null),
         this.setGalleryTempHeight(
-          this.$gallery.height() - this.getSpinnerHeight()
+          this.$gallery.height() - this.getSpinnerHeight(),
         ),
         this.spinner.$el.detach()
     }),
@@ -617,7 +619,7 @@
       clearInterval(t.intervalId),
         this.$gallery.append(t.$el),
         this.setGalleryTempHeight(
-          this.offY + this.buildingRow.height + this.getSpinnerHeight()
+          this.offY + this.buildingRow.height + this.getSpinnerHeight(),
         ),
         (t.intervalId = setInterval(function () {
           t.phase < i.length
@@ -716,7 +718,7 @@
             e.data('jg.createdCaption')
               ? (e.data('jg.createdCaption', void 0), null !== n && n.remove())
               : null !== n && n.fadeTo(0, 1)
-          }, this)
+          }, this),
         ),
         this.$gallery.css('height', ''),
         this.$gallery.removeClass('justified-gallery'),
@@ -819,7 +821,7 @@
                 },
                 function () {
                   e.data('jg.loaded', 'error'), l.startImgAnalyzer(!1)
-                }
+                },
               )
           } else
             e.data('jg.loaded', !0),
@@ -900,11 +902,11 @@
       if (
         (this.checkOrConvertNumber(
           this.settings.captionSettings,
-          'animationDuration'
+          'animationDuration',
         ),
         this.checkOrConvertNumber(
           this.settings.captionSettings,
-          'visibleOpacity'
+          'visibleOpacity',
         ),
         this.settings.captionSettings.visibleOpacity < 0 ||
           1 < this.settings.captionSettings.visibleOpacity)
@@ -913,7 +915,7 @@
       if (
         (this.checkOrConvertNumber(
           this.settings.captionSettings,
-          'nonVisibleOpacity'
+          'nonVisibleOpacity',
         ),
         this.settings.captionSettings.nonVisibleOpacity < 0 ||
           1 < this.settings.captionSettings.nonVisibleOpacity)
@@ -1070,7 +1072,7 @@
     _initDefaults: function () {
       ;(this.url = a.location.href),
         (this.text = b.trim(
-          b('meta[name=description]').attr('content') || b('title').text()
+          b('meta[name=description]').attr('content') || b('title').text(),
         ))
     },
     _initShares: function () {
@@ -1082,7 +1084,7 @@
           if (!c && !a.renderer)
             throw Error("Share '" + a.share + "' is not found")
           return b.extend({ url: this.url, text: this.text }, c, a)
-        }, this)
+        }, this),
       )
     },
     _attachWindowResizeCallback: function () {
@@ -1096,7 +1098,7 @@
         (a.clearTimeout(this._resizeTimer),
         (this._resizeTimer = setTimeout(
           b.proxy(this.refresh, this),
-          this.resizeTimeout
+          this.resizeTimeout,
         )))
     },
     _render: function () {
@@ -1118,7 +1120,7 @@
         this.shares,
         b.proxy(function (a, b) {
           this._renderShare(b)
-        }, this)
+        }, this),
       )
     },
     _renderShare: function (a) {
@@ -1176,7 +1178,7 @@
         this._loadCount(a).done(
           b.proxy(function (a) {
             a && (c.removeClass(this.shareZeroCountClass), d.text(a))
-          }, this)
+          }, this),
         )
     },
     _loadCount: function (a) {
@@ -1240,10 +1242,10 @@
       return b.isNumeric(a)
         ? this.shares[a]
         : 'string' == typeof a
-        ? b.grep(this.shares, function (b) {
-            return b.share === a
-          })[0]
-        : a
+          ? b.grep(this.shares, function (b) {
+              return b.share === a
+            })[0]
+          : a
     },
     refresh: function () {
       this._render()
@@ -1300,7 +1302,7 @@
               a.open(
                 c.shareUrl,
                 null,
-                'width=600, height=400, location=0, menubar=0, resizeable=0, scrollbars=0, status=0, titlebar=0, toolbar=0'
+                'width=600, height=400, location=0, menubar=0, resizeable=0, scrollbars=0, status=0, titlebar=0, toolbar=0',
               ),
               !1
             )
@@ -1484,8 +1486,8 @@ class GridToFullscreenEffect {
             t.flipBeizerControls.c0.x,
             t.flipBeizerControls.c0.y,
             t.flipBeizerControls.c1.x,
-            t.flipBeizerControls.c1.y
-          )
+            t.flipBeizerControls.c1.y,
+          ),
         ),
       }),
       (this.textures = []),
@@ -1555,7 +1557,7 @@ class GridToFullscreenEffect {
         45,
         window.innerWidth / window.innerHeight,
         0.1,
-        1e4
+        1e4,
       )),
       (this.camera.position.z = 50),
       (this.camera.lookAt = this.scene.position)
@@ -1567,7 +1569,7 @@ class GridToFullscreenEffect {
       '[object Function]' === {}.toString.call(r)
         ? this.options.transformation.type(this.options.transformation.props)
         : transformations[this.options.transformation.type](
-            this.options.transformation.props
+            this.options.transformation.props,
           )
     var r
     const i = generateShaders(activations[this.options.activation.type], t)
@@ -1587,7 +1589,7 @@ class GridToFullscreenEffect {
     for (let e = 0; e < this.itemsWrapperChildren.length; e++) {
       this.itemsWrapperChildren[e].children[0].addEventListener(
         'click',
-        this.createOnMouseDown(e)
+        this.createOnMouseDown(e),
       )
     }
   }
@@ -1625,7 +1627,7 @@ class GridToFullscreenEffect {
                 }),
               (this.currentImageIndex = -1)
           },
-        }
+        },
       )))
   }
   recalculateUniforms(e) {
@@ -1702,7 +1704,7 @@ class GridToFullscreenEffect {
                     index: this.currentImageIndex,
                   })
             },
-          }
+          },
         ))
     }
   }
@@ -1774,11 +1776,7 @@ const transformations = {
   },
   wavy: (e) => {
     const n = ensureFloat(e.seed || 0)
-    return `\n      float limit = 0.5;\n      float wavyProgress = min(clamp((vertexProgress) / limit,0.,1.),clamp((1.-vertexProgress) / (1.-limit),0.,1.));\n\n      float dist = length(transformedPos.xy);\n      \n      float angle = atan(transformedPos.x,transformedPos.y);\n\n      float nextDist = dist * (${ensureFloat(
-      e.amplitude || 0.5
-    )} * (sin(angle * ${ensureFloat(
-      e.frequency || 4
-    )} + ${n}) /2.+0.5)+ 1.);\n\n      transformedPos.x = mix(transformedPos.x,sin(angle) * nextDist ,  wavyProgress);\n      transformedPos.y = mix(transformedPos.y,cos(angle) * nextDist,  wavyProgress);\n    `
+    return `\n      float limit = 0.5;\n      float wavyProgress = min(clamp((vertexProgress) / limit,0.,1.),clamp((1.-vertexProgress) / (1.-limit),0.,1.));\n\n      float dist = length(transformedPos.xy);\n      \n      float angle = atan(transformedPos.x,transformedPos.y);\n\n      float nextDist = dist * (${ensureFloat(e.amplitude || 0.5)} * (sin(angle * ${ensureFloat(e.frequency || 4)} + ${n}) /2.+0.5)+ 1.);\n\n      transformedPos.x = mix(transformedPos.x,sin(angle) * nextDist ,  wavyProgress);\n      transformedPos.y = mix(transformedPos.y,cos(angle) * nextDist,  wavyProgress);\n    `
   },
   circle: (e) =>
     '\n      float limit = 0.5;\n      float circleProgress = min(clamp((vertexProgress) / limit,0.,1.),clamp((1.-vertexProgress) / (1.-limit),0.,1.));\n\n      float maxDistance = 0.5;\n      float dist = length(transformedPos.xy);\n      \n      float nextDist = min(maxDistance,dist);\n      float overload = step(maxDistance,dist);\n      float angle = atan(transformedPos.x,transformedPos.y);\n      \n      transformedPos.x = mix(transformedPos.x,sin(angle) * nextDist ,  circleProgress );\n      transformedPos.y = mix(transformedPos.y,cos(angle) * nextDist,  circleProgress);\n      transformedPos.z += -0.5 * overload * circleProgress;\n    \n  ',
@@ -1789,9 +1787,7 @@ function generateShaders(e, n) {
   return {
     fragment:
       '\n    uniform float uProgress;\n    uniform sampler2D uImage;\n    uniform vec2 uImageRes;\n    uniform sampler2D uImageLarge;\n    uniform vec2 uImageLargeRes;\n    uniform vec2 uMeshScale;\n    \n    varying vec2 vUv;\n    varying float vProgress;\n    varying vec2 scale;\n\n\n    vec2 preserveAspectRatioSlice(vec2 uv, vec2 planeSize, vec2 imageSize ){\n      \n        vec2 ratio = vec2(\n            min((planeSize.x / planeSize.y) / (imageSize.x / imageSize.y), 1.0),\n            min((planeSize.y / planeSize.x) / (imageSize.y / imageSize.x), 1.0)\n        );\n        \n        \n        vec2 sliceUvs = vec2(\n            uv.x * ratio.x + (1.0 - ratio.x) * 0.5,\n            uv.y * ratio.y + (1.0 - ratio.y) * 0.5\n        );\n\n        return sliceUvs;\n    }\n\n    void main(){\n \n        vec2 uv = vUv;\n\n        vec2 scaledPlane = uMeshScale * scale;\n\n        \n        vec2 smallImageUV = preserveAspectRatioSlice(uv, scaledPlane, uImageRes);\n\n        vec3 color = texture2D(uImage,smallImageUV).xyz;\n\n        if(vProgress > 0.){\n          vec2 largeImageUV = preserveAspectRatioSlice(uv, scaledPlane, uImageLargeRes);\n          color = mix(color,texture2D(uImageLarge,largeImageUV).xyz, vProgress );\n        }\n\n        gl_FragColor = vec4(color,1.);\n    }\n',
-    vertex: `\n    ${vertexUniforms}\n    ${cubicBeizer}\n    ${simplex}\n\n    ${quadraticBezier}\n    \n\n    ${e}\nfloat linearStep(float edge0, float edge1, float val) {\n\tfloat x = clamp( (val  - edge0) / (edge1 - edge0),0.,1.);\n\t\treturn x;\n}\n    void main(){\n\n      vec3 pos = position.xyz;\n      vec2 newUV = uv;\n\n      float activation = getActivation(uv);\n\n\n\n      \n      float startAt = activation * uSyncLatestStart;\n      float vertexProgress = smoothstep(startAt,1.,uProgress);\n\n\n      if(uProgressByParts){\n        \n        float activationPart = 1./uActivationParts;\n        float activationPartDuration = 1./(uActivationParts+1.);\n\n        float progressStart = (activation / activationPart) * activationPartDuration;\n        float progressEnd = min(progressStart + activationPartDuration,1.);\n        vertexProgress = linearStep(progressStart,progressEnd,uProgress);\n      }\n        vec3 transformedPos = pos;\n        vec2 transformedUV = uv;\n        ${
-      n || ''
-    }\n        pos = transformedPos;\n        newUV = transformedUV; \n\n        \n        scale = vec2(\n          1. + uScaleToViewSize * vertexProgress\n        );\n        \n        \n        vec2 flippedPos = vec2(\n          (- pos.x) ,\n          (- pos.y ) \n        );\n\n\n        \n        pos.xy *= scale;\n\n\n        \n        pos.y += -uPlaneCenter.y * vertexProgress;\n        pos.x += -uPlaneCenter.x * vertexProgress;\n\n        // Move slightly to the front\n        pos.z += vertexProgress;\n\n        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.);\n        vProgress = vertexProgress;\n      vUv = newUV;\n    }\n`,
+    vertex: `\n    ${vertexUniforms}\n    ${cubicBeizer}\n    ${simplex}\n\n    ${quadraticBezier}\n    \n\n    ${e}\nfloat linearStep(float edge0, float edge1, float val) {\n\tfloat x = clamp( (val  - edge0) / (edge1 - edge0),0.,1.);\n\t\treturn x;\n}\n    void main(){\n\n      vec3 pos = position.xyz;\n      vec2 newUV = uv;\n\n      float activation = getActivation(uv);\n\n\n\n      \n      float startAt = activation * uSyncLatestStart;\n      float vertexProgress = smoothstep(startAt,1.,uProgress);\n\n\n      if(uProgressByParts){\n        \n        float activationPart = 1./uActivationParts;\n        float activationPartDuration = 1./(uActivationParts+1.);\n\n        float progressStart = (activation / activationPart) * activationPartDuration;\n        float progressEnd = min(progressStart + activationPartDuration,1.);\n        vertexProgress = linearStep(progressStart,progressEnd,uProgress);\n      }\n        vec3 transformedPos = pos;\n        vec2 transformedUV = uv;\n        ${n || ''}\n        pos = transformedPos;\n        newUV = transformedUV; \n\n        \n        scale = vec2(\n          1. + uScaleToViewSize * vertexProgress\n        );\n        \n        \n        vec2 flippedPos = vec2(\n          (- pos.x) ,\n          (- pos.y ) \n        );\n\n\n        \n        pos.xy *= scale;\n\n\n        \n        pos.y += -uPlaneCenter.y * vertexProgress;\n        pos.x += -uPlaneCenter.x * vertexProgress;\n\n        // Move slightly to the front\n        pos.z += vertexProgress;\n\n        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.);\n        vProgress = vertexProgress;\n      vUv = newUV;\n    }\n`,
   }
 }
 var cubicBeizer =

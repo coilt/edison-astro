@@ -2902,47 +2902,18 @@ Function Shortcodes
           'mouseenter',
           function () {
             var $this = $(this)
-            gsap.to('#ball', {
-              duration: 0.3,
-              borderWidth: '2px',
-              scale: 1.2,
-              borderColor: $('body').data('primary-color'),
-              backgroundColor: $('body').data('primary-color'),
-            })
-            gsap.to('#ball-loader', {
-              duration: 0.2,
-              borderWidth: '2px',
-              top: 2,
-              left: 2,
-            })
-            $('#ball').append(
-              '<p class="first">' +
-                $this.data('firstline') +
-                '</p>' +
-                '<p>' +
-                $this.data('secondline') +
-                '</p>'
-            )
+      
+     
+      
           }
         )
 
         $('.random-collage .rc-slide .item-wrap-image').on(
           'mouseleave',
           function () {
-            gsap.to('#ball', {
-              duration: 0.2,
-              borderWidth: '4px',
-              scale: 0.5,
-              borderColor: '#999999',
-              backgroundColor: 'transparent',
-            })
-            gsap.to('#ball-loader', {
-              duration: 0.2,
-              borderWidth: '4px',
-              top: 0,
-              left: 0,
-            })
-            $('#ball p').remove()
+    
+        
+         
           }
         )
       }

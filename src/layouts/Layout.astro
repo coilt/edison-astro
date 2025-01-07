@@ -1,42 +1,38 @@
 ---
- 
-import Header from "@components/Header.astro";
+import Header from '@components/Header.astro'
 import Footer from '@components/Footer.astro'
+import Preloader from '@components/Preloader.astro'
 
 interface Props {
-  headerClass?: string;
   title?: string;
+  headerClass?: string;
+  bodyClass?: string;
   menuColor?: string;
-
+  primaryColor?: string;
 }
 
-const { title } = Astro.props;
-const { headerClass = "" } = Astro.props;
-const { menuColor } = Astro.props;
- 
+const { title } = Astro.props
+const { headerClass = '' } = Astro.props
+const { menuColor } = Astro.props
+const { bodyClass = "" } = Astro.props
+const { primaryColor } = Astro.props
+
+
 ---
+
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
-  <body style="background-color: black;">
+  <body style="background-color: black;" class={bodyClass} data-primary-color={primaryColor}>
+    <Preloader centerLine="Loading" />
     <Header class={headerClass} menuColor={menuColor} />
-
-    
     <article>
-      <slot /> <!-- your content is injected here -->
+      <slot />
+      <!-- your content is injected here -->
     </article>
-   
-   
+    <Footer />
   </body>
-  <style>
- 
-
-
-  </style>
-
-
-
+  <style></style>
 </html>

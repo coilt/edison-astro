@@ -1849,71 +1849,24 @@ export function ShowcaseCarousel() {
         }));
       }));
       document.querySelectorAll('.clapat-slider').forEach(_element22 => _element22.addEventListener('mouseup touchend', function () {
-        gsap.to('#ball', {
-          duration: 1,
-          borderWidth: '4px',
-          scale: 0.5,
-          borderColor: '#999999',
-          ease: Elastic.easeOut
-        });
+ 
         document.querySelectorAll('body').forEach(_element23 => _element23.classList.remove("scale-drag-x"));
       }));
       document.querySelectorAll('body').forEach(_element24 => _element24.addEventListener('mouseleave', function () {
-        gsap.to('#ball', {
-          duration: 1,
-          borderWidth: '4px',
-          scale: 0.5,
-          borderColor: '#999999',
-          ease: Elastic.easeOut
-        });
+ 
         document.querySelectorAll('body').forEach(_element25 => _element25.classList.remove("scale-drag-x"));
       }));
       const _start = document.querySelectorAll('.showcase-carousel.preview-mode-enabled .clapat-slide .slide-inner');
       _start.forEach(_element50 => _element50.addEventListener('mouseenter', function () {
         if (!document.querySelectorAll('body').classList.contains('scale-drag-x')) {
-          document.querySelectorAll('#ball p').forEach(_element27 => _element27.parentNode.removeChild(_element27));
-          var $this = document.querySelectorAll(this);
-          gsap.to('#ball', {
-            duration: 0.3,
-            borderWidth: '2px',
-            scale: 1.4,
-            borderColor: 'rgba(255,255,255,0)',
-            backgroundColor: 'rgba(255,255,255,0.1)'
-          });
-          gsap.to('#ball-loader', {
-            duration: 0.2,
-            borderWidth: '2px',
-            top: 2,
-            left: 2
-          });
-          document.querySelectorAll('#ball').forEach(_element28 => _element28.classList.add("with-blur"));
-          document.querySelectorAll('#ball').append('<p class="center-first">' + $this.data('centerline') + '</p>');
-          const _start2 = document.querySelectorAll(this);
-          const _chain3 = [].concat(..._start2.map(_element30 => _element30.querySelectorAll('video')));
-          const _chain4 = document.querySelectorAll(_chain3).each(function () {
-            const _start3 = document.querySelectorAll(this);
-            const _chain5 = document.querySelectorAll(_start3).get(0).toArray();
-            const _chain6 = document.querySelectorAll(_chain5).play().toArray();
-          }).toArray();
+ 
         }
       }));
       _start.forEach(_element51 => _element51.addEventListener('mouseleave', function () {
         if (!document.querySelectorAll('body').classList.contains('scale-drag-x')) {
-          gsap.to('#ball', {
-            duration: 0.2,
-            borderWidth: '4px',
-            scale: 0.5,
-            borderColor: '#999999',
-            backgroundColor: 'transparent'
-          });
-          gsap.to('#ball-loader', {
-            duration: 0.2,
-            borderWidth: '4px',
-            top: 0,
-            left: 0
-          });
-          document.querySelectorAll('#ball').forEach(_element31 => _element31.classList.remove("with-blur"));
-          document.querySelectorAll('#ball p').forEach(_element32 => _element32.parentNode.removeChild(_element32));
+     
+    
+  
           const _start4 = document.querySelectorAll(this);
           const _chain7 = [].concat(..._start4.map(_element34 => _element34.querySelectorAll('video')));
           const _chain8 = document.querySelectorAll(_chain7).each(function () {
@@ -1927,21 +1880,8 @@ export function ShowcaseCarousel() {
       _start6.forEach(_element52 => _element52.addEventListener('mouseenter', function () {
         if (!document.querySelectorAll('body').classList.contains('scale-drag-x')) {
           var $this = document.querySelectorAll(this);
-          gsap.to('#ball', {
-            duration: 0.3,
-            borderWidth: '2px',
-            scale: 1.4,
-            borderColor: 'rgba(255,255,255,0)',
-            backgroundColor: 'rgba(255,255,255,0.1)'
-          });
-          gsap.to('#ball-loader', {
-            duration: 0.2,
-            borderWidth: '2px',
-            top: 2,
-            left: 2
-          });
-          document.querySelectorAll('#ball').forEach(_element36 => _element36.classList.add("with-blur"));
-          document.querySelectorAll('#ball').append('<p class="center-first">' + $this.data('centerline') + '</p>');
+     
+      
           const _start7 = document.querySelectorAll(this);
           const _chain11 = [].concat(..._start7.map(_element38 => _element38.querySelectorAll('video')));
           const _chain12 = document.querySelectorAll(_chain11).each(function () {
@@ -1953,28 +1893,8 @@ export function ShowcaseCarousel() {
       }));
       _start6.forEach(_element53 => _element53.addEventListener('mouseleave', function () {
         if (!document.querySelectorAll('body').classList.contains('scale-drag-x')) {
-          gsap.to('#ball', {
-            duration: 0.2,
-            borderWidth: '4px',
-            scale: 0.5,
-            borderColor: '#999999',
-            backgroundColor: 'transparent'
-          });
-          gsap.to('#ball-loader', {
-            duration: 0.2,
-            borderWidth: '4px',
-            top: 0,
-            left: 0
-          });
-          document.querySelectorAll('#ball').forEach(_element39 => _element39.classList.remove("with-blur"));
-          document.querySelectorAll('#ball p').forEach(_element40 => _element40.parentNode.removeChild(_element40));
-          const _start9 = document.querySelectorAll(this);
-          const _chain15 = [].concat(..._start9.map(_element42 => _element42.querySelectorAll('video')));
-          const _chain16 = document.querySelectorAll(_chain15).each(function () {
-            const _start10 = document.querySelectorAll(this);
-            const _chain17 = document.querySelectorAll(_start10).get(0).toArray();
-            const _chain18 = document.querySelectorAll(_chain17).pause().toArray();
-          }).toArray();
+  
+ 
         }
       }));
       document.querySelectorAll('.showcase-carousel .clapat-slide .slide-inner').forEach(_element43 => _element43.addEventListener('mouseenter', function () {
@@ -2074,19 +1994,8 @@ export function ShowcaseCarousel() {
         opacity: 0,
         ease: Power4.easeInOut
       });
-      gsap.to('#ball', {
-        duration: 0.3,
-        borderWidth: '4px',
-        scale: 0.5,
-        borderColor: '#999999',
-        backgroundColor: 'transparent'
-      });
-      gsap.to('#ball-loader', {
-        duration: 0.3,
-        borderWidth: '4px',
-        top: 0,
-        left: 0
-      });
+ 
+  
       document.querySelectorAll('#ball').forEach(_element60 => _element60.classList.remove("with-blur"));
       document.querySelectorAll('#ball p').forEach(_element61 => _element61.parentNode.removeChild(_element61));
     }));
@@ -2517,12 +2426,7 @@ export function ShowcaseSlider() {
         borderColor: '#999999',
         backgroundColor: 'transparent'
       });
-      gsap.to('#ball-loader', {
-        duration: 0.3,
-        borderWidth: '4px',
-        top: 0,
-        left: 0
-      });
+  
       document.querySelectorAll('#ball').forEach(_element38 => _element38.classList.remove("with-blur"));
       document.querySelectorAll('#ball p').forEach(_element39 => _element39.parentNode.removeChild(_element39));
       const _chain17 = document.querySelectorAll(trigger_item).delay(1500).toArray();
@@ -3022,12 +2926,7 @@ function ShowcasePortfolio() {
         borderColor: '#999999',
         backgroundColor: 'transparent'
       });
-      gsap.to('#ball-loader', {
-        duration: 0.3,
-        borderWidth: '4px',
-        top: 0,
-        left: 0
-      });
+  
       document.querySelectorAll('#ball').forEach(_element26 => _element26.classList.remove("with-blur"));
       document.querySelectorAll('#ball p').forEach(_element27 => _element27.parentNode.removeChild(_element27));
     }));
@@ -3414,12 +3313,7 @@ function ShowcaseLists() {
         borderColor: '#999999',
         backgroundColor: 'transparent'
       });
-      gsap.to('#ball-loader', {
-        duration: 0.3,
-        borderWidth: '4px',
-        top: 0,
-        left: 0
-      });
+  
       document.querySelectorAll('#ball').forEach(_element43 => _element43.classList.remove("with-blur"));
       document.querySelectorAll('#ball p').forEach(_element44 => _element44.parentNode.removeChild(_element44));
     }));

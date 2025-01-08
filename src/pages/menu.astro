@@ -7,45 +7,47 @@ import '../styles/menu.css'
     <span></span>
     <span></span>
   </div>
+  <div class="menu-overlay"></div>
   <div class="menu-items-container">
-  <ul class="menu-list">
-    <li><div class="menu-item-mask"><a href="/">Home</a></div></li>
-    <li><div class="menu-item-mask"><a href="/showcase">Showcase</a></div></li>
-    <li><div class="menu-item-mask"><a href="/about">About</a></div></li>
-    <li><div class="menu-item-mask"><a href="/contact">Contact</a></div></li>
-    <li><div class="menu-item-mask"><a href="/more">More</a></div></li>
-  </ul>
-</div>
+    <ul class="menu-list">
+      <li><div class="menu-item-mask"><a href="/">Home</a></div></li>
+      <li>
+        <div class="menu-item-mask"><a href="/showcase">Showcase</a></div>
+      </li>
+      <li><div class="menu-item-mask"><a href="/about">About</a></div></li>
+      <li><div class="menu-item-mask"><a href="/contact">Contact</a></div></li>
+      <li><div class="menu-item-mask"><a href="/more">More</a></div></li>
+    </ul>
+  </div>
 </nav>
 
-
-
-
 <script>
-import { gsap } from 'gsap';
+  import { gsap } from 'gsap'
 
-const navIcon = document.getElementById('nav-icon');
-const menuList = document.querySelector('.menu-list');
-const menuItems = document.querySelectorAll('.menu-list li a');
+  const navIcon = document.getElementById('nav-icon')
+  const menuList = document.querySelector('.menu-list')
+  const menuItems = document.querySelectorAll('.menu-list li a')
+  const menuOverlay = document.querySelector('.menu-overlay')
 
-navIcon.addEventListener('click', () => {
-  navIcon.classList.toggle('open');
-  menuList.classList.toggle('active');
+  navIcon.addEventListener('click', () => {
+    navIcon.classList.toggle('open')
+    menuList.classList.toggle('active')
+    menuOverlay.classList.toggle('active')
 
-  if (menuList.classList.contains('active')) {
-  gsap.to(menuItems, {
-    y: '0%',
-    duration: 0.5,
-    stagger: 0.1,
-    ease: 'power3.out'
-  });
-} else {
-  gsap.to(menuItems, {
-    y: '100%',
-    duration: 0.3,
-    stagger: 0.05,
-    ease: 'power2.in'
-  });
-}
-});
+    if (menuList.classList.contains('active')) {
+      gsap.to(menuItems, {
+        y: '0%',
+        duration: 0.2,
+        stagger: 0.1,
+        ease: 'back.out(1.2)',
+      })
+    } else {
+      gsap.to(menuItems, {
+        y: '100%',
+        duration: 0.3,
+        stagger: 0.05,
+        ease: 'power2.in',
+      })
+    }
+  })
 </script>

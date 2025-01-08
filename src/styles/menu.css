@@ -40,6 +40,7 @@ a {
   position: relative;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+  z-index: 100;
 }
 
  
@@ -92,6 +93,7 @@ a {
     max-width: 300px;
     padding: 2rem;
     box-sizing: border-box;
+    z-index: 100;
  
   }
 
@@ -113,7 +115,6 @@ a {
 
   .menu-list li a {
     display: block;
-
     margin-left: 0;
     margin-bottom: 1rem;
     font-size: 3rem;       
@@ -128,6 +129,31 @@ a {
 
 
 
+}
+
+
+
+.dummy {
+  margin: auto;
+  color: #ffffff;
+}
+
+
+
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0, 0, 0); /* Adjust opacity as needed */
+  display: none;
+  z-index: 1;
+}
+
+.menu-overlay.active {
+  display: block;
 }
 
 

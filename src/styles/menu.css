@@ -28,14 +28,10 @@ a {
 
 .menu-list li {
   margin-left: 1rem;
+
+  
 }
-
-
-
-
-
-
-
+ 
 
 #nav-icon {
   display: none;
@@ -96,17 +92,42 @@ a {
     max-width: 300px;
     padding: 2rem;
     box-sizing: border-box;
+ 
   }
+
+
+.menu-item-mask {
+  overflow: hidden;
+  height: 3rem; /* Adjust based on your font size */
+}
+
+.menu-item-mask a {
+  display: block;
+  transform: translateY(100%);
+}
 
   .menu-list.active {
     display: flex;
+ 
   }
 
-  .menu-list li {
+  .menu-list li a {
+    display: block;
+
     margin-left: 0;
     margin-bottom: 1rem;
-    font-size: 3rem;
+    font-size: 3rem;       
   }
+
+
+  .menu-list li {
+    margin-bottom: 2rem;      
+  }
+
+
+
+
+
 }
 
 

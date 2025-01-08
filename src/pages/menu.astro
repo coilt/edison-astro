@@ -1,53 +1,94 @@
 ---
-import '../styles/menu.css'
+import '@styles/menu.css'
+import '@styles/nav.button.css'
 ---
 
 <nav class="menu-wrapper">
-  <div id="nav-icon">
+  <div id="nav-button">
     <span></span>
     <span></span>
   </div>
   <div class="menu-overlay"></div>
   <div class="menu-items-container">
     <ul class="menu-list">
-      <li><div class="menu-item-mask"><a href="/">Home</a></div></li>
       <li>
-        <div class="menu-item-mask"><a href="/showcase">Showcase</a></div>
+        <div class="menu-item-mask">
+          <div class="menu-item-wrapper">
+            <a href="/" class="original-item">Home</a>
+            <a href="/" class="hover-item">Home</a>
+          </div>
+        </div>
       </li>
-      <li><div class="menu-item-mask"><a href="/about">About</a></div></li>
-      <li><div class="menu-item-mask"><a href="/contact">Contact</a></div></li>
-      <li><div class="menu-item-mask"><a href="/more">More</a></div></li>
+      <li>
+        <div class="menu-item-mask">
+          <div class="menu-item-wrapper">
+            <a href="/showcase" class="original-item">Showcase</a>
+            <a href="/showcase" class="hover-item">Showcase</a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="menu-item-mask">
+          <div class="menu-item-wrapper">
+            <a href="/about" class="original-item">About</a>
+            <a href="/about" class="hover-item">About</a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="menu-item-mask">
+          <div class="menu-item-wrapper">
+            <a href="/contact" class="original-item">Contact</a>
+            <a href="/contact" class="hover-item">Contact</a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="menu-item-mask">
+          <div class="menu-item-wrapper">
+            <a href="/more" class="original-item">More</a>
+            <a href="/more" class="hover-item">More</a>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>
 
 <script>
   import { gsap } from 'gsap'
-
-  const navIcon = document.getElementById('nav-icon')
+  document.addEventListener('DOMContentLoaded', () => {
+  const navButton = document.getElementById('nav-button')
   const menuList = document.querySelector('.menu-list')
   const menuItems = document.querySelectorAll('.menu-list li a')
   const menuOverlay = document.querySelector('.menu-overlay')
 
-  navIcon.addEventListener('click', () => {
-    navIcon.classList.toggle('open')
-    menuList.classList.toggle('active')
-    menuOverlay.classList.toggle('active')
+  let tl = gsap.timeline({paused: true});
+
+  tl.to(menuItems, {
+    y: '0%',
+    opacity: 1,
+    duration: 0.2,
+    stagger: {
+      amount: 0.5,
+      from: "start",
+      ease: "power4.in"
+    },
+    ease: 'back.out(1.2)',
+  });
+
+  navButton.addEventListener('click', () => {
+    navButton.classList.toggle('open');
+    menuList.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
 
     if (menuList.classList.contains('active')) {
-      gsap.to(menuItems, {
-        y: '0%',
-        duration: 0.2,
-        stagger: 0.1,
-        ease: 'back.out(1.2)',
-      })
+      gsap.set(menuItems, {y: '100%', opacity: 0});
+      tl.restart();
     } else {
-      gsap.to(menuItems, {
-        y: '100%',
-        duration: 0.3,
-        stagger: 0.05,
-        ease: 'power2.in',
-      })
+      tl.reverse();
     }
-  })
+  });
+});
+
 </script>

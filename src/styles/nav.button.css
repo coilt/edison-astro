@@ -1,0 +1,48 @@
+
+#nav-button {
+  top: 50%;
+  display: none;
+  width: 1.5rem;
+  height: 2.5rem;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  z-index: 100;
+}
+
+#nav-button span {
+  transition: 0.25s ease-in-out;
+  transform-origin: center center;
+  display: block;
+  position: absolute;
+  height: 0.16rem;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+}
+
+#nav-button span:nth-child(1) {
+  top: 1rem;
+}
+
+#nav-button span:nth-child(2) {
+  top: 0.6rem;
+}
+
+#nav-button.open span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 10px;
+}
+
+#nav-button.open span:nth-child(2) {
+  transform: rotate(-45deg);
+  top: 10px;
+}
+
+@media (max-width: 768px) {
+  #nav-button {
+    display: block;
+  }
+}

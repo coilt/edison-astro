@@ -1,0 +1,30 @@
+---
+import '../styles/menu.css'
+---
+ 
+<nav class="menu-wrapper">
+  <div id="nav-icon">
+    <span></span>
+    <span></span>
+     
+  </div>
+  <ul class="menu-list">
+    <li><a href="/">Home</a></li>
+    <li><a href="/showcase">Showcase</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/more">More</a></li>
+  </ul>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const navIcon = document.getElementById('nav-icon');
+    const menuList = document.querySelector('.menu-list');
+
+    navIcon?.addEventListener('click', function() {
+      this.classList.toggle('open');
+      menuList?.classList.toggle('active');
+    });
+  });
+</script>

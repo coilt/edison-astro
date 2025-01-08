@@ -9,6 +9,11 @@ a {
   text-decoration: none;
 }
 
+.menu-items-container {
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+}
+
 .menu-wrapper {
   margin-top: 20px;
   margin-right: 20px;
@@ -42,6 +47,7 @@ a {
     flex-direction: column;
     align-items: flex-end;
   }
+ 
 
   .menu-toggle {
     display: block;
@@ -50,29 +56,16 @@ a {
 
   .menu-list {
     display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 300px;
-    padding: 2rem;
-    box-sizing: border-box;
-    text-align: left;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    
+    
   }
-
+ 
   .menu-list.active {
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 
-  .menu-list li {
-    margin-left: 0;
-    margin-bottom: 0.5rem;
-  }
+ 
 }
 
 #nav-icon {

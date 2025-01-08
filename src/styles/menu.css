@@ -9,11 +9,7 @@ a {
   text-decoration: none;
 }
 
-.menu-items-container {
-  overflow: hidden;
-  clip-path: inset(0 0 0 0);
-}
-
+ 
 .menu-wrapper {
   margin-top: 20px;
   margin-right: 20px;
@@ -22,15 +18,7 @@ a {
   justify-content: flex-end;
   align-items: center;
 }
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
+ 
 .menu-list {
   display: flex;
   list-style-type: none;
@@ -42,35 +30,97 @@ a {
   margin-left: 1rem;
 }
 
-@media (max-width: 768px) {
-  .menu-wrapper {
-    flex-direction: column;
-    align-items: flex-end;
-  }
+
+
+
+
+
+
+
+#nav-icon {
+  display: none;
+  width: 2.5rem;
+  height: 2.2rem;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
  
 
-  .menu-toggle {
+#nav-icon span {
+  transition: 0.25s ease-in-out;
+  transform-origin: center center;
+  display: block;
+  position: absolute;
+  height: 0.2rem;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+}
+
+#nav-icon span:nth-child(1) {
+  top: 0px;
+}
+
+#nav-icon span:nth-child(2) {
+  top: 12px;
+}
+
+#nav-icon.open span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 10px;
+}
+
+#nav-icon.open span:nth-child(2) {
+  transform: rotate(-45deg);
+  top: 10px;
+}
+
+
+@media (max-width: 768px) {
+  #nav-icon {
     display: block;
-    margin-bottom: 1rem;
   }
 
   .menu-list {
     display: none;
-    
-    
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 300px;
+    padding: 2rem;
+    box-sizing: border-box;
   }
- 
+
   .menu-list.active {
     display: flex;
-    flex-direction: column;
   }
 
- 
+  .menu-list li {
+    margin-left: 0;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+  }
 }
 
-#nav-icon {
-  display: none;
-}
+
+
+
+
+
+
+/* 
+
+
+
+ 
+ 
 
 @media (max-width: 768px) {
   #nav-icon {
@@ -86,6 +136,7 @@ a {
 }
 
 #nav-icon {
+display: none;
   width: 2.5rem;
   height: 2.2rem;
   position: relative;
@@ -125,7 +176,7 @@ a {
   -moz-transform-origin: center center;
   -o-transform-origin: center center;
   transform-origin: center center;
-  /* background-color: rgb(255, 211, 211); */
+ 
 }
 
 #nav-icon span:nth-child(2) {
@@ -134,7 +185,7 @@ a {
   -moz-transform-origin: center center;
   -o-transform-origin: center center;
   transform-origin: center center;
-  /* background-color: rgb(217, 223, 254); */
+ 
 }
 
 #nav-icon.open span:nth-child(1) {
@@ -153,4 +204,4 @@ a {
   transform: rotate(-45deg);
   top: 10px;
   left: 0px;
-}
+} */

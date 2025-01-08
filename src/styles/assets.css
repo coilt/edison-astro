@@ -331,7 +331,7 @@
 		position:absolute;
 		display:block;
 		opacity:0;
-		pointer-events:none;
+		pointer-events:all;
 		-webkit-transition:all .2s ease-in-out;
 		transition:all .2s ease-in-out;
 		line-height:12px

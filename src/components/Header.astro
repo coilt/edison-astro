@@ -1,98 +1,123 @@
 ---
-
-const currentPath = Astro.url.pathname;
-import '@styles/globals.css'
-import '@components/PageTransition.astro'
-import '../styles/globals.css';
-import '../styles/all.min.css'
-import '../styles/shortcodes.css'
-
-interface Props {
-  class?: string;
-  menuColor?: string;
-}
-
-const { class: className = "", menuColor = "#000000" } = Astro.props;
-
-
+import '../styles/menu.css'
+import '../styles/nav.button.css'
+import '../styles/header.css'
+ 
 ---
 
 
-<header class={className} data-menucolor={menuColor}>
-    <div id="header-container">
-    
-    
-    <!-- Logo -->
-    <div id="logo" >
-        <a   data-type="page-transition" href="index.html">
-            <img class="black-logo" src="images/logo.png" alt="ClaPat Logo">
-            <img class="white-logo" src="images/logo-white.png" alt="ClaPat Logo">
-        </a>
+ 
+ 
+
+  <nav class="menu-wrapper">
+    <div id="nav-button">
+      <span></span>
+      <span></span>
     </div>
-    <!--/Logo -->
-                
-    
-    <!-- Navigation -->
-    <nav> 
-        <div class="nav-height">
-            <div class="outer">
-                <div class="inner">           
-                    <ul data-breakpoint="10025" class="flexnav">
-                        <li class="link menu-timeline"><a class="ajax-link active" data-type="page-transition" href="/"><div class="before-span"><span data-hover="Home">Home</span></div></a></li>
-                        <li class="link menu-timeline"><a class="ajax-link active" data-type="page-transition" href="/showcase"><div class="before-span"><span data-hover="Showcase">Showcase</span></div></a></li>
-                        <li class="link menu-timeline"><a class="ajax-link" data-type="page-transition" href="about.html"><div class="before-span"><span data-hover="About">About</span></div></a></li>
-                        <li class="link menu-timeline"><a class="ajax-link" data-type="page-transition" href="contact.html"><div class="before-span"><span data-hover="Contact">Contact</span></div></a></li>
-                        <li class="link menu-timeline"><a class="" href="#"><div class="before-span"><span data-hover="More">More</span></div></a>
-                            <ul>
-                                <li><a class="ajax-link" href="typography.html" data-type="page-transition">Typography</a></li>                                         
-                                <li><a class="ajax-link" href="multimedia.html" data-type="page-transition">Multimedia</a></li>
-                                <li><a class="ajax-link" href="shortcodes.html" data-type="page-transition">Shortcodes</a></li>
-                            </ul>
-                        </li>
-                        
-                    </ul>            
-                </div>
-            </div> 
-        </div>          
-    </nav>
-    <!--/Navigation -->
-    
-    
-    <!-- Menu Burger -->
-    <div class="button-wrap right menu burger-lines">
-        <div class="icon-wrap parallax-wrap">
-            <div class="button-icon parallax-element">
-                <div id="burger-wrapper">
-                    <div id="menu-burger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
+    <div class="menu-overlay"></div>
+    <div class="menu-items-container">
+      <ul class="menu-list">
+        <li>
+          <div class="menu-item-mask">
+            <div class="menu-item-wrapper">
+              <a href="/" class="original-item">Home</a>
+              <a href="/" class="hover-item">Home</a>
             </div>
-        </div>
-        <div class="button-text sticky right"><span data-hover="Menu">Menu</span></div> 
+          </div>
+        </li>
+        <li>
+          <div class="menu-item-mask">
+            <div class="menu-item-wrapper">
+              <a href="/showcase" class="original-item">Showcase</a>
+              <a href="/showcase" class="hover-item">Showcase</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="menu-item-mask">
+            <div class="menu-item-wrapper">
+              <a href="/about" class="original-item">About</a>
+              <a href="/about" class="hover-item">About</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="menu-item-mask">
+            <div class="menu-item-wrapper">
+              <a href="/contact" class="original-item">Contact</a>
+              <a href="/contact" class="hover-item">Contact</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="menu-item-mask">
+            <div class="menu-item-wrapper">
+              <a href="/more" class="original-item">More</a>
+              <a href="/more" class="hover-item">More</a>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
-    <!--/Menu Burger -->
-
-    </div>
-</header>
-
-
-
- 
-
-
-
-
- 
-
- 
-
-
-
+  </nav>
  
  
+  
+  
 
+<script>
+  import { gsap } from 'gsap'
+
+  const menuItems = document.querySelectorAll('.menu-item-wrapper');
+
+  menuItems.forEach(item => {
+  const originalItem = item.querySelector('.original-item');
+  const hoverItem = item.querySelector('.hover-item');
+  
+  item.addEventListener('mouseenter', () => {
+    gsap.to(originalItem, { opacity: 0.2, duration: 0.2 });
+    gsap.to(hoverItem, { opacity: 1, duration: 0.2 });
+  });
+
+  item.addEventListener('mouseleave', () => {
+    gsap.to(hoverItem, { opacity: 0.2, duration: 0.2 });
+    gsap.to(originalItem, { opacity: 1, duration: 0.2 });
+  });
+});
 
  
+  document.addEventListener('DOMContentLoaded', () => {
+  const navButton = document.getElementById('nav-button')
+  const menuList = document.querySelector('.menu-list')
+  const menuItems = document.querySelectorAll('.menu-list li a')
+  const menuOverlay = document.querySelector('.menu-overlay')
+
+  let tl = gsap.timeline({paused: true});
+
+  tl.to(menuItems, {
+    y: '0%',
+    opacity: 1,
+    duration: 0.2,
+    stagger: {
+      amount: 0.5,
+      from: "start",
+      ease: "power4.in"
+    },
+    ease: 'back.out(1.2)',
+  });
+
+  navButton.addEventListener('click', () => {
+    navButton.classList.toggle('open');
+    menuList.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+
+    if (menuList.classList.contains('active')) {
+      gsap.set(menuItems, {y: '100%', opacity: 0});
+      tl.restart();
+    } else {
+      tl.reverse();
+    }
+  });
+});
+
+</script>

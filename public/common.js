@@ -13,7 +13,7 @@ import {
   ScrollTrigger,
 } from '/node_modules/gsap/'
 
-import { GridToFullscreenEffect } from '../../public/GridToFullScreen'
+import { GridToFullscreenEffect } from '../../public/GridToFullScreen.js'
 
 import '/node_modules/jquery/dist/jquery.js'
 

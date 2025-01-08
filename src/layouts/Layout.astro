@@ -2,6 +2,7 @@
 import Header from '@components/Header.astro'
 import Footer from '@components/Footer.astro'
 import Preloader from '@components/Preloader.astro'
+import Menu from '@components/Menu.astro'
 
 interface Props {
   title?: string;
@@ -27,7 +28,8 @@ const { primaryColor } = Astro.props
   </head>
   <body style="background-color: black;" class={bodyClass} data-primary-color={primaryColor}>
     <Preloader centerLine="Loading" />
-    <Header class={headerClass} menuColor={menuColor} />
+    
+   <!-- <Header class={headerClass} menuColor={menuColor} />  -->
     <article>
       <slot />
       <!-- your content is injected here -->

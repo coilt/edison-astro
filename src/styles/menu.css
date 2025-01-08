@@ -1,8 +1,4 @@
-body {
-  background-color: black;
-  margin: 0;
-}
-
+ 
 a {
   color: #ffffff;
   font-family: sans-serif;
@@ -10,11 +6,14 @@ a {
 }
 
 .menu-wrapper {
-  margin: 20px 20px 0 0;
+  height: 120px;
+  width: 100%;
+  margin: 0;
   position: relative;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  z-index: 100;
 }
 
 .menu-list {
@@ -22,12 +21,12 @@ a {
   flex-direction: column;
   list-style-type: none;
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
   max-width: 300px;
-  padding: 2rem;
+  padding: 1rem;
   box-sizing: border-box;
   z-index: 100;
 }
@@ -38,7 +37,7 @@ a {
 
 .menu-list li {
    
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .menu-list li a {
@@ -46,15 +45,13 @@ a {
   font-size: clamp(3rem, 5vw, 4rem);
    
 }
-
  
-
 .menu-item-wrapper {
   position: relative;
   transform: rotateX(0deg);
   transform-origin: center bottom;
   transform-style: preserve-3d;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   /* border: 1px solid rgb(208, 255, 0); */
    
 
@@ -66,7 +63,9 @@ a {
 }
 
 .original-item {
-  transform: rotateX(0deg) translateZ(56px);
+  color: rgb(221, 221, 221);
+  transform: rotateX(0deg) translateZ(calc(5vh + 1rem));
+  transition: opacity 0.2s ease-in-out;
   backface-visibility: hidden;
   position: absolute;
   top: 0;

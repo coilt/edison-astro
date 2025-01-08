@@ -44,7 +44,7 @@
 		position: relative;
 		box-sizing: border-box;	
 		text-align:left;
-		pointer-events:initial;	
+		pointer-events:all;	
 	}
 	
 	#hero #hero-caption.text-align-center {	
@@ -896,7 +896,7 @@
 	}
 	
 	.next-ajax-link-project.auto-trigger {
-		pointer-events:none;
+		pointer-events:all;
 	}
 	
 	.disable-ajaxload .next-ajax-link-project.auto-trigger {

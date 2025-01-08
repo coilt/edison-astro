@@ -1,13 +1,13 @@
 
 #nav-button {
   top: 50%;
-  display: none;
+  display: block;
   width: 1.5rem;
   height: 2.5rem;
   position: relative;
   cursor: pointer;
   transition: 0.3s ease-in-out;
-  z-index: 100;
+  z-index: 1000;
 }
 
 #nav-button span {
@@ -41,8 +41,8 @@
   top: 10px;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   #nav-button {
     display: block;
-  }
-}
+  } */
+ 

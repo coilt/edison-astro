@@ -12,10 +12,15 @@ import {
   ScrollTrigger,
 } from '/node_modules/gsap/all'
 
+gsap.registerPlugin(ScrollTrigger)
+
+import { FitThumbScreenWEBGL } from './fitThumbScreenWEBGL.js'
 import '../src/lib/common.js'
 import '/plugins.js'
 import { ContactForm } from '/contact.js'
 import { ContactMap } from '/contact.js'
+import { FitThumbScreenGSAP } from './FitThumbScreenGSAP.js'
+import { Core } from './core.js'
 
 import '../src/lib/common'
 
@@ -28,37 +33,26 @@ function isMobile() {
   )
 }
 
-if (typeof window !== 'undefined') {
-  import('/node_modules/jquery/dist/jquery.js').then((jQueryModule) => {
-    const $ = jQuery
+function initializeApp() {
+  'use strict'
 
-    $(function () {
-      $(document).ready(function () {
-        'use strict'
+  PageLoad()
 
-        PageLoad()
-        ScrollEffects()
-        Sliders()
-        FirstLoad()
-        PageLoadActions()
-        FitThumbScreenGSAP()
-        ShowcaseCarousel()
-        ShowcaseSlider()
-        ShowcasePortfolio()
-        ShowcaseLists()
-        ShowcaseGallery()
-        FitThumbScreenWEBGL()
-        Shortcodes()
-        Core()
-        JustifiedGrid()
-        Lightbox()
-        ContactForm()
-        PlayVideo()
-        ContactMap()
-        CustomFunction()
-      })
-    })
-  })
+  PageLoadActions()
+  FitThumbScreenGSAP()
+  ShowcaseCarousel()
+  ShowcaseSlider()
+  ShowcasePortfolio()
+  ShowcaseLists()
+  ShowcaseGallery()
+  FitThumbScreenWEBGL()
+
+  Core()
+  Lightbox()
+  ContactForm()
+  PlayVideo()
+  ContactMap()
+  CustomFunction()
 }
 
 /*--------------------------------------------------
@@ -2149,49 +2143,23 @@ export function ShowcaseCarousel() {
           }
         }),
       )
-      const _start6 = document.querySelectorAll('.trigger-item')
-      _start6.forEach((_element52) =>
-        _element52.addEventListener('mouseenter', function () {
-          if (
-            !document
-              .querySelectorAll('body')
-              .classList.contains('scale-drag-x')
-          ) {
-            var $this = document.querySelectorAll(this)
+      const triggerItems = document.querySelectorAll('.trigger-item')
 
-            const _start7 = document.querySelectorAll(this)
-            const _chain11 = [].concat(
-              ..._start7.map((_element38) =>
-                _element38.querySelectorAll('video'),
-              ),
-            )
-            const _chain12 = document
-              .querySelectorAll(_chain11)
-              .each(function () {
-                const _start8 = document.querySelectorAll(this)
-                const _chain13 = document
-                  .querySelectorAll(_start8)
-                  .get(0)
-                  .toArray()
-                const _chain14 = document
-                  .querySelectorAll(_chain13)
-                  .play()
-                  .toArray()
-              })
-              .toArray()
+      triggerItems.forEach((item) => {
+        item.addEventListener('mouseenter', function () {
+          if (!document.body.classList.contains('scale-drag-x')) {
+            const videos = this.querySelectorAll('video')
+            videos.forEach((video) => video.play())
           }
-        }),
-      )
-      _start6.forEach((_element53) =>
-        _element53.addEventListener('mouseleave', function () {
-          if (
-            !document
-              .querySelectorAll('body')
-              .classList.contains('scale-drag-x')
-          ) {
+        })
+
+        item.addEventListener('mouseleave', function () {
+          if (!document.body.classList.contains('scale-drag-x')) {
+            // Add mouseleave functionality here if needed
           }
-        }),
-      )
+        })
+      })
+
       document
         .querySelectorAll('.showcase-carousel .clapat-slide .slide-inner')
         .forEach((_element43) =>
@@ -2807,7 +2775,7 @@ export function ShowcaseSlider() {
               .querySelectorAll('body')
               .classList.contains('scale-drag-y')
           ) {
-            var $this = document.querySelectorAll(this)
+            const $this = document.querySelectorAll(this)
 
             const _start2 = document.querySelectorAll(this)
             const _chain7 = [].concat(
@@ -3949,8 +3917,6 @@ function ShowcaseLists() {
             duration: 0.7,
             top: `${mousePos.y - this.DOM.el.querySelector('.hover-reveal').offsetHeight * 0.5}px`,
             left: `${mousePos.x - this.DOM.el.querySelector('.hover-reveal').offsetWidth * 0.5}px`,
-            /*top: `${window.innerHeight*0.5-(this.DOM.el.querySelector('.hover-reveal').offsetHeight*0.5)}px`, 
-            left: `${window.innerWidth*0.5-(this.DOM.el.querySelector('.hover-reveal').offsetWidth*0.5)}px`, */
 
             ease: Power4.easeOut,
           })
@@ -4073,108 +4039,163 @@ function ShowcaseLists() {
 Function Showcase Gallery
 ---------------------------------------------------*/
 
-
- 
-
 function ShowcaseGallery() {
-  const currentElement = this;
+  const currentElement = this
   if (document.querySelector('.showcase-gallery')) {
-    document.querySelector('footer').classList.add('showcase-footer');
-    gsap.set(document.querySelectorAll('.showcase-gallery .slide-hero-title span, .showcase-gallery .slide-hero-subtitle span'), {
-      y: 120,
-      opacity: 0
-    });
-    gsap.set(document.querySelectorAll('.showcase-gallery .clapat-slider .slide-inner'), {
-      opacity: 0
-    });
+    document.querySelector('footer').classList.add('showcase-footer')
+    gsap.set(
+      document.querySelectorAll(
+        '.showcase-gallery .slide-hero-title span, .showcase-gallery .slide-hero-subtitle span',
+      ),
+      {
+        y: 120,
+        opacity: 0,
+      },
+    )
+    gsap.set(
+      document.querySelectorAll(
+        '.showcase-gallery .clapat-slider .slide-inner',
+      ),
+      {
+        opacity: 0,
+      },
+    )
     slider = new ClapatSlider('.showcase-gallery', {
       direction: 'vertical',
       snap: false,
       navigation: {
         nextEl: '.cp-button-next',
-        prevEl: '.cp-button-prev'
+        prevEl: '.cp-button-prev',
       },
-      parallax: [{
-        element: '.speed-50',
-        margin: -80
-      }],
+      parallax: [
+        {
+          element: '.speed-50',
+          margin: -80,
+        },
+      ],
       on: {
         init: function (slide) {
           if (document.body.classList.contains('show-loader')) {
-            gsap.to(document.querySelectorAll('.showcase-gallery .slider-fixed-content .caption-timeline span'), {
-              duration: 0.7,
-              y: 0,
-              opacity: 1,
-              stagger: 0.1,
-              delay: 0.55,
-              ease: Power3.easeOut
-            });
-            gsap.to(document.querySelectorAll('.showcase-gallery .clapat-slider .clapat-slide .slide-inner'), {
-              duration: 0.7,
-              opacity: 1,
-              delay: 0.4,
-              ease: Power2.easeOut
-            });
-            var gallerySlideClasses = ['.clapat-slide-prev-two', '.clapat-slide-prev', '.clapat-slide-active', '.clapat-slide-next', '.clapat-slide-next-two'];
+            gsap.to(
+              document.querySelectorAll(
+                '.showcase-gallery .slider-fixed-content .caption-timeline span',
+              ),
+              {
+                duration: 0.7,
+                y: 0,
+                opacity: 1,
+                stagger: 0.1,
+                delay: 0.55,
+                ease: Power3.easeOut,
+              },
+            )
+            gsap.to(
+              document.querySelectorAll(
+                '.showcase-gallery .clapat-slider .clapat-slide .slide-inner',
+              ),
+              {
+                duration: 0.7,
+                opacity: 1,
+                delay: 0.4,
+                ease: Power2.easeOut,
+              },
+            )
+            var gallerySlideClasses = [
+              '.clapat-slide-prev-two',
+              '.clapat-slide-prev',
+              '.clapat-slide-active',
+              '.clapat-slide-next',
+              '.clapat-slide-next-two',
+            ]
             gallerySlideClasses.forEach(function (gallerySlideClass, index) {
-              var gallerySlide = document.querySelector('.showcase-gallery .clapat-slider ' + gallerySlideClass + ' .slide-inner');
-              var delay = 0 + index * 0.1;
+              var gallerySlide = document.querySelector(
+                '.showcase-gallery .clapat-slider ' +
+                  gallerySlideClass +
+                  ' .slide-inner',
+              )
+              var delay = 0 + index * 0.1
               gsap.set(gallerySlide, {
-                yPercent: 150
-              });
+                yPercent: 150,
+              })
               gsap.to(gallerySlide, {
                 duration: 1.5,
                 yPercent: 0,
                 delay: delay,
-                ease: Power4.easeOut
-              });
-            });
-            gsap.to(document.querySelectorAll('#filters-wrapper, .clapat-pagination, .cp-button-prev, .cp-button-next, .progress-info, footer .link-text'), {
-              duration: 0.5,
-              opacity: 1,
-              delay: 0.4,
-              ease: Power2.easeOut
-            });
+                ease: Power4.easeOut,
+              })
+            })
+            gsap.to(
+              document.querySelectorAll(
+                '#filters-wrapper, .clapat-pagination, .cp-button-prev, .cp-button-next, .progress-info, footer .link-text',
+              ),
+              {
+                duration: 0.5,
+                opacity: 1,
+                delay: 0.4,
+                ease: Power2.easeOut,
+              },
+            )
           }
         },
         slideLeaveViewport: function (slide) {
-          gsap.set(document.querySelectorAll('.clapat-slider div:not(.clapat-slide-visible) .slide-events'), {
-            y: ''
-          });
+          gsap.set(
+            document.querySelectorAll(
+              '.clapat-slider div:not(.clapat-slide-visible) .slide-events',
+            ),
+            {
+              y: '',
+            },
+          )
+        },
+      },
+    })
+    slider.tl
+      .fromTo(
+        '.progress-info-fill',
+        {
+          backgroundSize: '0% 100%',
+        },
+        {
+          backgroundSize: '100% 100%',
+        },
+        0,
+      )
+      .fromTo(
+        '.progress-info-fill-2',
+        {
+          backgroundSize: '100% 100%',
+        },
+        {
+          backgroundSize: '0% 100%',
+          duration: 0.3,
+          ease: 'power3',
+        },
+        0,
+      )
+    document
+      .querySelector('.carousel-prev')
+      .addEventListener('click', function () {
+        if (window.rotateElement && window.rotateElement.isActive()) {
+          return
+        } else {
+          window.rotateElement = gsap.to(currentElement.querySelector('i'), {
+            duration: 0.3,
+            rotate: '-= 180',
+          })
         }
-      }
-    });
-    slider.tl.fromTo('.progress-info-fill', {
-      backgroundSize: '0% 100%'
-    }, {
-      backgroundSize: '100% 100%'
-    }, 0).fromTo('.progress-info-fill-2', {
-      backgroundSize: '100% 100%'
-    }, {
-      backgroundSize: '0% 100%',
-      duration: 0.3,
-      ease: 'power3'
-    }, 0);
-    document.querySelector('.carousel-prev').addEventListener('click', function () {
-      if (window.rotateElement && window.rotateElement.isActive()) {
-        return;
-      } else {
-        window.rotateElement = gsap.to(currentElement.querySelector('i'), {
-          duration: 0.3,
-          rotate: '-= 180'
-        });
-      }
-    });
-    document.querySelector('.carousel-next').addEventListener('click', function () {
-      if (window.rotateElement && window.rotateElement.isActive()) {
-        return;
-      } else {
-        window.rotateElement = gsap.to(currentElement.querySelector('i'), {
-          duration: 0.3,
-          rotate: '+= 90'
-        });
-      }
-    });
+      })
+    document
+      .querySelector('.carousel-next')
+      .addEventListener('click', function () {
+        if (window.rotateElement && window.rotateElement.isActive()) {
+          return
+        } else {
+          window.rotateElement = gsap.to(currentElement.querySelector('i'), {
+            duration: 0.3,
+            rotate: '+= 90',
+          })
+        }
+      })
     class Item {
       constructor(DOM_el) {
         // DOM elements
@@ -4188,814 +4209,1019 @@ function ShowcaseGallery() {
           // image (.item__image)
           image: null,
           // imageInner (.item__image > .item__image-inner)
-          imageInner: null
-        };
-        this.DOM.el = DOM_el;
-        this.DOM.imageWrap = this.DOM.el.querySelector('.slide-moving');
-        if (this.DOM.imageWrap != null) {
-          this.DOM.imageCaption = this.DOM.imageWrap.querySelector('.slide-caption');
+          imageInner: null,
         }
-        this.DOM.image = this.DOM.el.querySelector('.trigger-item');
+        this.DOM.el = DOM_el
+        this.DOM.imageWrap = this.DOM.el.querySelector('.slide-moving')
+        if (this.DOM.imageWrap != null) {
+          this.DOM.imageCaption =
+            this.DOM.imageWrap.querySelector('.slide-caption')
+        }
+        this.DOM.image = this.DOM.el.querySelector('.trigger-item')
         if (this.DOM.image != null) {
-          this.DOM.imageInner = this.DOM.image.querySelector('.section-image');
+          this.DOM.imageInner = this.DOM.image.querySelector('.section-image')
         }
       }
     }
 
     // Placeholder for the grid items (.item__image). We'll use the gsap FLIP plugin to move the "".item .item__image" inside the grid element
-    const grid = document.querySelector('.gallery-thumbs-wrapper');
-    const triggeredImage = document.querySelector('.gallery-zoom-wrapper');
-    let animateTitle = gsap.timeline();
-    let endScaleSmall = gsap.getProperty('.showcase-gallery .has-scale-small .section-image', 'scale');
+    const grid = document.querySelector('.gallery-thumbs-wrapper')
+    const triggeredImage = document.querySelector('.gallery-zoom-wrapper')
+    let animateTitle = gsap.timeline()
+    let endScaleSmall = gsap.getProperty(
+      '.showcase-gallery .has-scale-small .section-image',
+      'scale',
+    )
     gsap.set('.showcase-gallery .has-scale-small .section-image', {
-      scale: endScaleSmall
-    });
-    let endScaleMedium = gsap.getProperty('.showcase-gallery .has-scale-medium .section-image', 'scale');
+      scale: endScaleSmall,
+    })
+    let endScaleMedium = gsap.getProperty(
+      '.showcase-gallery .has-scale-medium .section-image',
+      'scale',
+    )
     gsap.set('.showcase-gallery .has-scale-medium .section-image', {
-      scale: endScaleMedium
-    });
+      scale: endScaleMedium,
+    })
     const showGrid = () => {
-      document.body.classList.add('grid-open', 'disable-scroll');
-      slider.enabled = false;
-      gsap.to(document.querySelectorAll('footer .link-text, .clapat-pagination, .progress-info, #filters-wrapper'), {
-        duration: 0.3,
-        opacity: 0,
-        y: 30,
-        stagger: -0.05,
-        ease: Power2.easeInOut
-      });
-      gsap.to(document.querySelectorAll('.showcase-gallery .slider-fixed-content .caption-timeline span'), {
-        duration: 0.3,
-        y: -100,
-        opacity: 0,
-        stagger: 0.1,
-        delay: 0,
-        ease: Power3.easeIn
-      });
+      document.body.classList.add('grid-open', 'disable-scroll')
+      slider.enabled = false
+      gsap.to(
+        document.querySelectorAll(
+          'footer .link-text, .clapat-pagination, .progress-info, #filters-wrapper',
+        ),
+        {
+          duration: 0.3,
+          opacity: 0,
+          y: 30,
+          stagger: -0.05,
+          ease: Power2.easeInOut,
+        },
+      )
+      gsap.to(
+        document.querySelectorAll(
+          '.showcase-gallery .slider-fixed-content .caption-timeline span',
+        ),
+        {
+          duration: 0.3,
+          y: -100,
+          opacity: 0,
+          stagger: 0.1,
+          delay: 0,
+          ease: Power3.easeIn,
+        },
+      )
 
       // get the DOM elements that we'll work with
-      const DOM = getDOMElements();
-      const allImages = DOM.grid.map(element => {
-        element.item.DOM.image.setAttribute('data-slide-index', element.item_index);
-        return element.item.DOM.image;
-      });
-      const allImagesInner = DOM.grid.map(element => element.item.DOM.imageInner);
-      const currentImage = DOM.currentItem.DOM.image;
-      const currentImageInner = DOM.currentItem.DOM.imageInner;
-      const currentImageCaption = DOM.currentItem.DOM.imageCaption;
+      const DOM = getDOMElements()
+      const allImages = DOM.grid.map((element) => {
+        element.item.DOM.image.setAttribute(
+          'data-slide-index',
+          element.item_index,
+        )
+        return element.item.DOM.image
+      })
+      const allImagesInner = DOM.grid.map(
+        (element) => element.item.DOM.imageInner,
+      )
+      const currentImage = DOM.currentItem.DOM.image
+      const currentImageInner = DOM.currentItem.DOM.imageInner
+      const currentImageCaption = DOM.currentItem.DOM.imageCaption
 
       // Use gsap flip for the animation
       // save the current state of the images
-      const flipstate = Flip.getState([allImages]);
-      const flipstate1 = Flip.getState([currentImage]);
+      const flipstate = Flip.getState([allImages])
+      const flipstate1 = Flip.getState([currentImage])
       gsap.set(currentImage.closest('.clapat-slide'), {
-        zIndex: 0
-      });
+        zIndex: 0,
+      })
 
       // put them inside the .grid element
-      grid.append(...allImages);
-      currentImage.setAttribute('data-slide-index', DOM.currentIndex);
-      triggeredImage.append(currentImage);
-      triggeredImage.append(currentImageCaption);
+      grid.append(...allImages)
+      currentImage.setAttribute('data-slide-index', DOM.currentIndex)
+      triggeredImage.append(currentImage)
+      triggeredImage.append(currentImageCaption)
       gsap.to('.clapat-slider .clapat-slide .trigger-item', {
         duration: 1,
         opacity: 0,
         scale: 0.7,
-        ease: Power2.easeOut
-      });
+        ease: Power2.easeOut,
+      })
 
       // Flip it
-      const _chain = document.querySelectorAll(Flip).from(flipstate, {
-        duration: 0.7,
-        stagger: 0.02,
-        ease: 'power3.inOut',
-        absolute: true
-      }).toArray();
-      const _chain2 = document.querySelectorAll(_chain).to(currentImageInner, {
-        duration: 0.7,
-        ease: 'power3.inOut',
-        scale: 1,
-        onComplete: () => {
-          document.body.classList.add('enable-trigger');
-        }
-      }, 0).toArray();
-      const _chain3 = document.querySelectorAll(_chain2).to(allImagesInner, {
-        duration: 0.7,
-        ease: 'power3.inOut',
-        scale: 1
-      }, 0).toArray();
-      const _chain4 = document.querySelectorAll(_chain3).to('.img-mask', {
-        duration: 0.7,
-        ease: 'power3.inOut',
-        opacity: 1
-      }, 0).toArray();
+      const _chain = document
+        .querySelectorAll(Flip)
+        .from(flipstate, {
+          duration: 0.7,
+          stagger: 0.02,
+          ease: 'power3.inOut',
+          absolute: true,
+        })
+        .toArray()
+      const _chain2 = document
+        .querySelectorAll(_chain)
+        .to(
+          currentImageInner,
+          {
+            duration: 0.7,
+            ease: 'power3.inOut',
+            scale: 1,
+            onComplete: () => {
+              document.body.classList.add('enable-trigger')
+            },
+          },
+          0,
+        )
+        .toArray()
+      const _chain3 = document
+        .querySelectorAll(_chain2)
+        .to(
+          allImagesInner,
+          {
+            duration: 0.7,
+            ease: 'power3.inOut',
+            scale: 1,
+          },
+          0,
+        )
+        .toArray()
+      const _chain4 = document
+        .querySelectorAll(_chain3)
+        .to(
+          '.img-mask',
+          {
+            duration: 0.7,
+            ease: 'power3.inOut',
+            opacity: 1,
+          },
+          0,
+        )
+        .toArray()
       Flip.from(flipstate1, {
         duration: 0.7,
         ease: 'power3.inOut',
-        absolute: true
-      });
+        absolute: true,
+      })
       animateTitle.set('.showcase-gallery .slide-caption span', {
         y: 120,
-        opacity: 0
-      });
-      animateTitle.to('.showcase-gallery .gallery-zoom-wrapper .slide-caption span', {
-        duration: 0.5,
-        y: 0,
-        opacity: 1,
-        delay: 0.2,
-        stagger: 0.03,
-        ease: Power2.easeOut
-      });
+        opacity: 0,
+      })
+      animateTitle.to(
+        '.showcase-gallery .gallery-zoom-wrapper .slide-caption span',
+        {
+          duration: 0.5,
+          y: 0,
+          opacity: 1,
+          delay: 0.2,
+          stagger: 0.03,
+          ease: Power2.easeOut,
+        },
+      )
       gsap.to('.showcase-gallery .gallery-zoom-wrapper a.slide-link', {
         duration: 0.7,
         opacity: 1,
         scale: 1,
-        ease: Power2.easeIn
-      });
-    };
+        ease: Power2.easeIn,
+      })
+    }
     const hideGrid = () => {
       gsap.to('.clapat-slider .clapat-slide .trigger-item', {
         duration: 0.5,
         opacity: 1,
         scale: 1,
         delay: 0.2,
-        ease: 'power3.inOut'
-      });
-      gsap.to(document.querySelectorAll('.showcase-gallery .gallery-zoom-wrapper .slide-caption'), {
-        duration: 0.25,
-        opacity: 0,
-        delay: 0,
-        ease: Power2.easeOut
-      });
-      animateTitle.to('.showcase-gallery .gallery-zoom-wrapper .slide-caption span', {
-        duration: 0.5,
-        y: -100,
-        opacity: 0,
-        ease: Power2.easeInOut
-      });
+        ease: 'power3.inOut',
+      })
+      gsap.to(
+        document.querySelectorAll(
+          '.showcase-gallery .gallery-zoom-wrapper .slide-caption',
+        ),
+        {
+          duration: 0.25,
+          opacity: 0,
+          delay: 0,
+          ease: Power2.easeOut,
+        },
+      )
+      animateTitle.to(
+        '.showcase-gallery .gallery-zoom-wrapper .slide-caption span',
+        {
+          duration: 0.5,
+          y: -100,
+          opacity: 0,
+          ease: Power2.easeInOut,
+        },
+      )
       gsap.to('.showcase-gallery a.slide-link', {
         duration: 0.3,
         opacity: 0,
         scale: 0.8,
         delay: 0,
-        ease: Power2.easeOut
-      });
-      document.body.classList.remove('grid-open');
-      slider.enabled = true;
+        ease: Power2.easeOut,
+      })
+      document.body.classList.remove('grid-open')
+      slider.enabled = true
 
       // get the DOM elements that we'll work with
-      const DOM = getDOMElements();
-      const allImages = document.querySelectorAll('.gallery-thumbs-wrapper .trigger-item');
-      const currentImage = document.querySelector('.gallery-zoom-wrapper .trigger-item');
-      const currentImageCaption = document.querySelector('.gallery-zoom-wrapper .slide-caption');
-      const currentImageInner = document.querySelector('.gallery-zoom-wrapper .trigger-item .section-image');
-      const flipstate = Flip.getState([allImages]);
-      const flipstate1 = Flip.getState([currentImage]);
-      allImages.forEach(image => {
-        let index = image.getAttribute('data-slide-index');
-        let element = DOM.items[index];
-        image.removeAttribute('data-slide-index');
-        element.DOM.imageWrap.appendChild(image);
-      });
-      currentImage.removeAttribute('data-slide-index');
-      DOM.currentItem.DOM.imageWrap.appendChild(currentImage);
+      const DOM = getDOMElements()
+      const allImages = document.querySelectorAll(
+        '.gallery-thumbs-wrapper .trigger-item',
+      )
+      const currentImage = document.querySelector(
+        '.gallery-zoom-wrapper .trigger-item',
+      )
+      const currentImageCaption = document.querySelector(
+        '.gallery-zoom-wrapper .slide-caption',
+      )
+      const currentImageInner = document.querySelector(
+        '.gallery-zoom-wrapper .trigger-item .section-image',
+      )
+      const flipstate = Flip.getState([allImages])
+      const flipstate1 = Flip.getState([currentImage])
+      allImages.forEach((image) => {
+        let index = image.getAttribute('data-slide-index')
+        let element = DOM.items[index]
+        image.removeAttribute('data-slide-index')
+        element.DOM.imageWrap.appendChild(image)
+      })
+      currentImage.removeAttribute('data-slide-index')
+      DOM.currentItem.DOM.imageWrap.appendChild(currentImage)
 
       // Remove all the elements from the grid and current triggered image divs
-      const liveGrid = document.querySelector('.gallery-thumbs-wrapper');
-      const liveTriggeredImage = document.querySelector('.gallery-zoom-wrapper');
+      const liveGrid = document.querySelector('.gallery-thumbs-wrapper')
+      const liveTriggeredImage = document.querySelector('.gallery-zoom-wrapper')
       while (liveGrid.firstChild) {
-        liveGrid.removeChild(liveGrid.firstChild);
+        liveGrid.removeChild(liveGrid.firstChild)
       }
       Flip.from(flipstate, {
         duration: 0.7,
         stagger: 0.02,
-        ease: 'power3.inOut'
-      });
-      const _chain5 = document.querySelectorAll(Flip).from(flipstate1, {
-        duration: 0.7,
-        stagger: 0.02,
         ease: 'power3.inOut',
-        onComplete: function () {
-          DOM.currentItem.DOM.imageWrap.appendChild(currentImageCaption);
-          const triggeredItem = document.querySelector('.clapat-slide.triggered-item');
-          if (triggeredItem != null) {
-            triggeredItem.classList.remove('triggered-item');
-          }
-          const clapatSlides = document.querySelectorAll('.clapat-slide');
-          clapatSlides.forEach(slide => {
-            slide.style.zIndex = '';
-            slideInner = slide.querySelector('.slide-inner');
-            slideInner.classList.remove('disabled');
-          });
-          document.body.classList.remove('disable-scroll', 'enable-trigger');
-          gsap.set(document.querySelectorAll('.showcase-gallery .slide-caption'), {
-            clearProps: 'opacity'
-          });
-        }
-      }).toArray();
-      const _chain6 = document.querySelectorAll(_chain5).to(document.querySelectorAll('.showcase-gallery .has-scale-small .section-image'), {
-        duration: 0.7,
-        ease: 'power3.inOut',
-        scale: endScaleSmall
-      }, 0).toArray();
-      const _chain7 = document.querySelectorAll(_chain6).to(document.querySelectorAll('.showcase-gallery .has-scale-medium .section-image'), {
-        duration: 0.7,
-        ease: 'power3.inOut',
-        scale: endScaleMedium
-      }, 0).toArray();
-      gsap.to(document.querySelectorAll('footer .link-text, .clapat-pagination, .progress-info, #filters-wrapper'), {
-        duration: 0.3,
-        opacity: 1,
-        y: 0,
-        stagger: 0.05,
-        delay: 0.4,
-        ease: Power2.easeInOut
-      });
-      gsap.set(document.querySelectorAll('.showcase-gallery .slider-fixed-content .caption-timeline span'), {
-        y: 100
-      });
-      gsap.to(document.querySelectorAll('.showcase-gallery .slider-fixed-content .caption-timeline span'), {
-        duration: 0.7,
-        y: 0,
-        opacity: 1,
-        stagger: 0.1,
-        delay: 0.3,
-        ease: Power3.easeOut
-      });
-    };
+      })
+      const _chain5 = document
+        .querySelectorAll(Flip)
+        .from(flipstate1, {
+          duration: 0.7,
+          stagger: 0.02,
+          ease: 'power3.inOut',
+          onComplete: function () {
+            DOM.currentItem.DOM.imageWrap.appendChild(currentImageCaption)
+            const triggeredItem = document.querySelector(
+              '.clapat-slide.triggered-item',
+            )
+            if (triggeredItem != null) {
+              triggeredItem.classList.remove('triggered-item')
+            }
+            const clapatSlides = document.querySelectorAll('.clapat-slide')
+            clapatSlides.forEach((slide) => {
+              slide.style.zIndex = ''
+              slideInner = slide.querySelector('.slide-inner')
+              slideInner.classList.remove('disabled')
+            })
+            document.body.classList.remove('disable-scroll', 'enable-trigger')
+            gsap.set(
+              document.querySelectorAll('.showcase-gallery .slide-caption'),
+              {
+                clearProps: 'opacity',
+              },
+            )
+          },
+        })
+        .toArray()
+      const _chain6 = document
+        .querySelectorAll(_chain5)
+        .to(
+          document.querySelectorAll(
+            '.showcase-gallery .has-scale-small .section-image',
+          ),
+          {
+            duration: 0.7,
+            ease: 'power3.inOut',
+            scale: endScaleSmall,
+          },
+          0,
+        )
+        .toArray()
+      const _chain7 = document
+        .querySelectorAll(_chain6)
+        .to(
+          document.querySelectorAll(
+            '.showcase-gallery .has-scale-medium .section-image',
+          ),
+          {
+            duration: 0.7,
+            ease: 'power3.inOut',
+            scale: endScaleMedium,
+          },
+          0,
+        )
+        .toArray()
+      gsap.to(
+        document.querySelectorAll(
+          'footer .link-text, .clapat-pagination, .progress-info, #filters-wrapper',
+        ),
+        {
+          duration: 0.3,
+          opacity: 1,
+          y: 0,
+          stagger: 0.05,
+          delay: 0.4,
+          ease: Power2.easeInOut,
+        },
+      )
+      gsap.set(
+        document.querySelectorAll(
+          '.showcase-gallery .slider-fixed-content .caption-timeline span',
+        ),
+        {
+          y: 100,
+        },
+      )
+      gsap.to(
+        document.querySelectorAll(
+          '.showcase-gallery .slider-fixed-content .caption-timeline span',
+        ),
+        {
+          duration: 0.7,
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          delay: 0.3,
+          ease: Power3.easeOut,
+        },
+      )
+    }
 
     // Returns some DOM elements that are needed for showing/hiding the grid
     const getDOMElements = () => {
       // Item instances (slides)
-      const items = [];
-      [...document.querySelector('.clapat-slide')].forEach(item => {
-        items.push(new Item(item));
-      });
+      const items = []
+      ;[...document.querySelector('.clapat-slide')].forEach((item) => {
+        items.push(new Item(item))
+      })
 
       // Cloned items
-      const itemsCloned = [];
-      [...document.querySelector('.clapat-slide-clone')].forEach(item => {
-        itemsCloned.push(new Item(item));
-      });
-      let firstVisibleIndex = -1;
-      let direction = slider.opts.direction;
+      const itemsCloned = []
+      ;[...document.querySelector('.clapat-slide-clone')].forEach((item) => {
+        itemsCloned.push(new Item(item))
+      })
+      let firstVisibleIndex = -1
+      let direction = slider.opts.direction
       for (let i = 0; i < items.length; i++) {
-        let item = items[i];
-        let bounding = item.DOM.el.getBoundingClientRect();
+        let item = items[i]
+        let bounding = item.DOM.el.getBoundingClientRect()
         if (direction == 'vertical') {
-          start = bounding.top;
-          end = bounding.bottom;
+          start = bounding.top
+          end = bounding.bottom
         } else {
-          start = bounding.left;
-          end = bounding.right;
+          start = bounding.left
+          end = bounding.right
         }
         if (start <= 0 && end > 0) {
-          firstVisibleIndex = i;
-          break;
+          firstVisibleIndex = i
+          break
         }
       }
-      const gridItems = [];
-      let currentIndex = -1;
+      const gridItems = []
+      let currentIndex = -1
       if (direction == 'vertical') {
-        let selectedItems = 0;
+        let selectedItems = 0
         // in case of the vertical direction cloned items are reverted, last one becomes first
         if (firstVisibleIndex >= itemsCloned.length) {
           // the first visible index is a clone, therefore iterate back to the first clone
-          for (index = firstVisibleIndex; index >= itemsCloned.length; index--) {
-            let item = items[index];
+          for (
+            index = firstVisibleIndex;
+            index >= itemsCloned.length;
+            index--
+          ) {
+            let item = items[index]
             if (!item.DOM.el.classList.contains('triggered-item')) {
               gridItems.push({
                 item_index: index,
-                item: item
-              });
+                item: item,
+              })
             } else {
-              currentIndex = index;
+              currentIndex = index
             }
-            selectedItems++;
+            selectedItems++
           }
           // and then from the beginning the rest of the clones
           for (index = 0; selectedItems < itemsCloned.length; index++) {
-            let item = items[index];
+            let item = items[index]
             if (!item.DOM.el.classList.contains('triggered-item')) {
               gridItems.push({
                 item_index: index,
-                item: item
-              });
+                item: item,
+              })
             } else {
-              currentIndex = index;
+              currentIndex = index
             }
-            selectedItems++;
+            selectedItems++
           }
         } else {
           // the first visible index is not a clone, therefore iterate from the beginning of the items
           for (index = firstVisibleIndex; index < itemsCloned.length; index++) {
-            let item = items[index];
+            let item = items[index]
             if (!item.DOM.el.classList.contains('triggered-item')) {
               gridItems.push({
                 item_index: index,
-                item: item
-              });
+                item: item,
+              })
             } else {
-              currentIndex = index;
+              currentIndex = index
             }
-            selectedItems++;
+            selectedItems++
           }
           // and then from the end of the clones
-          for (index = items.length - 1; selectedItems < itemsCloned.length; index--) {
-            let item = items[index];
+          for (
+            index = items.length - 1;
+            selectedItems < itemsCloned.length;
+            index--
+          ) {
+            let item = items[index]
             if (!item.DOM.el.classList.contains('triggered-item')) {
               gridItems.push({
                 item_index: index,
-                item: item
-              });
+                item: item,
+              })
             } else {
-              currentIndex = index;
+              currentIndex = index
             }
-            selectedItems++;
+            selectedItems++
           }
         }
       } else {
-        let iterator = 0;
+        let iterator = 0
         while (iterator < itemsCloned.length) {
-          let index = gsap.utils.wrap(0, items.length, firstVisibleIndex + iterator);
-          let item = items[index];
+          let index = gsap.utils.wrap(
+            0,
+            items.length,
+            firstVisibleIndex + iterator,
+          )
+          let item = items[index]
           if (!item.DOM.el.classList.contains('triggered-item')) {
             gridItems.push({
               item_index: index,
-              item: item
-            });
+              item: item,
+            })
           } else {
-            currentIndex = index;
+            currentIndex = index
           }
-          iterator++;
+          iterator++
         }
       }
       return {
         items: items,
         grid: gridItems,
-        currentItem: new Item(document.querySelector('.clapat-slide.triggered-item')),
-        currentIndex: currentIndex
-      };
-    };
-    let bGridSwiped = false;
+        currentItem: new Item(
+          document.querySelector('.clapat-slide.triggered-item'),
+        ),
+        currentIndex: currentIndex,
+      }
+    }
+    let bGridSwiped = false
     // Initialize the events
     const initEvents = () => {
-      const items = document.querySelectorAll('.slide-inner');
-      items.forEach(triggerItem => {
-        triggerItem.addEventListener('click', event => {
+      const items = document.querySelectorAll('.slide-inner')
+      items.forEach((triggerItem) => {
+        triggerItem.addEventListener('click', (event) => {
           if (document.querySelector('.showcase-gallery').length > 0) {
-            event.currentTarget.closest('.clapat-slide').classList.add('triggered-item');
-            showGrid();
+            event.currentTarget
+              .closest('.clapat-slide')
+              .classList.add('triggered-item')
+            showGrid()
           }
-        });
-      });
-      window.addEventListener('wheel', event => {
-        if (document.body.classList.contains('grid-open') && document.querySelector('.showcase-gallery').length > 0) {
-          hideGrid();
+        })
+      })
+      window.addEventListener('wheel', (event) => {
+        if (
+          document.body.classList.contains('grid-open') &&
+          document.querySelector('.showcase-gallery').length > 0
+        ) {
+          hideGrid()
         }
-      });
-      window.addEventListener('touchmove', event => {
-        if (document.body.classList.contains('grid-open') && document.querySelector('.showcase-gallery').length > 0) {
-          bGridSwiped = true;
+      })
+      window.addEventListener('touchmove', (event) => {
+        if (
+          document.body.classList.contains('grid-open') &&
+          document.querySelector('.showcase-gallery').length > 0
+        ) {
+          bGridSwiped = true
         }
-      });
-      window.addEventListener('touchcancel', event => {
-        if (document.body.classList.contains('grid-open') && document.querySelector('.showcase-gallery').length > 0) {
-          bGridSwiped = false;
+      })
+      window.addEventListener('touchcancel', (event) => {
+        if (
+          document.body.classList.contains('grid-open') &&
+          document.querySelector('.showcase-gallery').length > 0
+        ) {
+          bGridSwiped = false
         }
-      });
-      window.addEventListener('touchend', event => {
-        if (document.body.classList.contains('grid-open') && bGridSwiped && document.querySelector('.showcase-gallery').length > 0) {
-          bGridSwiped = false;
-          hideGrid();
+      })
+      window.addEventListener('touchend', (event) => {
+        if (
+          document.body.classList.contains('grid-open') &&
+          bGridSwiped &&
+          document.querySelector('.showcase-gallery').length > 0
+        ) {
+          bGridSwiped = false
+          hideGrid()
         }
-      });
-      const closeGrid = document.querySelector('.gallery-close-thumbs');
+      })
+      const closeGrid = document.querySelector('.gallery-close-thumbs')
       if (closeGrid != null) {
-        closeGrid.addEventListener('click', event => {
-          if (document.body.classList.contains('grid-open') && document.querySelector('.showcase-gallery').length > 0) {
-            hideGrid();
+        closeGrid.addEventListener('click', (event) => {
+          if (
+            document.body.classList.contains('grid-open') &&
+            document.querySelector('.showcase-gallery').length > 0
+          ) {
+            hideGrid()
           }
-        });
+        })
       }
       function moveThumbGrid(direction = 'next') {
         if (document.body.classList.contains('grid-open')) {
-          const allImages = document.querySelectorAll('.gallery-thumbs-wrapper .trigger-item');
+          const allImages = document.querySelectorAll(
+            '.gallery-thumbs-wrapper .trigger-item',
+          )
           if (allImages.length <= 0) {
-            return;
+            return
           }
-          const currentImage = document.querySelector('.gallery-zoom-wrapper .trigger-item');
-          const currentImageCaption = document.querySelector('.gallery-zoom-wrapper .slide-caption');
-          const currentImageInner = document.querySelector('.gallery-zoom-wrapper .trigger-item .section-image');
-          const liveGrid = document.querySelector('.gallery-thumbs-wrapper');
-          const liveTriggeredImage = document.querySelector('.gallery-zoom-wrapper');
-          let currentIndex = Number(currentImage.getAttribute('data-slide-index'));
-          let nextImage = null;
+          const currentImage = document.querySelector(
+            '.gallery-zoom-wrapper .trigger-item',
+          )
+          const currentImageCaption = document.querySelector(
+            '.gallery-zoom-wrapper .slide-caption',
+          )
+          const currentImageInner = document.querySelector(
+            '.gallery-zoom-wrapper .trigger-item .section-image',
+          )
+          const liveGrid = document.querySelector('.gallery-thumbs-wrapper')
+          const liveTriggeredImage = document.querySelector(
+            '.gallery-zoom-wrapper',
+          )
+          let currentIndex = Number(
+            currentImage.getAttribute('data-slide-index'),
+          )
+          let nextImage = null
           if (direction == 'next') {
             for (let i = 0; i < allImages.length; i++) {
-              let image = allImages[i];
-              let index = Number(image.getAttribute('data-slide-index'));
+              let image = allImages[i]
+              let index = Number(image.getAttribute('data-slide-index'))
               if (nextImage == null) {
                 if (index > currentIndex) {
-                  nextImage = image;
-                  break;
+                  nextImage = image
+                  break
                 }
               }
             }
           } else {
             for (let i = allImages.length - 1; i >= 0; i--) {
-              let image = allImages[i];
-              let index = Number(image.getAttribute('data-slide-index'));
+              let image = allImages[i]
+              let index = Number(image.getAttribute('data-slide-index'))
               if (nextImage == null) {
                 if (index < currentIndex) {
-                  nextImage = image;
-                  break;
+                  nextImage = image
+                  break
                 }
               }
             }
           }
-          const flipstate = Flip.getState([allImages /*allImagesInner*/,, currentImage /*currentImageInner*/]);
+          const flipstate = Flip.getState([
+            allImages /*allImagesInner*/,
+            ,
+            currentImage /*currentImageInner*/,
+          ])
           if (nextImage != null) {
-            liveGrid.replaceChild(currentImage, nextImage);
+            liveGrid.replaceChild(currentImage, nextImage)
           } else {
             if (direction == 'next') {
-              nextImage = allImages[0];
-              liveGrid.appendChild(currentImage);
+              nextImage = allImages[0]
+              liveGrid.appendChild(currentImage)
             } else {
-              nextImage = allImages[allImages.length - 1];
-              liveGrid.insertBefore(currentImage, liveGrid.firstChild);
+              nextImage = allImages[allImages.length - 1]
+              liveGrid.insertBefore(currentImage, liveGrid.firstChild)
             }
           }
-          liveTriggeredImage.appendChild(nextImage);
+          liveTriggeredImage.appendChild(nextImage)
 
           // Get all the slides
-          let slides = document.querySelectorAll('.clapat-slide');
+          let slides = document.querySelectorAll('.clapat-slide')
 
           // Remove the caption in the image preview in order to replace it with the next
-          let currentSlide = slides[currentIndex];
-          let elWrap = currentSlide.querySelector('.slide-moving');
+          let currentSlide = slides[currentIndex]
+          let elWrap = currentSlide.querySelector('.slide-moving')
           if (elWrap != null) {
-            animateTitle.to('.showcase-gallery .gallery-zoom-wrapper .slide-caption span', {
-              duration: 0.2,
-              y: -15,
-              opacity: 0,
-              delay: 0,
-              stagger: 0,
-              ease: Power2.easeInOut,
-              onComplete: function () {
-                elWrap.appendChild(currentImageCaption);
-              }
-            });
+            animateTitle.to(
+              '.showcase-gallery .gallery-zoom-wrapper .slide-caption span',
+              {
+                duration: 0.2,
+                y: -15,
+                opacity: 0,
+                delay: 0,
+                stagger: 0,
+                ease: Power2.easeInOut,
+                onComplete: function () {
+                  elWrap.appendChild(currentImageCaption)
+                },
+              },
+            )
           }
 
           // Update the triggered item flag in slider as it marks the current image
-          document.querySelector('.clapat-slide').classList.remove('triggered-item');
-          let indexSlide = Number(nextImage.getAttribute('data-slide-index'));
-          let nextSlide = slides[indexSlide];
+          document
+            .querySelector('.clapat-slide')
+            .classList.remove('triggered-item')
+          let indexSlide = Number(nextImage.getAttribute('data-slide-index'))
+          let nextSlide = slides[indexSlide]
           if (nextSlide) {
-            nextSlide.classList.add('triggered-item');
-            let elNextWrap = nextSlide.querySelector('.slide-moving');
+            nextSlide.classList.add('triggered-item')
+            let elNextWrap = nextSlide.querySelector('.slide-moving')
             if (elNextWrap != null) {
-              let nextCaption = elNextWrap.querySelector('.slide-caption');
-              liveTriggeredImage.appendChild(nextCaption);
+              let nextCaption = elNextWrap.querySelector('.slide-caption')
+              liveTriggeredImage.appendChild(nextCaption)
             }
           }
 
           // Move the slider to the next or prev slide
-          slider.goTo(indexSlide);
+          slider.goTo(indexSlide)
           animateTitle.set('.showcase-gallery .slide-caption span', {
             y: 15,
-            opacity: 0
-          });
+            opacity: 0,
+          })
           gsap.to('.showcase-gallery a.slide-link', {
             duration: 0.2,
             opacity: 0,
             scale: 0.8,
-            ease: Power2.easeInOut
-          });
+            ease: Power2.easeInOut,
+          })
           Flip.from(flipstate, {
             duration: 0.5,
             stagger: 0,
             ease: 'power3.inOut',
             absolute: true,
             onComplete: function () {
-              animateTitle.to('.showcase-gallery .gallery-zoom-wrapper .slide-caption span', {
-                duration: 0.3,
-                y: 0,
-                opacity: 1,
-                delay: 0,
-                stagger: 0.03,
-                ease: Power2.easeOut
-              });
+              animateTitle.to(
+                '.showcase-gallery .gallery-zoom-wrapper .slide-caption span',
+                {
+                  duration: 0.3,
+                  y: 0,
+                  opacity: 1,
+                  delay: 0,
+                  stagger: 0.03,
+                  ease: Power2.easeOut,
+                },
+              )
               gsap.to('.showcase-gallery .gallery-zoom-wrapper a.slide-link', {
                 duration: 0.3,
                 opacity: 1,
                 scale: 1,
                 delay: 0,
-                ease: Power2.easeOut
-              });
-            }
-          });
+                ease: Power2.easeOut,
+              })
+            },
+          })
         }
       }
       function throttle(calback, delay = 250) {
-        let shouldWait = false;
+        let shouldWait = false
         return (...args) => {
-          if (shouldWait) return;
-          calback(...args);
-          shouldWait = true;
+          if (shouldWait) return
+          calback(...args)
+          shouldWait = true
           setTimeout(() => {
-            shouldWait = false;
-          }, delay);
-        };
+            shouldWait = false
+          }, delay)
+        }
       }
-      const nextBtn = document.querySelector('.cp-button-next');
+      const nextBtn = document.querySelector('.cp-button-next')
       if (nextBtn != null) {
-        nextBtn.addEventListener('click', throttle(event => {
-          console.log('Click event ' + performance.now());
-          moveThumbGrid('next');
-        }, 500));
+        nextBtn.addEventListener(
+          'click',
+          throttle((event) => {
+            console.log('Click event ' + performance.now())
+            moveThumbGrid('next')
+          }, 500),
+        )
       }
-      const prevBtn = document.querySelector('.cp-button-prev');
+      const prevBtn = document.querySelector('.cp-button-prev')
       if (prevBtn != null) {
-        prevBtn.addEventListener('click', throttle(event => {
-          moveThumbGrid('prev');
-        }, 500));
+        prevBtn.addEventListener(
+          'click',
+          throttle((event) => {
+            moveThumbGrid('prev')
+          }, 500),
+        )
       }
-    };
-    const previewModeEnabled = document.querySelector('.preview-mode-enabled');
+    }
+    const previewModeEnabled = document.querySelector('.preview-mode-enabled')
     if (previewModeEnabled) {
-      initEvents();
+      initEvents()
     }
     if (!isMobile()) {
-      if (document.querySelector('.showcase-gallery').classList.contains('tilt-gallery')) {
-        var timeout;
+      if (
+        document
+          .querySelector('.showcase-gallery')
+          .classList.contains('tilt-gallery')
+      ) {
+        var timeout
         document.querySelector('.showcase-gallery').mousemove(function (e) {
-          if (timeout) clearTimeout(timeout);
-          timeout = setTimeout(callTiltSlider.bind(null, e));
-        });
+          if (timeout) clearTimeout(timeout)
+          timeout = setTimeout(callTiltSlider.bind(null, e))
+        })
         function callTiltSlider(e) {
-          moveItSlider(e, '.clapat-slider-viewport', 30);
+          moveItSlider(e, '.clapat-slider-viewport', 30)
         }
         function moveItSlider(e, target, movement) {
-          const gallery = document.querySelector('.showcase-gallery');
-          const rect = gallery.getBoundingClientRect();
-          const relX = e.pageX - rect.left;
-          const relY = e.pageY - rect.top;
+          const gallery = document.querySelector('.showcase-gallery')
+          const rect = gallery.getBoundingClientRect()
+          const relX = e.pageX - rect.left
+          const relY = e.pageY - rect.top
           gsap.to(target, 1, {
-            x: (relX - rect.width / 2) / rect.width * movement,
-            y: (relY - rect.height / 2) / rect.height * movement,
-            ease: 'power4.out'
-          });
+            x: ((relX - rect.width / 2) / rect.width) * movement,
+            y: ((relY - rect.height / 2) / rect.height) * movement,
+            ease: 'power4.out',
+          })
         }
-        const dragWrapper = document.querySelector('.clapat-slider');
+        const dragWrapper = document.querySelector('.clapat-slider')
         dragWrapper.addEventListener('mousedown', function (evt) {
-          dragWrapper.addEventListener('mouseup mousemove', function handler(evt) {
-            if (evt.type === 'mouseup') {
-              // click
+          dragWrapper.addEventListener(
+            'mouseup mousemove',
+            function handler(evt) {
+              if (evt.type === 'mouseup') {
+                // click
 
-              document.body.classList.remove('scale-drag-y');
-            }
-            dragWrapper.off('mouseup mousemove', handler);
-          });
-        });
-        document.querySelector('.clapat-slider').addEventListener('mouseup touchend', function () {
-          document.body.classList.remove('scale-drag-y');
-        });
+                document.body.classList.remove('scale-drag-y')
+              }
+              dragWrapper.off('mouseup mousemove', handler)
+            },
+          )
+        })
+        document
+          .querySelector('.clapat-slider')
+          .addEventListener('mouseup touchend', function () {
+            document.body.classList.remove('scale-drag-y')
+          })
         document.body.addEventListener('mouseleave', function () {
-          document.body.classList.remove('scale-drag-y');
-        });
-        document.querySelectorAll('.showcase-gallery.preview-mode-enabled .clapat-slide .slide-inner').forEach(element => {
-          element.addEventListener('mouseenter', function () {
-            if (!document.body.classList.contains('scale-drag-x')) {
-              this.querySelectorAll('video').forEach(video => {
-                video.play();
-              });
-            }
-          });
-        });
+          document.body.classList.remove('scale-drag-y')
+        })
+        document
+          .querySelectorAll(
+            '.showcase-gallery.preview-mode-enabled .clapat-slide .slide-inner',
+          )
+          .forEach((element) => {
+            element.addEventListener('mouseenter', function () {
+              if (!document.body.classList.contains('scale-drag-x')) {
+                this.querySelectorAll('video').forEach((video) => {
+                  video.play()
+                })
+              }
+            })
+          })
         element.addEventListener('mouseleave', function () {
           if (!document.body.classList.contains('scale-drag-x')) {
-            this.querySelectorAll('video').forEach(video => {
-              video.pause();
-            });
+            this.querySelectorAll('video').forEach((video) => {
+              video.pause()
+            })
           }
-        });
-        document.querySelector('.trigger-item').addEventListener('mouseenter', function () {
-          if (!document.body.classList.contains('scale-drag-x')) {
-            this.querySelectorAll('video').forEach(video => {
-              video.play();
-            });
-          }
-        }).addEventListener('mouseleave', function () {
-          if (!document.body.classList.contains('scale-drag-x')) {
-            this.querySelectorAll('video').forEach(video => {
-              video.pause();
-            });
-          }
-        });
+        })
+        document
+          .querySelector('.trigger-item')
+          .addEventListener('mouseenter', function () {
+            if (!document.body.classList.contains('scale-drag-x')) {
+              this.querySelectorAll('video').forEach((video) => {
+                video.play()
+              })
+            }
+          })
+          .addEventListener('mouseleave', function () {
+            if (!document.body.classList.contains('scale-drag-x')) {
+              this.querySelectorAll('video').forEach((video) => {
+                video.pause()
+              })
+            }
+          })
       }
       function wrapElements(selector, wrapperElement = 'div') {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(el => {
-          const wrapper = document.createElement(wrapperElement);
-          el.parentNode.insertBefore(wrapper, el);
-          wrapper.appendChild(el);
-        });
+        const elements = document.querySelectorAll(selector)
+        elements.forEach((el) => {
+          const wrapper = document.createElement(wrapperElement)
+          el.parentNode.insertBefore(wrapper, el)
+          wrapper.appendChild(el)
+        })
       }
-      wrapElements('.slide-hero-title span, .slide-hero-subtitle span');
+      wrapElements('.slide-hero-title span, .slide-hero-subtitle span')
       if (document.getElementById('filters-wrapper')) {
-        document.querySelectorAll('li.filters-timeline a').forEach(element => {
-          element.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelectorAll('.slide-inner').forEach(slide => {
-              slide.classList.remove('disabled');
-            });
-            gsap.to(document.querySelectorAll('.slide-inner .img-mask'), {
-              duration: 0.2,
-              opacity: 1,
-              ease: 'power1.in'
-            });
-            let filterClass = this.getAttribute('data-filter');
-            if (filterClass == '*') {
-              return;
-            }
-            document.querySelectorAll('.slide-inner:not(' + filterClass + ')').forEach(slide => {
-              slide.classList.add('disabled');
-            });
-            gsap.to(document.querySelectorAll('.slide-inner:not(' + filterClass + ') .img-mask'), {
-              duration: 0.2,
-              opacity: 0.2,
-              ease: 'power1.out'
-            });
-          });
-        });
+        document
+          .querySelectorAll('li.filters-timeline a')
+          .forEach((element) => {
+            element.addEventListener('click', function (e) {
+              e.preventDefault()
+              document.querySelectorAll('.slide-inner').forEach((slide) => {
+                slide.classList.remove('disabled')
+              })
+              gsap.to(document.querySelectorAll('.slide-inner .img-mask'), {
+                duration: 0.2,
+                opacity: 1,
+                ease: 'power1.in',
+              })
+              let filterClass = this.getAttribute('data-filter')
+              if (filterClass == '*') {
+                return
+              }
+              document
+                .querySelectorAll('.slide-inner:not(' + filterClass + ')')
+                .forEach((slide) => {
+                  slide.classList.add('disabled')
+                })
+              gsap.to(
+                document.querySelectorAll(
+                  '.slide-inner:not(' + filterClass + ') .img-mask',
+                ),
+                {
+                  duration: 0.2,
+                  opacity: 0.2,
+                  ease: 'power1.out',
+                },
+              )
+            })
+          })
       }
-      getElementById('#footer-container').addEventListener('click', '.toggle-filters, #close-filters', function () {
-        var closeFiltersDiv = document.getElementById('close-filters');
-        if (!closeFiltersDiv) {
-          closeFiltersDiv = document.createElement('div');
-          closeFiltersDiv.id = 'close-filters';
-          document.getElementById('footer-container').appendChild(closeFiltersDiv);
-        } else {
-          closeFiltersDiv.parentNode.removeChild(closeFiltersDiv);
-        }
-        const filtersWrapper = document.getElementById('filters-wrapper');
-        filtersWrapper.classList.toggle('on');
-        filtersWrapper.classList.toggle('open');
-        filtersWrapper.classList.toggle('active');
-        document.querySelector('.toggle-filters').textContent = filtersWrapper.classList.contains('on') ? 'Close' : 'Filters';
-        const filters = document.getElementById('filters');
-        const filtersLi = filters.querySelectorAll('li');
-        function getOuterHeight(el) {
-          const styles = window.getComputedStyle(el);
-          const margin = parseFloat(styles['marginTop']) + parseFloat(styles['marginBottom']);
-          return Math.ceil(el.offsetHeight + margin);
-        }
-        const filtersHeight = 4 + Array.from(filtersLi).reduce((acc, li) => acc + getOuterHeight(li), 0);
-        gsap.to(filters, {
-          duration: 0.3,
-          opacity: filtersWrapper.classList.contains('on') ? 1 : 0,
-          height: filtersWrapper.classList.contains('on') ? filtersHeight : 0,
-          delay: 0
-        });
-        gsap.to('.active-filter-bg', {
-          duration: 0.3,
-          opacity: filtersWrapper.classList.contains('on') ? 1 : 0,
-          delay: 0.1
-        });
-      });
+      getElementById('#footer-container').addEventListener(
+        'click',
+        '.toggle-filters, #close-filters',
+        function () {
+          var closeFiltersDiv = document.getElementById('close-filters')
+          if (!closeFiltersDiv) {
+            closeFiltersDiv = document.createElement('div')
+            closeFiltersDiv.id = 'close-filters'
+            document
+              .getElementById('footer-container')
+              .appendChild(closeFiltersDiv)
+          } else {
+            closeFiltersDiv.parentNode.removeChild(closeFiltersDiv)
+          }
+          const filtersWrapper = document.getElementById('filters-wrapper')
+          filtersWrapper.classList.toggle('on')
+          filtersWrapper.classList.toggle('open')
+          filtersWrapper.classList.toggle('active')
+          document.querySelector('.toggle-filters').textContent =
+            filtersWrapper.classList.contains('on') ? 'Close' : 'Filters'
+          const filters = document.getElementById('filters')
+          const filtersLi = filters.querySelectorAll('li')
+          function getOuterHeight(el) {
+            const styles = window.getComputedStyle(el)
+            const margin =
+              parseFloat(styles['marginTop']) +
+              parseFloat(styles['marginBottom'])
+            return Math.ceil(el.offsetHeight + margin)
+          }
+          const filtersHeight =
+            4 +
+            Array.from(filtersLi).reduce(
+              (acc, li) => acc + getOuterHeight(li),
+              0,
+            )
+          gsap.to(filters, {
+            duration: 0.3,
+            opacity: filtersWrapper.classList.contains('on') ? 1 : 0,
+            height: filtersWrapper.classList.contains('on') ? filtersHeight : 0,
+            delay: 0,
+          })
+          gsap.to('.active-filter-bg', {
+            duration: 0.3,
+            opacity: filtersWrapper.classList.contains('on') ? 1 : 0,
+            delay: 0.1,
+          })
+        },
+      )
       function initFiltersWrapper() {
         if (typeof window !== 'undefined') {
-          const filtersWrapper = document.getElementById('filters-wrapper');
+          const filtersWrapper = document.getElementById('filters-wrapper')
           if (filtersWrapper) {
             filtersWrapper.addEventListener('click', function () {
               if (window.innerWidth > 1024) {
-                this.classList.add('open');
-                setTimeout(() => this.classList.add('active'), 200);
+                this.classList.add('open')
+                setTimeout(() => this.classList.add('active'), 200)
               }
-            });
+            })
           }
         }
       }
 
       // Call this function after your component mounts
-      initFiltersWrapper();
+      initFiltersWrapper()
       function initFiltersMouseLeave() {
         if (typeof window !== 'undefined') {
-          const filters = document.getElementById('filters');
+          const filters = document.getElementById('filters')
           if (filters) {
             filters.addEventListener('mouseleave', function () {
               if (window.innerWidth > 1024) {
-                const filtersWrapper = document.getElementById('filters-wrapper');
-                filtersWrapper.classList.remove('open', 'active', 'on');
+                const filtersWrapper =
+                  document.getElementById('filters-wrapper')
+                filtersWrapper.classList.remove('open', 'active', 'on')
                 gsap.to('#filters', {
                   duration: 0.3,
                   opacity: 0,
                   height: 0,
-                  delay: 0.1
-                });
+                  delay: 0.1,
+                })
               }
-            });
+            })
           }
         }
       }
 
-      // Call this function after your component mounts
-      initFiltersMouseLeave();
-      const filtersTimeline = document.querySelectorAll('.filters-timeline');
-      const firstChild = filtersTimeline.querySelectorAll(':first-child');
-      const firstOffsetLeft = firstChild.offsetLeft;
-      const firstOffsetTop = firstChild.offsetTop;
-      filtersTimeline.addEventListener('mouseenter', function () {
-        const currentElement = this;
-        const rect = currentElement.getBoundingClientRect();
-        const offsetParent = currentElement.offsetParent || document.body;
-        const parentRect = offsetParent.getBoundingClientRect();
-        const offsetLeft = rect.left - parentRect.left;
-        const offsetTop = rect.top - parentRect.top;
-        gsap.to('.active-filter-bg', {
-          duration: 0.3,
-          width: $this.outerWidth(),
-          x: offsetLeft,
-          y: offsetTop
-        });
-      });
-      gsap.to('.active-filter-bg', {
-        duration: 0.3,
-        width: currentElement.offsetWidth,
-        x: offsetLeft,
-        y: offsetTop
-      });
+      initFiltersMouseLeave()
+
+      const filtersTimeline = document.querySelectorAll('.filters-timeline')
+      const firstChild = filtersTimeline[0].querySelector(':first-child')
+      const firstOffsetLeft = firstChild.offsetLeft
+      const firstOffsetTop = firstChild.offsetTop
+
+      filtersTimeline.forEach((timeline) => {
+        timeline.addEventListener('mouseenter', function () {
+          const currentElement = this
+          const rect = currentElement.getBoundingClientRect()
+          const offsetParent = currentElement.offsetParent || document.body
+          const parentRect = offsetParent.getBoundingClientRect()
+
+          const offsetLeft = rect.left - parentRect.left
+          const offsetTop = rect.top - parentRect.top
+
+          gsap.to('.active-filter-bg', {
+            duration: 0.3,
+            width: currentElement.offsetWidth,
+            x: offsetLeft,
+            y: offsetTop,
+          })
+        })
+      })
     }
-    document.querySelector('.trigger-item').addEventListener('click', function () {
-      document.body.classList.add('load-project-thumb');
-      gsap.to('.showcase-gallery .gallery-zoom-wrapper .slide-caption span', {
-        duration: 0.3,
-        y: 15,
-        opacity: 0,
-        delay: 0,
-        stagger: 0,
-        ease: Power2.easeIn
-      });
-      gsap.to('.showcase-gallery a.slide-link', {
-        duration: 0.3,
-        opacity: 0,
-        scale: 0.8,
-        delay: 0,
-        ease: Power2.easeIn
-      });
-      gsap.to(document.querySelectorAll('.gallery-thumbs-wrapper .trigger-item'), {
-        duration: 0.3,
-        y: 160,
-        x: 0,
-        opacity: 1,
-        stagger: 0.05,
-        delay: 0,
-        ease: Power2.easeIn
-      });
-      setTimeout(function () {
-        document.body.classList.add('show-loader');
-      }, 300);
-      gsap.to('footer, .carousel-nav-wrapper', {
-        duration: 0.5,
-        opacity: 0,
-        ease: Power4.easeInOut
-      });
-    });
+    document
+      .querySelector('.trigger-item')
+      .addEventListener('click', function () {
+        document.body.classList.add('load-project-thumb')
+        gsap.to('.showcase-gallery .gallery-zoom-wrapper .slide-caption span', {
+          duration: 0.3,
+          y: 15,
+          opacity: 0,
+          delay: 0,
+          stagger: 0,
+          ease: Power2.easeIn,
+        })
+        gsap.to('.showcase-gallery a.slide-link', {
+          duration: 0.3,
+          opacity: 0,
+          scale: 0.8,
+          delay: 0,
+          ease: Power2.easeIn,
+        })
+        gsap.to(
+          document.querySelectorAll('.gallery-thumbs-wrapper .trigger-item'),
+          {
+            duration: 0.3,
+            y: 160,
+            x: 0,
+            opacity: 1,
+            stagger: 0.05,
+            delay: 0,
+            ease: Power2.easeIn,
+          },
+        )
+        setTimeout(function () {
+          document.body.classList.add('show-loader')
+        }, 300)
+        gsap.to('footer, .carousel-nav-wrapper', {
+          duration: 0.5,
+          opacity: 0,
+          ease: Power4.easeInOut,
+        })
+      })
   }
 }
 
+function LoadViaAjax() {
+  CleanupBeforeAjax()
 
-
-
-let LoadViaAjax
+  PageLoadActions()
+  FitThumbScreenGSAP()
+  ShowcaseCarousel()
+  ShowcaseSlider()
+  ShowcasePortfolio()
+  ShowcaseLists()
+  ShowcaseGallery()
+  FitThumbScreenWEBGL()
+  LazyLoad()
+  Core()
+  Lightbox()
+  PlayVideo()
+  ContactForm()
+  ContactMap()
+  CustomFunction()
+}
 
 if (typeof window !== 'undefined') {
-  LoadViaAjax = function () {
-    CleanupBeforeAjax()
-    FirstLoad()
-    ScrollEffects()
-    Sliders()
-    PageLoadActions()
-    FitThumbScreenGSAP()
-    ShowcaseCarousel()
-    ShowcaseSlider()
-    ShowcasePortfolio()
-    ShowcaseLists()
-    ShowcaseGallery()
-    FitThumbScreenWEBGL()
-    LazyLoad()
-    Shortcodes()
-    JustifiedGrid()
-    Lightbox()
-    PlayVideo()
-    ContactForm()
-    ContactMap()
-    CustomFunction()
-  }
+  window.addEventListener('DOMContentLoaded', initializeApp)
+  window.LoadViaAjax = LoadViaAjax
 }
-
-window.LoadViaAjax = LoadViaAjax
 
 export { LoadViaAjax }

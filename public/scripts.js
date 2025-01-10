@@ -29,8 +29,6 @@ import { ContactMap } from '/contact.js'
 import { FitThumbScreenGSAP } from './FitThumbScreenGSAP.js'
 import { Core } from './core.js'
 
-import '../src/lib/common'
-
 gsap.config({ nullTargetWarn: false })
 import 'https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js'
 
@@ -287,8 +285,6 @@ function PageLoad() {
           },
         )
       }
-
-      // Cleaned up jQuery ^^^^
 
       // Fading In Showcase Carousel elements on Finised
       gsap.set(
@@ -585,8 +581,6 @@ export function PageLoadActions() {
       element.addEventListener('mouseleave', function () {})
     })
   }
-
-  // Cleaned jQuery ^^^^
 
   if (!document.body.classList.contains('disable-ajaxload')) {
     document.querySelectorAll('#page-nav .page-title').forEach((element) =>

@@ -1,4 +1,3 @@
- 
 import { gsap, Power2 } from '/node_modules/gsap/all'
 
 export function Core() {
@@ -103,48 +102,57 @@ export function Core() {
       })
     })
 
- 
-
     document.querySelectorAll('.parallax-wrap').forEach((element) => {
       element.addEventListener('mouseleave', function (e) {
-        gsap.to(this, { duration: 0.3, scale: 1 });
-    
-        gsap.to(Array.from(this.children), { duration: 0.3, scale: 1, x: 0, y: 0 });
-        active = false;
-      });
-    });
-    
+        gsap.to(this, { duration: 0.3, scale: 1 })
 
-    document.querySelectorAll('.clapat-button .sticky').forEach((element) => {
-      element.addEventListener('mouseenter', function (e) {
-        if (
-          document
-            .getElementById('#page-content')
-            .classList.contains('light-content')
-        ) {
-          gsap.to(ball, { duration: 0.5, borderColor: '#000' })
-        } else {
-          gsap.to(ball, { duration: 0.5, borderColor: '#fff' })
-        }
-      })
-      $('.parallax-wrap').addEventListener('mouseenter', function (e) {
-        gsap.to(ball, {
+        gsap.to(Array.from(this.children), {
           duration: 0.3,
-          borderColor: $('body').data('primary-color'),
+          scale: 1,
+          x: 0,
+          y: 0,
+        })
+        active = false
+      })
+    })
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const ball = document.getElementById('ball') // Assuming 'ball' is the ID of your element
+      const pageContent = document.getElementById('page-content') // Note: Remove the '#' from the ID
+
+      document.querySelectorAll('.clapat-button .sticky').forEach((element) => {
+        element.addEventListener('mouseenter', function (e) {
+          if (pageContent.classList.contains('light-content')) {
+            gsap.to(ball, { duration: 0.5, borderColor: '#000' })
+          } else {
+            gsap.to(ball, { duration: 0.5, borderColor: '#fff' })
+          }
         })
       })
-      $('.clapat-button .parallax-wrap').addEventListener(
-        'mouseenter',
-        function (e) {
-          if ($('#page-content').classList.contains('light-content')) {
-          }
-        },
-      )
+
+      document.querySelectorAll('.parallax-wrap').forEach((element) => {
+        element.addEventListener('mouseenter', function (e) {
+          const primaryColor = document.body.dataset.primaryColor
+          gsap.to(ball, {
+            duration: 0.3,
+            borderColor: primaryColor,
+          })
+        })
+      })
+
+      document
+        .querySelectorAll('.clapat-button .parallax-wrap')
+        .forEach((element) => {
+          element.addEventListener('mouseenter', function (e) {
+            if (pageContent.classList.contains('light-content')) {
+              // Add your logic here
+            }
+          })
+        })
     })
 
     document.querySelectorAll('.parallax-wrap').forEach((element) => {
       element.addEventListener('mousemove', function (e) {
-         
         callParallax(e, this)
       })
     })

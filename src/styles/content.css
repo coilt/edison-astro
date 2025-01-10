@@ -470,11 +470,11 @@
 	#main {
 		position:relative;
 		opacity:0;
-		user-select: none; 
+		/* user-select: none; 
 		-webkit-user-select: none; 
 		-khtml-user-select: none; 
 		-moz-user-select: none; 
-		-ms-user-select: none;
+		-ms-user-select: none; */
 	}
 	
 	.load-project-page #main, .load-next-project #main, .load-next-page #main {

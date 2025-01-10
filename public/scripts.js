@@ -14,8 +14,15 @@ import {
 
 gsap.registerPlugin(ScrollTrigger)
 
+import { ScrollEffects } from '/scrollEffects.js'
+import { Sliders } from '/sliders.js'
+import { FirstLoad } from './firstLoad.js'
+import { Shortcodes } from './shortcodes.js'
+import { JustifiedGrid } from './justifiedGrid.js'
+import { Lightbox } from './lightbox.js'
+import { PlayVideo } from './playVideo.js'
+
 import { FitThumbScreenWEBGL } from './fitThumbScreenWEBGL.js'
-import '../src/lib/common.js'
 import '/plugins.js'
 import { ContactForm } from '/contact.js'
 import { ContactMap } from '/contact.js'
@@ -37,7 +44,9 @@ function initializeApp() {
   'use strict'
 
   PageLoad()
-
+  ScrollEffects()
+  Sliders()
+  FirstLoad()
   PageLoadActions()
   FitThumbScreenGSAP()
   ShowcaseCarousel()
@@ -46,8 +55,9 @@ function initializeApp() {
   ShowcaseLists()
   ShowcaseGallery()
   FitThumbScreenWEBGL()
-
+  Shortcodes()
   Core()
+  JustifiedGrid()
   Lightbox()
   ContactForm()
   PlayVideo()
@@ -5201,7 +5211,9 @@ function ShowcaseGallery() {
 
 function LoadViaAjax() {
   CleanupBeforeAjax()
-
+  FirstLoad()
+  ScrollEffects()
+  Sliders()
   PageLoadActions()
   FitThumbScreenGSAP()
   ShowcaseCarousel()
@@ -5211,7 +5223,8 @@ function LoadViaAjax() {
   ShowcaseGallery()
   FitThumbScreenWEBGL()
   LazyLoad()
-  Core()
+  Shortcodes()
+  JustifiedGrid()
   Lightbox()
   PlayVideo()
   ContactForm()

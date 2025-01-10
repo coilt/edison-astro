@@ -1,4 +1,4 @@
-import { Power2 } from '/node_modules/gsap/'
+import { Power2, Cubic } from '/node_modules/gsap/'
 import { GridToFullscreenEffect } from './GridToFullScreen.js';
 
 

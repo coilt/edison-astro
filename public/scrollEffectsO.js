@@ -5,9 +5,9 @@ import {
   Power4,
   Flip,
   ScrollTrigger,
-  toArray,
- 
 } from '/node_modules/gsap/all'
+
+
 
 function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -15,40 +15,37 @@ function isMobile() {
   )
 }
 
+
+
 export function ScrollEffects() {
-
-  const heroElement = document.getElementById('#hero');
-  console.log(heroElement);
-
+ 
   gsap.defaults({ overwrite: 'auto' })
   gsap.registerPlugin(ScrollTrigger, Flip)
   gsap.config({ nullTargetWarn: false })
 
   setTimeout(function () {
-    const threeapp = document.getElementById('app')
+    var threeapp = document.getElementById('app')
     threeapp.className += 'active'
-    document.body.append(threeapp)
+    $('body').append(threeapp)
   }, 1500)
 
-  if (document.getElementById('#showcase-slider')) {
+  if ($('#showcase-slider').length > 0) {
     setTimeout(function () {
-      const threeSlider = document.getElementById('canvas-slider')
+      var threeSlider = document.getElementById('canvas-slider')
       threeSlider.className += ' active'
-      document.body.append(threeSlider)
+      $('body').append(threeSlider)
     }, 1500)
   }
 
-  if (!document.body.classList.contains('project-nav-text')) {
-    if (document.getElementById('#project-nav')) {
-      document.getElementById('#main-content').classList.add('solid-color')
-      document
-        .getElementById('#main-page-content')
-        .classList.add('project-page')
+  if (!$('body').hasClass('project-nav-text')) {
+    if ($('#project-nav').length > 0) {
+      $('#main-content').addClass('solid-color')
+      $('#main-page-content').addClass('project-page')
     }
   }
 
-  if (document.querySelector('.portfolio')) {
-    document.getElementById('#main-content').addClass('portfolio-page')
+  if ($('.portfolio').length > 0) {
+    $('#main-content').addClass('portfolio-page')
   }
 
   let enableSmoothScrollMobile = true
@@ -59,7 +56,7 @@ export function ScrollEffects() {
   }
 
   if (document.body.classList.contains('smooth-scroll')) {
-    const ScrollArea = document.getElementById('#content-scroll')
+    const ScrollArea = document.querySelector('#content-scroll')
     class EdgeEasingPlugin extends Scrollbar.ScrollbarPlugin {
       constructor() {
         super(...arguments)
@@ -90,7 +87,7 @@ export function ScrollEffects() {
     // Config
 
     if (!isMobile()) {
-      const ScrollbarOptions = {
+      var ScrollbarOptions = {
         damping: 0.1,
         renderByPixel: true,
         continuousScrolling: true,
@@ -99,7 +96,7 @@ export function ScrollEffects() {
     }
 
     if (isMobile()) {
-      const ScrollbarOptions = {
+      var ScrollbarOptions = {
         damping: 0.2,
         renderByPixel: true,
         continuousScrolling: true,
@@ -108,7 +105,7 @@ export function ScrollEffects() {
     }
 
     // Initialise
-    const scrollbar = Scrollbar.init(ScrollArea /*ScrollbarOptions*/)
+    var scrollbar = Scrollbar.init(ScrollArea /*ScrollbarOptions*/)
 
     ScrollTrigger.scrollerProxy('#content-scroll', {
       scrollTop(value) {
@@ -119,91 +116,61 @@ export function ScrollEffects() {
       },
     })
 
-    scrollbar.addEventListener(ScrollTrigger.update)
+    scrollbar.addListener(ScrollTrigger.update)
     ScrollTrigger.defaults({ scroller: ScrollArea })
   } // End Smooth Scroll
 
   if (isMobile()) {
-    const heroTranslate = document.querySelector('.hero-translate').offsetHeight
-    const winHeight = window.innerHeight
-    const footer_height = document.querySelector('footer').offsetHeight
-
-    const elementsToResize = document.querySelectorAll(
+    var heroTranslate = $('.hero-translate').height()
+    var winHeight = $(window).height()
+    var footer_height = $('footer').height()
+    $(
       '.smooth-scroll main, .has-parallax, nav, .clapat-slider-wrapper:not(.content-slider), .showcase-lists .clapat-sync-slider, .next-project-image-wrapper, .slider-fixed-content',
-    )
-    elementsToResize.forEach((el) => (el.style.height = `${winHeight}px`))
-
-    const mainPageContent = document.querySelector(
-      '#main-page-content.project-page',
-    )
-    if (mainPageContent) {
-      mainPageContent.style.marginBottom = `${winHeight * 2 - footer_height}px`
+    ).css({ height: winHeight })
+    $('#main-page-content.project-page').css({
+      'margin-bottom': winHeight * 2 - footer_height,
+    })
+    if (!$('body').hasClass('project-nav-text')) {
+      $('#project-nav').css({ height: winHeight * 2, bottom: -winHeight * 2 })
     }
+    $('.icon-wrap').removeClass('parallax-wrap')
 
-    if (!document.body.classList.contains('project-nav-text')) {
-      const projectNav = document.querySelector('#project-nav')
-      if (projectNav) {
-        projectNav.style.height = `${winHeight * 2}px`
-        projectNav.style.bottom = `${-winHeight * 2}px`
-      }
-    }
-
-    document
-      .querySelectorAll('.icon-wrap')
-      .forEach((el) => el.classList.remove('parallax-wrap'))
-
-    let resizeTime
-    window.addEventListener('resize', () => {
+    var resizeTime
+    $(window).resize(function () {
       clearTimeout(resizeTime)
       resizeTime = setTimeout(doneResizing, 100)
     })
 
     function doneResizing() {
-      const heroTranslate =
-        document.querySelector('.hero-translate').offsetHeight
-      const winHeight = window.innerHeight
-      const footer_height = document.querySelector('footer').offsetHeight
-
-      elementsToResize.forEach((el) => (el.style.height = `${winHeight}px`))
-
-      if (mainPageContent) {
-        mainPageContent.style.marginBottom = `${winHeight * 2 - footer_height}px`
+      var heroTranslate = $('.hero-translate').height()
+      var winHeight = $(window).height()
+      var footer_height = $('footer').height()
+      $(
+        '.smooth-scroll main, .has-parallax, nav, .clapat-slider-wrapper:not(.content-slider), .showcase-lists .clapat-sync-slider, .next-project-image-wrapper, .slider-fixed-content',
+      ).css({ height: winHeight })
+      $('#main-page-content.project-page').css({
+        'margin-bottom': winHeight * 2 - footer_height,
+      })
+      if (!$('body').hasClass('project-nav-text')) {
+        $('#project-nav').css({ height: winHeight * 2, bottom: -winHeight * 2 })
       }
-
-      if (!document.body.classList.contains('project-nav-text')) {
-        const projectNav = document.querySelector('#project-nav')
-        if (projectNav) {
-          projectNav.style.height = `${winHeight * 2}px`
-          projectNav.style.bottom = `${-winHeight * 2}px`
-        }
-      }
-
-      document
-        .querySelectorAll('.icon-wrap')
-        .forEach((el) => el.classList.remove('parallax-wrap'))
+      $('.icon-wrap').removeClass('parallax-wrap')
     }
   }
 
   // Hero AutoScroll On Page Load
-  // Hero AutoScroll On Page Load
   let autoScroll = null
 
   if (
-    document.body.classList.contains('load-project-thumb') ||
-    document.body.classList.contains('load-project-thumb-with-title')
+    $('body').hasClass('load-project-thumb') ||
+    $('body').hasClass('load-project-thumb-with-title')
   ) {
-    const delayTime = document.body.classList.contains(
-      'load-project-thumb-with-title',
-    )
+    const delayTime = $('body').hasClass('load-project-thumb-with-title')
       ? 0.6
       : 1.2
 
-    if (
-      document
-        .getElementById('#hero.has-image')
-        .classList.contains('autoscroll')
-    ) {
-      if (document.body.classList.contains('smooth-scroll')) {
+    if ($('#hero.has-image').hasClass('autoscroll')) {
+      if ($('body').hasClass('smooth-scroll')) {
         scrollbar.scrollTop = 0 // Reset the scrollbar position to 0
         autoScroll = gsap.to(scrollbar, {
           duration: 0.7,
@@ -222,28 +189,27 @@ export function ScrollEffects() {
     }
   }
 
-  // // Slider Center on click
-  //  document.querySelector('.autocenter').addEventListener('click', function () {
-  //   const $window = window
-  //   const $element = this
-  //   const elementTop = $element.offsetTop
-  //   const elementHeight = $element.offsetHeight
-  //   const viewportHeight = $window.innerHeight
-  //   const scrollIt = elementTop - (viewportHeight - elementHeight) / 2
-
-  //   if (document.body.classList.contains('smooth-scroll')) {
-  //     const scrollOffset =
-  //       scrollbar.offset.y +
-  //       (elementTop - scrollbar.getSize().container.height / 2)
-  //     autoScroll = gsap.to(scrollbar, {
-  //       duration: 0.8,
-  //       scrollTop: scrollOffset + elementHeight / 2,
-  //       ease: Power4.easeInOut,
-  //     })
-  //   } else {
-  //     window.scrollTo({ top: scrollIt, behavior: 'smooth' })
-  //   }
-  // })
+  // Slider Center on click
+  $('.autocenter').on('click', function () {
+    var $window = $(window),
+      $element = $(this),
+      elementTop = $element.offset().top,
+      elementHeight = $element.height(),
+      viewportHeight = $window.height(),
+      scrollIt = elementTop - (viewportHeight - elementHeight) / 2
+    if ($('body').hasClass('smooth-scroll')) {
+      var scrollOffset =
+        scrollbar.offset.y +
+        (elementTop - scrollbar.getSize().container.height / 2)
+      autoScroll = gsap.to(scrollbar, {
+        duration: 0.8,
+        scrollTop: scrollOffset + elementHeight / 2,
+        ease: Power4.easeInOut,
+      })
+    } else {
+      $('html, body').animate({ scrollTop: scrollIt }, 350)
+    }
+  })
 
   // Add an event listener for the mousewheel event
   window.addEventListener('wheel', function (event) {
@@ -254,93 +220,93 @@ export function ScrollEffects() {
     }
   })
 
-  if (document.body.classList.contains('swap-logo')) {
-    const imgLogoWhite = document.querySelector('.white-logo')
-    const originalSrcWhite = 'images/logo-white.png'
-    const updatedSrcWhite = 'images/logo-white-symbol.png'
+  if ($('body').hasClass('swap-logo')) {
+    var imgLogoWhite = document.querySelector('.white-logo')
+    var originalSrcWhite = 'images/logo-white.png'
+    var updatedSrcWhite = 'images/logo-white-symbol.png'
 
-    const imgLogoBlack = document.querySelector('.black-logo')
-    const originalSrcBlack = 'images/logo.png'
-    const updatedSrcBlack = 'images/logo-symbol.png'
+    var imgLogoBlack = document.querySelector('.black-logo')
+    var originalSrcBlack = 'images/logo.png'
+    var updatedSrcBlack = 'images/logo-symbol.png'
 
     // Create a scroll trigger
+
     ScrollTrigger.create({
       trigger: 'header', // Set the trigger element
       start: 'top 120px',
       onEnter: function () {
-        // Restore the original image source
+        //Restore the original image source
         imgLogoWhite.src = originalSrcWhite
         imgLogoBlack.src = originalSrcBlack
-        gsap.to('#logo', { duration: 0.2, opacity: 1 })
+        gsap.to($('#logo'), { duration: 0.2, opacity: 1 })
       },
       onEnterBack: function () {
         // Restore the original image source
-        gsap.to('#logo', {
+        gsap.to($('#logo'), {
           duration: 0.2,
           opacity: 0,
           onComplete: function () {
             imgLogoWhite.src = originalSrcWhite
             imgLogoBlack.src = originalSrcBlack
-            gsap.to('#logo', { duration: 0.2, opacity: 1 })
+            gsap.to($('#logo'), { duration: 0.2, opacity: 1 })
           },
         })
-        document.querySelector('header').classList.remove('swapped-logo')
+
+        $('header').removeClass('swapped-logo')
       },
       onLeave: function () {
         // Change the image source
-        gsap.to('#logo', {
+        gsap.to($('#logo'), {
           duration: 0.2,
           opacity: 0,
           onComplete: function () {
             imgLogoWhite.src = updatedSrcWhite
             imgLogoBlack.src = updatedSrcBlack
-            gsap.to('#logo', { duration: 0.2, opacity: 1 })
+            gsap.to($('#logo'), { duration: 0.2, opacity: 1 })
           },
         })
-        document.querySelector('header').classList.add('swapped-logo')
+
+        $('header').addClass('swapped-logo')
       },
       onLeaveBack: function () {
         // Change the image source
-        gsap.to('#logo', {
+        gsap.to($('#logo'), {
           duration: 0.2,
           opacity: 0,
           onComplete: function () {
             imgLogoWhite.src = updatedSrcWhite
             imgLogoBlack.src = updatedSrcBlack
-            gsap.to('#logo', { duration: 0.2, opacity: 1 })
+            gsap.to($('#logo'), { duration: 0.2, opacity: 1 })
           },
         })
-        document.querySelector('header').classList.add('swapped-logo')
+
+        $('header').addClass('swapped-logo')
       },
     })
 
-    document
-      .querySelectorAll('a.ajax-link, a.slide-link, a.next-ajax-link-page')
-      .forEach((link) => {
-        link.addEventListener('click', function () {
-          // Restore the original image source when you leave the page
-          if (
-            document.querySelector('header').classList.contains('swapped-logo')
-          ) {
-            gsap.to('#logo', {
-              duration: 0.2,
-              opacity: 0,
-              onComplete: function () {
-                imgLogoWhite.src = originalSrcWhite
-                imgLogoBlack.src = originalSrcBlack
-                gsap.to('#logo', { duration: 0.2, opacity: 1 })
-              },
-            })
-          }
-        })
-      })
+    $('a.ajax-link, a.slide-link, a.next-ajax-link-page').on(
+      'click',
+      function () {
+        // Restore the original image source when you leave the page
+        if ($('header').hasClass('swapped-logo')) {
+          gsap.to($('#logo'), {
+            duration: 0.2,
+            opacity: 0,
+            onComplete: function () {
+              imgLogoWhite.src = originalSrcWhite
+              imgLogoBlack.src = originalSrcBlack
+              gsap.to($('#logo'), { duration: 0.2, opacity: 1 })
+            },
+          })
+        }
+      },
+    )
   }
 
   // Back To Top
-  document.getElementById('backtotop').addEventListener('click', function () {
-    if (document.body.classList.contains('smooth-scroll')) {
-      // Assuming scrollbar is a DOM element with an ID
-      gsap.to(document.getElementById('scrollbar'), {
+  $('#backtotop').on('click', function () {
+    if ($('body').hasClass('smooth-scroll')) {
+      gsap.to(scrollbar, {
         duration: 1.5,
         scrollTop: 0,
         delay: 0.1,
@@ -354,10 +320,7 @@ export function ScrollEffects() {
         delay: 0.15,
       })
     } else {
-      document.documentElement.scrollTo({
-        top: 0,
-        behavior: 'smooth', // Ensure a smooth scroll
-      })
+      $('html,body').animate({ scrollTop: 0 }, 800)
       gsap.to('#ball', {
         duration: 0.3,
         borderWidth: '4px',
@@ -369,65 +332,51 @@ export function ScrollEffects() {
   })
 
   //Scroll Down
-  const scrollElements = document.querySelectorAll(
-    '.scroll-down, .hero-arrow.link',
-  )
-
-  scrollElements.forEach((element) => {
-    element.addEventListener('click', function () {
-      const heroHeight = document.getElementById('hero').clientHeight // Get height using clientHeight for accurate calculation
-
-      if (document.body.classList.contains('smooth-scroll')) {
-        // Assuming scrollbar is a DOM element with an ID
-        gsap.to(document.getElementById('scrollbar'), {
-          duration: 1.5,
-          scrollTop: heroHeight,
-          ease: Power4.easeInOut,
-        })
-        gsap.to('#ball', {
-          duration: 0.3,
-          borderWidth: '4px',
-          scale: 0.5,
-          borderColor: '#999999',
-          delay: 0.15,
-        })
-      } else {
-        document.documentElement.scrollTo({
-          top: heroHeight,
-          behavior: 'smooth', // Ensure a smooth scroll
-        })
-        gsap.to('#ball', {
-          duration: 0.3,
-          borderWidth: '4px',
-          scale: 0.5,
-          borderColor: '#999999',
-          delay: 0.15,
-        })
-      }
-    })
+  $('.scroll-down, .hero-arrow.link').on('click', function () {
+    var heroheight = $('#hero').height()
+    if ($('body').hasClass('smooth-scroll')) {
+      gsap.to(scrollbar, {
+        duration: 1.5,
+        scrollTop: heroheight,
+        ease: Power4.easeInOut,
+      })
+      gsap.to('#ball', {
+        duration: 0.3,
+        borderWidth: '4px',
+        scale: 0.5,
+        borderColor: '#999999',
+        delay: 0.15,
+      })
+    } else {
+      $('html,body').animate({ scrollTop: heroheight }, 800)
+      gsap.to('#ball', {
+        duration: 0.3,
+        borderWidth: '4px',
+        scale: 0.5,
+        borderColor: '#999999',
+        delay: 0.15,
+      })
+    }
   })
 
   // Zoom Gallery
-  
-  const zoomGalleries = Array.from(document.querySelectorAll('.zoom-gallery'))
-
-  zoomGalleries.forEach((zoomGallery) => {
+  gsap.utils.toArray('.zoom-gallery').forEach((zoomGallery) => {
     const zoomGalleryWrapper = zoomGallery.querySelector(
       '.zoom-wrapper-gallery',
     )
     const zoomWrapperThumb = zoomGallery.querySelector('.zoom-wrapper-thumb')
     const ZoomItem = zoomGallery.querySelector('.zoom-center .zoom-img-wrapper')
-    const zoomImgsWrapper = Array.from(
-      zoomGallery.querySelectorAll('li:not(.zoom-center) .zoom-img-wrapper'),
+    const zoomImgsWrapper = zoomGallery.querySelectorAll(
+      'li:not(.zoom-center) .zoom-img-wrapper',
     )
-    const zoomImgsWrapperAll = Array.from(
-      zoomGallery.querySelectorAll('li .zoom-img-wrapper'),
+    const zoomImgsWrapperAll = zoomGallery.querySelectorAll(
+      'li .zoom-img-wrapper',
     )
-    const heightRatio = parseFloat(zoomGalleryWrapper.dataset.heightratio)
+    const heightRatio = zoomGalleryWrapper.dataset.heightratio
     const zoomImgsHeight = ZoomItem.offsetWidth * heightRatio
     const paddingBottom = (window.innerHeight - zoomImgsHeight) / 2
 
-    gsap.set(zoomGallery, { paddingBottom })
+    gsap.set(zoomGallery, { paddingBottom: paddingBottom })
     gsap.set(zoomGalleryWrapper, { height: zoomImgsHeight })
     gsap.set(zoomWrapperThumb, {
       top: -paddingBottom,
@@ -486,6 +435,7 @@ export function ScrollEffects() {
     })
   })
 
+  // Carousel Shortcode
   gsap.utils
     .toArray('.carousel-shortcode-pin')
     .forEach((carouselShortcodePin) => {
@@ -625,20 +575,10 @@ export function ScrollEffects() {
       })
 
       if (!isMobile()) {
-        const clapatItemsThumbs = Array.from(
-          document.querySelectorAll(
-            '.carousel-shortcode-thumbs .clapat-item .slide-inner',
-          ),
-        )
-        const showcasePortfolioClapatItems = Array.from(
-          document.querySelectorAll(
-            '.showcase-portfolio .clapat-item .slide-inner',
-          ),
-        )
-
-        clapatItemsThumbs.forEach((element) => {
-          element.addEventListener('mouseenter', function () {
-            const $this = this
+        $('.carousel-shortcode-thumbs .clapat-item .slide-inner')
+          .on('mouseenter', function () {
+            $('#ball p').remove()
+            var $this = $(this)
             gsap.to('#ball', {
               duration: 0.3,
               borderWidth: '2px',
@@ -652,17 +592,17 @@ export function ScrollEffects() {
               top: 2,
               left: 2,
             })
-            document.getElementById('ball').classList.add('with-blur')
-            const centerlineElement = document.createElement('p')
-            centerlineElement.classList.add('center-first')
-            centerlineElement.textContent = $this.dataset.centerline
-            document.getElementById('ball').appendChild(centerlineElement)
-            this.querySelectorAll('video').forEach((video) => {
-              video.play()
-            })
+            $('#ball').addClass('with-blur')
+            $('#ball').append(
+              '<p class="center-first">' + $this.data('centerline') + '</p>',
+            )
+            $(this)
+              .find('video')
+              .each(function () {
+                $(this).get(0).play()
+              })
           })
-
-          element.addEventListener('mouseleave', function () {
+          .on('mouseleave', function () {
             gsap.to('#ball', {
               duration: 0.2,
               borderWidth: '4px',
@@ -676,45 +616,32 @@ export function ScrollEffects() {
               top: 0,
               left: 0,
             })
-            document.getElementById('ball').classList.remove('with-blur')
-            document.querySelectorAll('#ball p').forEach((p) => p.remove())
-            this.querySelectorAll('video').forEach((video) => {
-              video.pause()
-            })
+            $('#ball').removeClass('with-blur')
+            $('#ball p').remove()
+            $(this)
+              .find('video')
+              .each(function () {
+                $(this).get(0).pause()
+              })
           })
-        })
-      }
 
-      // Mouseenter event
-      document
-        .querySelectorAll('.showcase-portfolio .clapat-item .slide-inner')
-        .forEach((element) => {
-          element.addEventListener('mouseenter', function () {
-            if (
-              !document
-                .querySelector('.showcase-portfolio')
-                .classList.contains('list-grid')
-            ) {
-              gsap.set(this.querySelectorAll('.slide-title span'), {
-                y: 30,
-                opacity: 0,
-              })
-              gsap.set(this.querySelectorAll('.slide-cat span'), {
-                y: 30,
-                opacity: 0,
-              })
-              gsap.to(this.querySelectorAll('.slide-caption'), {
+        $('.showcase-portfolio .clapat-item .slide-inner')
+          .on('mouseenter', function () {
+            if (!$('.showcase-portfolio').hasClass('list-grid')) {
+              gsap.set($(this).find('.slide-title span'), { y: 30, opacity: 0 })
+              gsap.set($(this).find('.slide-cat span'), { y: 30, opacity: 0 })
+              gsap.to($(this).find('.slide-caption'), {
                 duration: 0.2,
                 opacity: 1,
                 ease: Power2.easeOut,
               })
-              gsap.to(this.querySelectorAll('.slide-title span'), {
+              gsap.to($(this).find('.slide-title span'), {
                 duration: 0.3,
                 y: 0,
                 opacity: 1,
                 ease: Power2.easeOut,
               })
-              gsap.to(this.querySelectorAll('.slide-cat span'), {
+              gsap.to($(this).find('.slide-cat span'), {
                 duration: 0.3,
                 y: 0,
                 opacity: 1,
@@ -722,31 +649,21 @@ export function ScrollEffects() {
               })
             }
           })
-        })
-
-      // Mouseleave event
-      document
-        .querySelectorAll('.showcase-portfolio .clapat-item .slide-inner')
-        .forEach((element) => {
-          element.addEventListener('mouseleave', function () {
-            if (
-              !document
-                .querySelector('.showcase-portfolio')
-                .classList.contains('list-grid')
-            ) {
-              gsap.to(this.querySelectorAll('.slide-caption'), {
+          .on('mouseleave', function () {
+            if (!$('.showcase-portfolio').hasClass('list-grid')) {
+              gsap.to($(this).find('.slide-caption'), {
                 duration: 0.3,
                 opacity: 0,
                 delay: 0.1,
                 ease: Power2.easeOut,
               })
-              gsap.to(this.querySelectorAll('.slide-title span'), {
+              gsap.to($(this).find('.slide-title span'), {
                 duration: 0.3,
                 y: -30,
                 opacity: 0,
                 ease: Power2.easeOut,
               })
-              gsap.to(this.querySelectorAll('.slide-cat span'), {
+              gsap.to($(this).find('.slide-cat span'), {
                 duration: 0.5,
                 y: -30,
                 delay: 0.05,
@@ -755,66 +672,9 @@ export function ScrollEffects() {
               })
             }
           })
-        })
+      }
 
-      // Trigger item click
-      document.querySelectorAll('.trigger-item').forEach((element) => {
-        element.addEventListener('click', function () {
-          document.body.classList.add('load-project-thumb')
-          document
-            .querySelectorAll('.carousel-shortcode-thumbs .trigger-item')
-            .forEach((item) => {
-              if (!item.classList.contains('above')) {
-                gsap.to(item, {
-                  duration: 0.5,
-                  delay: 0,
-                  opacity: 0,
-                  ease: Power4.easeInOut,
-                })
-              } else {
-                gsap.to(item.parentElement, {
-                  duration: 0.3,
-                  opacity: 1,
-                  ease: Power4.easeInOut,
-                })
-                gsap.to(item, {
-                  duration: 0.5,
-                  delay: 0.4,
-                  opacity: 0,
-                  ease: Power4.easeInOut,
-                })
-              }
-            })
-          setTimeout(() => {
-            document.body.classList.add('show-loader')
-          }, 300)
-          gsap.to(
-            'footer, .carousel-nav-wrapper, .showcase-portfolio.list-grid',
-            {
-              duration: 0.5,
-              opacity: 0,
-              ease: Power4.easeInOut,
-            },
-          )
-          gsap.to('#ball', {
-            duration: 0.3,
-            borderWidth: '4px',
-            scale: 0.5,
-            borderColor: '#999999',
-            backgroundColor: 'transparent',
-          })
-          gsap.to('#ball-loader', {
-            duration: 0.3,
-            borderWidth: '4px',
-            top: 0,
-            left: 0,
-          })
-          document.getElementById('ball').classList.remove('with-blur')
-          document.querySelectorAll('#ball p').forEach((p) => p.remove())
-        })
-      })
-
-      document.querySelector('.trigger-item').on('click', function () {
+      $('.trigger-item').on('click', function () {
         $('body').addClass('load-project-thumb')
         $('.carousel-shortcode-thumbs .trigger-item').each(function () {
           if (!$(this).hasClass('above')) {
@@ -861,59 +721,6 @@ export function ScrollEffects() {
         $('#ball').removeClass('with-blur')
         $('#ball p').remove()
       })
-    })
-
-  document
-    .querySelector('.trigger-item')
-    .addEventListener('click', function () {
-      document.body.classList.add('load-project-thumb')
-      document
-        .querySelectorAll('.carousel-shortcode-thumbs .trigger-item')
-        .forEach((item) => {
-          if (!item.classList.contains('above')) {
-            gsap.to(item, {
-              duration: 0.5,
-              delay: 0,
-              opacity: 0,
-              ease: Power4.easeInOut,
-            })
-          } else {
-            gsap.to(item.parentElement, {
-              duration: 0.3,
-              opacity: 1,
-              ease: Power4.easeInOut,
-            })
-            gsap.to(item, {
-              duration: 0.5,
-              delay: 0.4,
-              opacity: 0,
-              ease: Power4.easeInOut,
-            })
-          }
-        })
-      setTimeout(() => {
-        document.body.classList.add('show-loader')
-      }, 300)
-      gsap.to('footer, .carousel-nav-wrapper, .showcase-portfolio.list-grid', {
-        duration: 0.5,
-        opacity: 0,
-        ease: Power4.easeInOut,
-      })
-      gsap.to('#ball', {
-        duration: 0.3,
-        borderWidth: '4px',
-        scale: 0.5,
-        borderColor: '#999999',
-        backgroundColor: 'transparent',
-      })
-      gsap.to('#ball-loader', {
-        duration: 0.3,
-        borderWidth: '4px',
-        top: 0,
-        left: 0,
-      })
-      document.getElementById('ball').classList.remove('with-blur')
-      document.querySelectorAll('#ball p').forEach((p) => p.remove())
     })
 
   // News Shortcode
@@ -1159,14 +966,14 @@ export function ScrollEffects() {
         y: 1,
       })
 
-      const clippedImageAnimation = gsap.to(clippedImage, {
+      var clippedImageAnimation = gsap.to(clippedImage, {
         clipPath: 'inset(0% 0% 0%)',
         scale: 1,
         duration: 1,
         ease: 'Linear.easeNone',
       })
 
-      const clippedImageScene = ScrollTrigger.create({
+      var clippedImageScene = ScrollTrigger.create({
         trigger: clippedImagePin,
         start: function () {
           const startPin = 0
@@ -1185,7 +992,7 @@ export function ScrollEffects() {
 
   // Horizontal Gallery
   const panelsSections = gsap.utils.toArray('.panels')
-  for (const i = 0; i < panelsSections.length; i++) {
+  for (var i = 0; i < panelsSections.length; i++) {
     thePanelsSection = panelsSections[i]
     const panels = gsap.utils.toArray(
       '.panels-container .panel',
@@ -1201,7 +1008,7 @@ export function ScrollEffects() {
     gsap.set([panelsContainer, panels], { height: window.innerHeight * 0.6 })
     gsap.set(panels, { width: window.innerHeight * widthRatio })
 
-    const totalPanelsWidth = 0
+    var totalPanelsWidth = 0
     panels.forEach(function (panel) {
       totalPanelsWidth += $(panel).outerWidth(true)
     })
@@ -1334,12 +1141,12 @@ export function ScrollEffects() {
 
     // Pinned Sections
     if (window.innerWidth > 479) {
-      const pinnedSection = gsap.utils.toArray('.pinned-element')
+      var pinnedSection = gsap.utils.toArray('.pinned-element')
       pinnedSection.forEach(function (pinElement) {
-        const parentNode = pinElement.parentNode
-        const scrollingElement = parentNode.querySelector('.scrolling-element')
+        var parentNode = pinElement.parentNode
+        var scrollingElement = parentNode.querySelector('.scrolling-element')
 
-        const pinnedScene = ScrollTrigger.create({
+        var pinnedScene = ScrollTrigger.create({
           trigger: pinElement,
           //start: "top top-=-50px",
           start: function () {
@@ -1356,10 +1163,10 @@ export function ScrollEffects() {
     // Vertical Parallax Columns
     if (window.innerWidth > 767) {
       gsap.utils.toArray('.vertical-parallax').forEach((parallaxElement) => {
-        const startMovement = -(
+        var startMovement = -(
           parallaxElement.offsetHeight * parallaxElement.dataset.startparallax
         )
-        const endMovement = -(
+        var endMovement = -(
           parallaxElement.offsetHeight * parallaxElement.dataset.endparallax
         )
         gsap.fromTo(
@@ -1480,17 +1287,15 @@ export function ScrollEffects() {
       },
     })
 
-    function roll(targets, consts, reverse) {
+    function roll(targets, vars, reverse) {
       const tl = gsap.timeline({
         repeat: -1,
         onReverseComplete() {
-          gsap.delayedCall(0, () => {
-            this.totalTime(this.rawTime() + this.duration() * 10)
-          })
+          this.totalTime(this.rawTime() + this.duration() * 10)
         },
       })
-      consts = consts || {}
-      consts.ease || (consts.ease = 'none')
+      vars = vars || {}
+      vars.ease || (vars.ease = 'none')
       gsap.utils.toArray(targets).forEach((el) => {
         let clone = el.cloneNode(true)
         el.parentNode.appendChild(clone)
@@ -1506,37 +1311,36 @@ export function ScrollEffects() {
           delay: 0.5,
           ease: Power2.easeOut,
         })
-        tl.to([el, clone], { xPercent: reverse ? 100 : -100, ...consts }, 0)
+        tl.to([el, clone], { xPercent: reverse ? 100 : -100, ...vars }, 0)
       })
       return tl
     }
   })
 
   // Hero Section Effects
-  if (document.body.classList.contains('hero-below-caption')) {
+  if ($('body').hasClass('hero-below-caption')) {
     // Create Scripts
   } else {
-    if (document.querySelector('#hero').classList.contains('has-image')) {
-
-      const heroCaption = document.querySelector('#hero.has-image #hero-caption');
-      const heroImage = document.querySelector('#hero-image-wrapper');
-
+    if ($('#hero').hasClass('has-image')) {
+      const heroCaption = document.querySelector(
+        '#hero.has-image #hero-caption',
+      )
+      const heroImage = document.querySelector('#hero-image-wrapper')
 
       function setheroImageProperties() {
-        gsap.set(heroCaption, { height: window.innerHeight });
-        gsap.set(heroImage, { height: window.innerHeight });
+        gsap.set(heroCaption, { height: window.innerHeight })
+        gsap.set(heroImage, { height: window.innerHeight })
       }
 
       setheroImageProperties()
 
-      const heroImagePin = gsap.to('#hero-image-wrapper', {
+      var heroImagePin = gsap.to('#hero-image-wrapper', {
         scrollTrigger: {
-          trigger: document.getElementById('#hero.has-image'),
+          trigger: $('#hero.has-image'),
           start: 'top top',
           end: function () {
             const durationHeight =
-              document.getElementById('#hero.has-image').outerHeight() -
-              window.innerHeight
+              $('#hero.has-image').outerHeight() - window.innerHeight
             return '+=' + durationHeight
           },
           pin: '#hero-background-layer',
@@ -1545,23 +1349,19 @@ export function ScrollEffects() {
 
       window.addEventListener('resize', setheroImageProperties)
 
-      const heroImageParallax = gsap.to(
-        '.parallax-scroll-image #hero-bg-image',
-        {
-          duration: 1,
-          backgroundPosition: 'center 95%',
-          ease: Linear.easeNone,
-          scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: () =>
-              `+=${document.getElementById('hero').offsetHeight - window.innerHeight}`,
-            scrub: true,
-          },
+      var heroImageParallax = gsap.to('.parallax-scroll-image #hero-bg-image', {
+        duration: 1,
+        backgroundPosition: 'center ' + 95 + '%',
+        ease: Linear.easeNone,
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: () => `+=${$('#hero').outerHeight() - window.innerHeight}`,
+          scrub: true,
         },
-      )
+      })
 
-      const heroFooterParallax = gsap.to('#hero-footer', {
+      var heroFooterParallax = gsap.to('#hero-footer', {
         duration: 1,
         yPercent: 15,
         opacity: 0,
@@ -1570,8 +1370,7 @@ export function ScrollEffects() {
           trigger: '#hero-description',
           start: 'top 50%',
           end: function () {
-            const durationHeight =
-              document.getElementById('#hero-description').outerHeight() * 2
+            var durationHeight = $('#hero-description').outerHeight() * 2
             return '+=' + durationHeight
           },
           scrub: true,
@@ -1579,492 +1378,473 @@ export function ScrollEffects() {
       })
     }
 
-    const heroCaptionParallax = gsap.to(
-      document.querySelector('#hero-caption.parallax-scroll-caption'),
-      {
-        duration: 1,
-        yPercent: 5,
-        opacity: 0.5,
-        ease: Linear.easeNone,
-        scrollTrigger: {
-          trigger: document.querySelector('#hero'),
-          start: 'top top',
-          end: () => `+=${document.querySelector('#hero').offsetHeight}`,
-          scrub: true,
-        },
-      }
-    );
+    var heroCaptionParallax = gsap.to('#hero-caption.parallax-scroll-caption', {
+      duration: 1,
+      yPercent: 5,
+      opacity: 0.5,
+      ease: Linear.easeNone,
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: () => `+=${$('#hero').outerHeight()}`,
+        scrub: true,
+      },
+    })
+  }
 
-    // Page and Project Navigation
+  // Page and Project Navigation
 
-    if (document.body.classList.contains('hero-below-caption')) {
-      // Create Scripts
-    } else {
-      const NextheroPin = gsap.to('.next-project-wrap', {
-        duration: 1,
-        ease: Linear.easeNone,
-        scrollTrigger: {
-          trigger: '.next-project-wrap',
-          start: 'top top',
-          end: '+=100%',
-          pin: true,
-          scrub: true,
-        },
-      })
+  if ($('body').hasClass('hero-below-caption')) {
+    // Create Scripts
+  } else {
+    var NextheroPin = gsap.to('.next-project-wrap', {
+      duration: 1,
+      ease: Linear.easeNone,
+      scrollTrigger: {
+        trigger: '.next-project-wrap',
+        start: 'top top',
+        end: '+=100%',
+        pin: true,
+        scrub: true,
+      },
+    })
 
-      const nextProjectImageParallax = gsap.to('.next-project-image', {
-        duration: 1,
-        clipPath: 'inset(0 0%)',
-        scale: 1.05,
-        ease: Linear.easeNone,
-        scrollTrigger: {
-          trigger: '#project-nav',
-          start: 'top 0%',
-          end: '+=100%',
-          scrub: true,
-        },
-      })
+    var nextProjectImageParallax = gsap.to('.next-project-image', {
+      duration: 1,
+      clipPath: 'inset(0 0%)',
+      scale: 1.05,
+      ease: Linear.easeNone,
+      scrollTrigger: {
+        trigger: '#project-nav',
+        start: 'top 0%',
+        end: '+=100%',
+        scrub: true,
+      },
+    })
 
-      const nextAllWorks = gsap.to('.all-works', {
-        opacity: 0,
-        ease: Linear.easeNone,
-        scrollTrigger: {
-          trigger: '#project-nav',
-          start: 'top 0%',
-          end: '+=50%',
-          scrub: true,
-        },
-      })
+    var nextAllWorks = gsap.to('.all-works', {
+      opacity: 0,
+      ease: Linear.easeNone,
+      scrollTrigger: {
+        trigger: '#project-nav',
+        start: 'top 0%',
+        end: '+=50%',
+        scrub: true,
+      },
+    })
 
-      const nextProjectProgress = gsap.to('.next-hero-progress span', {
-        duration: 1,
-        width: '100%',
-        ease: Linear.easeNone,
-        scrollTrigger: {
-          trigger: '#project-nav',
-          start: 'top top',
-          end: '+=100%',
-          scrub: true,
-        },
-      })
+    var nextProjectProgress = gsap.to('.next-hero-progress span', {
+      duration: 1,
+      width: '100%',
+      ease: Linear.easeNone,
+      scrollTrigger: {
+        trigger: '#project-nav',
+        start: 'top top',
+        end: '+=100%',
+        scrub: true,
+      },
+    })
 
-      const startCount = 0
-      const num = { const: startCount }
-      const numbers = document.querySelector('.next-hero-counter span')
-      if (numbers) {
-        const nextProjectCounter = gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: '#project-nav',
-              start: 'top top',
-              end: '+=100%',
-              scrub: true,
-            },
-          })
-          .to(num, {
-            const: 100,
-            duration: 1,
-            ease: Linear.easeNone,
-            onUpdate: changeNumber,
-          })
-      }
-
-      function changeNumber() {
-        numbers.innerHTML = num.const.toFixed()
-      }
-
-      const nextPageCaptionParallax = gsap.to('.page-nav-caption', {
-        duration: 1,
-        top: '0',
-        scale: 1,
-        opacity: 1,
-        ease: Linear.easeNone,
-        scrollTrigger: {
-          trigger: '#page-nav',
-          start: 'top 100%',
-          end: () =>
-            `+=${
-              Array.from(document.querySelectorAll('#page-nav')).reduce(
-                (total, element) => total + element.offsetHeight,
-                0
-              ) + document.querySelector('footer').offsetHeight
-            }`,
-          scrub: true,
-        },
-      })
+    var startCount = 0
+    var num = { var: startCount }
+    var numbers = document.querySelector('.next-hero-counter span')
+    if (numbers) {
+      var nextProjectCounter = gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: '#project-nav',
+            start: 'top top',
+            end: '+=100%',
+            scrub: true,
+          },
+        })
+        .to(num, {
+          var: 100,
+          duration: 1,
+          ease: Linear.easeNone,
+          onUpdate: changeNumber,
+        })
     }
 
-    // Elements Animation
+    function changeNumber() {
+      numbers.innerHTML = num.var.toFixed()
+    }
 
-    const contentVideo = gsap.utils.toArray('.content-video-wrapper')
-    contentVideo.forEach(function (videoPlay) {
-      const video = videoPlay.querySelector('video')
-
-      const videoScene = ScrollTrigger.create({
-        trigger: videoPlay,
+    var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
+      duration: 1,
+      top: '0',
+      scale: 1,
+      opacity: 1,
+      ease: Linear.easeNone,
+      scrollTrigger: {
+        trigger: '#page-nav',
         start: 'top 100%',
-        end: () => `+=${videoPlay.offsetHeight + window.innerHeight * 2}`,
-        onEnter: function () {
-          video.play()
-        },
-        onLeave: function () {
-          video.pause()
-        },
-        onEnterBack: function () {
-          video.play()
-        },
-        onLeaveBack: function () {
-          video.pause()
-        },
-      })
-    })
-
-    const hasParallax = gsap.utils.toArray('.has-parallax')
-    hasParallax.forEach(function (hParallax) {
-      const bgImage = hParallax.querySelector('img')
-      const bgVideo = hParallax.querySelector('video')
-      const parallax = gsap.fromTo(
-        [bgImage, bgVideo],
-        { y: '-20%', scale: 1.15 },
-        { y: '20%', scale: 1, duration: 1, ease: Linear.easeNone },
-      )
-      const parallaxScene = ScrollTrigger.create({
-        trigger: hParallax,
-        start: 'top 100%',
-        end: () => `+=${hParallax.offsetHeight + window.innerHeight}`,
-        animation: parallax,
+        end: () =>
+          `+=${$('#page-nav').outerHeight() + $('footer').outerHeight()}`,
         scrub: true,
-      })
+      },
     })
+  }
 
-    const hasAnimation = gsap.utils.toArray('.has-animation')
-    hasAnimation.forEach(function (hAnimation) {
-      const delayValue = parseInt(hAnimation.getAttribute('data-delay')) || 0
-      gsap.to(hAnimation, {
-        scrollTrigger: {
-          trigger: hAnimation,
-          start: 'top 85%',
-          onEnter: function () {
-            hAnimation.classList.add('animated')
-          },
+  // Elements Animation
+
+  var contentVideo = gsap.utils.toArray('.content-video-wrapper')
+  contentVideo.forEach(function (videoPlay) {
+    var video = videoPlay.querySelector('video')
+
+    var videoScene = ScrollTrigger.create({
+      trigger: videoPlay,
+      start: 'top 100%',
+      end: () => `+=${videoPlay.offsetHeight + window.innerHeight * 2}`,
+      onEnter: function () {
+        video.play()
+      },
+      onLeave: function () {
+        video.pause()
+      },
+      onEnterBack: function () {
+        video.play()
+      },
+      onLeaveBack: function () {
+        video.pause()
+      },
+    })
+  })
+
+  var hasParallax = gsap.utils.toArray('.has-parallax')
+  hasParallax.forEach(function (hParallax) {
+    var bgImage = hParallax.querySelector('img')
+    var bgVideo = hParallax.querySelector('video')
+    var parallax = gsap.fromTo(
+      [bgImage, bgVideo],
+      { y: '-20%', scale: 1.15 },
+      { y: '20%', scale: 1, duration: 1, ease: Linear.easeNone },
+    )
+    var parallaxScene = ScrollTrigger.create({
+      trigger: hParallax,
+      start: 'top 100%',
+      end: () => `+=${hParallax.offsetHeight + window.innerHeight}`,
+      animation: parallax,
+      scrub: true,
+    })
+  })
+
+  var hasAnimation = gsap.utils.toArray('.has-animation')
+  hasAnimation.forEach(function (hAnimation) {
+    var delayValue = parseInt(hAnimation.getAttribute('data-delay')) || 0
+    gsap.to(hAnimation, {
+      scrollTrigger: {
+        trigger: hAnimation,
+        start: 'top 85%',
+        onEnter: function () {
+          hAnimation.classList.add('animated')
         },
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: Power2.easeOut,
-        delay: delayValue / 1000,
-      })
+      },
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: Power2.easeOut,
+      delay: delayValue / 1000,
     })
+  })
 
-    // document.querySelector('.has-cover').style.backgroundColor = function() {
-    //   return document.querySelector('.has-cover').closest('.content-row').dataset.bgcolor;
-    // };
-    
+  $('.has-cover').css('background-color', function () {
+    return $(this).parents('.content-row').data('bgcolor')
+  })
 
-    // .has-mask
-    document.querySelectorAll('.has-mask').forEach((element) => {
-      const words = element.textContent.split(' ')
-      const total = words.length
-      element.innerHTML = ''
-      for (let index = 0; index < total; index++) {
-        element.appendChild(document.createElement('span')).textContent =
-          words[index]
-      }
-    })
+  $('.has-mask').each(function () {
+    var words = $(this).text().split(' ')
+    var total = words.length
+    $(this).empty()
+    for (index = 0; index < total; index++) {
+      $(this).append($('<span /> ').text(words[index]))
+    }
+  })
 
-    // .has-mask span
-    document.querySelectorAll('.has-mask span').forEach((element) => {
-      const words = element.textContent.split(' ')
-      const total = words.length
-      element.innerHTML = ''
-      for (let index = 0; index < total; index++) {
-        element.appendChild(document.createElement('span')).textContent =
-          words[index]
-      }
-    })
+  $('.has-mask span').each(function () {
+    var words = $(this).text().split(' ')
+    var total = words.length
+    $(this).empty()
+    for (index = 0; index < total; index++) {
+      $(this).append($('<span /> ').text(words[index]))
+    }
+  })
 
-    // .has-mask animation
-    const hasMask = gsap.utils.toArray('.has-mask')
-    hasMask.forEach((hMask) => {
-      const delayValue = parseInt(hMask.getAttribute('data-delay')) || 0
-      const spanMask = hMask.querySelectorAll('span > span')
-      gsap.to(spanMask, {
-        scrollTrigger: {
-          trigger: hMask,
-          start: 'top 85%',
-          onEnter: () => {
-            hMask.classList.add('animated')
-          },
+  var hasMask = gsap.utils.toArray('.has-mask')
+  hasMask.forEach(function (hMask) {
+    var delayValue = parseInt(hMask.getAttribute('data-delay')) || 0
+    var spanMask = hMask.querySelectorAll('span > span')
+    gsap.to(spanMask, {
+      scrollTrigger: {
+        trigger: hMask,
+        start: 'top 85%',
+        onEnter: function () {
+          hMask.classList.add('animated')
         },
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: Power2.easeOut,
-        delay: delayValue / 1000,
-      })
+      },
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: Power2.easeOut,
+      delay: delayValue / 1000,
     })
+  })
 
-    // .has-mask-fill
-    document.querySelectorAll('.has-mask-fill').forEach((element) => {
-      const words = element.textContent
-      const total = words
-      element.innerHTML = ''
-      element.appendChild(document.createElement('span')).textContent = words
+  $('.has-mask-fill').each(function () {
+    var words = $(this).text()
+    var total = words
+    $(this).empty()
+    $(this).append($('<span /> ').text(words))
+  })
+
+  $('.has-mask-fill.block-title').each(function () {
+    var words = $(this).text().split(' ')
+    var total = words.length
+    $(this).empty()
+    for (index = 0; index < total; index++) {
+      $(this).append($('<span /> ').text(words[index]))
+    }
+  })
+
+  var hasMaskFill = gsap.utils.toArray('.has-mask-fill')
+  hasMaskFill.forEach(function (hMaskFill) {
+    var spanFillMask = hMaskFill.querySelectorAll('span')
+    gsap.to(spanFillMask, {
+      scrollTrigger: {
+        trigger: hMaskFill,
+        start: 'top 85%',
+        end: () => `+=${hMaskFill.offsetHeight * 2}`,
+        scrub: 1,
+      },
+      duration: 1,
+      backgroundSize: '200% 100%',
+      stagger: 0.5,
+      ease: Linear.easeNone,
     })
+  })
 
-    // .has-mask-fill.block-title
-    document
-      .querySelectorAll('.has-mask-fill.block-title')
-      .forEach((element) => {
-        const words = element.textContent.split(' ')
-        const total = words.length
-        element.innerHTML = ''
-        for (let index = 0; index < total; index++) {
-          element.appendChild(document.createElement('span')).textContent =
-            words[index]
-        }
-      })
+  $('.has-opacity').each(function () {
+    var words = $(this).text().split(' ')
+    var total = words.length
+    $(this).empty()
+    for (index = 0; index < total; index++) {
+      $(this).append($('<span /> ').text(words[index] + ' '))
+    }
+  })
 
-    // .has-mask-fill animation
-    const hasMaskFill = gsap.utils.toArray('.has-mask-fill')
-    hasMaskFill.forEach((hMaskFill) => {
-      const spanFillMask = hMaskFill.querySelectorAll('span')
-      gsap.to(spanFillMask, {
-        scrollTrigger: {
-          trigger: hMaskFill,
-          start: 'top 85%',
-          end: () => `+=${hMaskFill.offsetHeight * 2}`,
-          scrub: 1,
+  var hasOpacity = gsap.utils.toArray('.has-opacity')
+  hasOpacity.forEach(function (hOpacity) {
+    var spanOpacity = hOpacity.querySelectorAll('span')
+    gsap.to(spanOpacity, {
+      scrollTrigger: {
+        trigger: hOpacity,
+        start: 'top 85%',
+        end: () => `+=${hOpacity.offsetHeight}`,
+        scrub: 1,
+      },
+      duration: 1,
+      opacity: 1,
+      stagger: 0.5,
+      ease: Linear.easeNone,
+    })
+  })
+
+  var counter = gsap.utils.toArray('.number-counter')
+  counter.forEach(function (countNumber) {
+    gsap.fromTo(
+      countNumber,
+      { innerText: countNumber.innerText },
+      {
+        innerText: function () {
+          return Math.floor(parseFloat(countNumber.getAttribute('data-target')))
         },
         duration: 1,
-        backgroundSize: '200% 100%',
-        stagger: 0.5,
-        ease: Linear.easeNone,
-      })
-    })
-
-    // .has-opacity
-    document.querySelectorAll('.has-opacity').forEach((element) => {
-      const words = element.textContent.split(' ')
-      const total = words.length
-      element.innerHTML = ''
-      for (let index = 0; index < total; index++) {
-        element.appendChild(document.createElement('span')).textContent =
-          words[index] + ' '
-      }
-    })
-
-    // .has-opacity animation
-    const hasOpacity = gsap.utils.toArray('.has-opacity')
-    hasOpacity.forEach((hOpacity) => {
-      const spanOpacity = hOpacity.querySelectorAll('span')
-      gsap.to(spanOpacity, {
+        snap: { innerText: 1 },
         scrollTrigger: {
-          trigger: hOpacity,
-          start: 'top 85%',
-          end: () => `+=${hOpacity.offsetHeight}`,
-          scrub: 1,
+          trigger: countNumber,
+          start: 'top 90%',
         },
-        duration: 1,
-        opacity: 1,
-        stagger: 0.5,
-        ease: Linear.easeNone,
-      })
-    })
+      },
+    )
+  })
 
-    // .number-counter animation
-    const counter = gsap.utils.toArray('.number-counter')
-    counter.forEach((countNumber) => {
-      gsap.fromTo(
-        countNumber,
-        { innerText: countNumber.innerText },
-        {
-          innerText: () =>
-            Math.floor(parseFloat(countNumber.getAttribute('data-target'))),
-          duration: 1,
-          snap: { innerText: 1 },
-          scrollTrigger: {
-            trigger: countNumber,
-            start: 'top 90%',
-          },
-        },
-      )
+  var titleMovingForward = gsap.utils.toArray('.title-moving-forward')
+  titleMovingForward.forEach(function (movingTitle) {
+    var parallax = gsap.to(movingTitle, 1, {
+      x: -(movingTitle.offsetWidth - window.innerWidth),
+      ease: Linear.easeNone,
     })
+    var parallaxScene = ScrollTrigger.create({
+      trigger: movingTitle,
+      end: () => `+=${movingTitle.offsetHeight + window.innerHeight}`,
+      animation: parallax,
+      scrub: 2,
+    })
+  })
 
-    // .title-moving-forward animation
-    const titleMovingForward = gsap.utils.toArray('.title-moving-forward')
-    titleMovingForward.forEach((movingTitle) => {
-      const parallax = gsap.to(movingTitle, 1, {
-        x: -(movingTitle.offsetWidth - window.innerWidth),
-        ease: Linear.easeNone,
-      })
-      const parallaxScene = ScrollTrigger.create({
-        trigger: movingTitle,
-        end: () => `+=${movingTitle.offsetHeight + window.innerHeight}`,
-        animation: parallax,
-        scrub: 2,
-      })
+  var titleMovingBackward = gsap.utils.toArray('.title-moving-backward')
+  titleMovingBackward.forEach(function (movingTitle) {
+    gsap.set(movingTitle, { x: -(movingTitle.offsetWidth - window.innerWidth) })
+    var parallax = gsap.to(movingTitle, 1, { x: 0, ease: Linear.easeNone })
+    var parallaxScene = ScrollTrigger.create({
+      trigger: movingTitle,
+      end: () => `+=${movingTitle.offsetHeight + window.innerHeight}`,
+      animation: parallax,
+      scrub: 2,
     })
-
-    // .title-moving-backward animation
-    const titleMovingBackward = gsap.utils.toArray('.title-moving-backward')
-    titleMovingBackward.forEach((movingTitle) => {
-      gsap.set(movingTitle, {
-        x: -(movingTitle.offsetWidth - window.innerWidth),
-      })
-      const parallax = gsap.to(movingTitle, 1, { x: 0, ease: Linear.easeNone })
-      const parallaxScene = ScrollTrigger.create({
-        trigger: movingTitle,
-        end: () => `+=${movingTitle.offsetHeight + window.innerHeight}`,
-        animation: parallax,
-        scrub: 2,
-      })
-    })
+  })
 
   // Content Row Options
 
-  if ($(".content-row").hasClass("light-section")) {
-    $(".light-section").each(function(i) {				
-      $(this).wrap( "<div class='light-section-wrapper'><div class='light-section-container content-max-width'></div></div>" );
-      $("body").find(".light-section-wrapper").each(function(i) {				
-        $(this).css('background-color', function () {
-          return $(this).children().children().data('bgcolor')
-        });
-      });
-    });
-  }
-  
-  if ($(".content-row").hasClass("dark-section")) {
-    $(".dark-section").each(function(i) {				
-      $(this).wrap( "<div class='dark-section-wrapper'><div class='dark-section-container content-max-width'></div></div>" );			
-      $("body").find(".dark-section-wrapper").each(function(i) {				
-        $(this).css('background-color', function () {
-          return $(this).children().children().data('bgcolor')
-        });
-      });
-    });
+  if ($('.content-row').hasClass('light-section')) {
+    $('.light-section').each(function (i) {
+      $(this).wrap(
+        "<div class='light-section-wrapper'><div class='light-section-container content-max-width'></div></div>",
+      )
+      $('body')
+        .find('.light-section-wrapper')
+        .each(function (i) {
+          $(this).css('background-color', function () {
+            return $(this).children().children().data('bgcolor')
+          })
+        })
+    })
   }
 
-// Clip Path
-document.querySelectorAll('.content-row.has-clip-path').forEach((row) => {
-  row.closest('.light-section-wrapper, .dark-section-wrapper').classList.add('clip-effects');
-});
+  if ($('.content-row').hasClass('dark-section')) {
+    $('.dark-section').each(function (i) {
+      $(this).wrap(
+        "<div class='dark-section-wrapper'><div class='dark-section-container content-max-width'></div></div>",
+      )
+      $('body')
+        .find('.dark-section-wrapper')
+        .each(function (i) {
+          $(this).css('background-color', function () {
+            return $(this).children().children().data('bgcolor')
+          })
+        })
+    })
+  }
 
-const hasClipPath = gsap.utils.toArray('.has-clip-path');
-hasClipPath.forEach((hClipPath) => {
-  const clipPath = gsap.to(hClipPath.closest('.clip-effects'), {
-    clipPath: 'inset(0% 0%)',
-    duration: 1,
-    ease: 'Linear.easeNone'
-  });
+  $('.content-row.has-clip-path').parent().parent().addClass('clip-effects')
 
-  ScrollTrigger.create({
-    trigger: hClipPath,
-    start: 'top 100%',
-    end: `+=${window.innerHeight / 3}`,
-    animation: clipPath,
-    scrub: 1
-  });
-});
+  var hasClipPath = gsap.utils.toArray('.has-clip-path')
+  hasClipPath.forEach(function (hClipPath) {
+    var clipPath = gsap.to(hClipPath.closest('.clip-effects'), {
+      clipPath: 'inset(0% 0%)',
+      duration: 1,
+      ease: 'Linear.easeNone',
+    })
 
-// Change Header Color
-if (document.querySelector('.change-header-color')) {
-  imagesLoaded('body', () => {
-    setTimeout(() => {
-      const changeHeaderColor = gsap.utils.toArray('.change-header-color');
-      const pageHeader = document.querySelector('header');
+    var clipPathScene = ScrollTrigger.create({
+      trigger: hClipPath,
+      start: 'top 100%',
+      end: `+=${window.innerHeight / 3}`,
+      animation: clipPath,
+      scrub: 1,
+    })
+  })
 
-      changeHeaderColor.forEach((changeHeaderElement) => {
-        gsap.to(changeHeaderElement, {
-          scrollTrigger: {
-            trigger: changeHeaderElement,
-            start: "top 8%",
-            end: () => `+=${changeHeaderElement.offsetHeight}`,
-            onEnter: () => pageHeader.classList.add('white-header'),
-            onEnterBack: () => pageHeader.classList.add('white-header'),
-            onLeave: () => pageHeader.classList.remove('white-header'),
-            onLeaveBack: () => pageHeader.classList.remove('white-header')
+  if ($('.change-header-color').length > 0) {
+    imagesLoaded('body', function () {
+      setTimeout(function () {
+        var changeHeaderColor = gsap.utils.toArray('.change-header-color')
+        changeHeaderColor.forEach(function (changeHeaderElement) {
+          var pageHeader = document.querySelector('header')
+          gsap.to(changeHeaderElement, {
+            scrollTrigger: {
+              trigger: changeHeaderElement,
+              start: 'top 8%',
+              end: () => `+=${changeHeaderElement.offsetHeight}`,
+              //markers: true,
+              onEnter: function () {
+                pageHeader.classList.add('white-header')
+              },
+              onEnterBack: function () {
+                pageHeader.classList.add('white-header')
+              },
+              onLeave: function () {
+                pageHeader.classList.remove('white-header')
+              },
+              onLeaveBack: function () {
+                pageHeader.classList.remove('white-header')
+              },
+            },
+          })
+        })
+      }, 100)
+    })
+  }
+
+  if ($('#page-content').hasClass('light-content')) {
+    if ($('#project-nav').hasClass('change-header')) {
+      imagesLoaded('body', function () {
+        setTimeout(function () {
+          var pageNav = document.querySelector('#project-nav.change-header')
+          if (pageNav) {
+            var pageContent = document.querySelector('#page-content')
+            var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
+              scrollTrigger: {
+                trigger: pageNav,
+                start: 'top 8%',
+                end: () => `+=${pageNav.offsetHeight}`,
+                onEnter: function () {
+                  pageContent.classList.remove('light-content')
+                },
+                onEnterBack: function () {
+                  pageContent.classList.remove('light-content')
+                },
+                onLeave: function () {
+                  pageContent.classList.add('light-content')
+                },
+                onLeaveBack: function () {
+                  pageContent.classList.add('light-content')
+                },
+              },
+            })
           }
-        });
-      });
-    }, 100);
-  });
-}
-
-
-if ($('#page-content').hasClass("light-content")) {
-  if ($('#project-nav').hasClass("change-header")) {
-      imagesLoaded('body', function() {
-      setTimeout(function() {	
-        var pageNav = document.querySelector('#project-nav.change-header');
-        if (pageNav) {
-          var pageContent = document.querySelector('#page-content');	
-          var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
-            scrollTrigger: {
-              trigger: pageNav,
-              start: "top 8%",
-              end: () => `+=${pageNav.offsetHeight}`,
-              onEnter: function() {
-                pageContent.classList.remove('light-content');
-              },
-              onEnterBack: function() {
-                pageContent.classList.remove('light-content');
-              },
-              onLeave: function() {
-                pageContent.classList.add('light-content');
-              },
-              onLeaveBack: function() {
-                pageContent.classList.add('light-content');
-              }
-            }							
-          });
-        }
-      }, 100);
-    });
+        }, 100)
+      })
+    }
   }
-}
 
-
-if ($('#page-content').hasClass("dark-content")) {
-  if ($('#project-nav').hasClass("change-header")) {
-      imagesLoaded('body', function() {
-      setTimeout(function() {	
-        var pageNav = document.querySelector('#project-nav');
-        if (pageNav) {
-          var pageContent = document.querySelector('#page-content');
-          var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
-            scrollTrigger: {
-              trigger: pageNav,
-              start: "top 8%",
-              end: () => `+=${pageNav.offsetHeight}`,
-              onEnter: function() {
-                pageContent.classList.add('light-content');
+  if ($('#page-content').hasClass('dark-content')) {
+    if ($('#project-nav').hasClass('change-header')) {
+      imagesLoaded('body', function () {
+        setTimeout(function () {
+          var pageNav = document.querySelector('#project-nav')
+          if (pageNav) {
+            var pageContent = document.querySelector('#page-content')
+            var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
+              scrollTrigger: {
+                trigger: pageNav,
+                start: 'top 8%',
+                end: () => `+=${pageNav.offsetHeight}`,
+                onEnter: function () {
+                  pageContent.classList.add('light-content')
+                },
+                onEnterBack: function () {
+                  pageContent.classList.add('light-content')
+                },
+                onLeave: function () {
+                  pageContent.classList.remove('light-content')
+                },
+                onLeaveBack: function () {
+                  pageContent.classList.remove('light-content')
+                },
               },
-              onEnterBack: function() {
-                pageContent.classList.add('light-content');
-              },
-              onLeave: function() {
-                pageContent.classList.remove('light-content');
-              },
-              onLeaveBack: function() {
-                pageContent.classList.remove('light-content');
-              }
-            }							
-          });
-        }
-      }, 100);
-    });
+            })
+          }
+        }, 100)
+      })
+    }
   }
-}
 
+  // Reinit All Scrolltrigger After Page Load
 
-
- 
-
-
-
-   
-  }
-}
-
-
+  // imagesLoaded('body', function() {
+  //   setTimeout(function() {
+  //     ScrollTrigger.refresh()
+  //   }, 1000);
+  // });
+} // End Scroll Effects

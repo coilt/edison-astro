@@ -30,7 +30,10 @@ import { FitThumbScreenGSAP } from './FitThumbScreenGSAP.js'
 import { Core } from './core.js'
 
 gsap.config({ nullTargetWarn: false })
-import 'https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js'
+// import 'https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js'
+
+// Dummy ImagesLoaded
+import { ImagesLoaded } from './imagesLoaded.js'
 
 function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(

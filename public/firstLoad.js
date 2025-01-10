@@ -1,90 +1,73 @@
 import { gsap, Power0, Power2 } from '/node_modules/gsap/all'
 
 export function FirstLoad() {
-  window.addEventListener('popstate', function () {
-    location.reload(true)
-  })
-
-  const pageContent = document.getElementById('page-content')
-  const header = document.querySelector('header')
-  const nav = document.querySelector('nav')
-
-  const hero = document.getElementById('hero')
-
-  if (pageContent.classList.contains('light-content')) {
-    nav.style.backgroundColor = header.dataset.menucolor
-
-    gsap.to('main', {
-      duration: 0.5,
-      backgroundColor: pageContent.getAttribute('data-bgcolor'),
-      ease: Power2.easeInOut,
+  document.addEventListener('DOMContentLoaded', function FirstLoad() {
+    window.addEventListener('popstate', function () {
+      location.reload(true)
     })
 
-    if (hero) {
-      if (hero.classList.contains('has-image')) {
-        header.style.backgroundColor = 'transparent'
-      } else {
-        if (header.classList.contains('fullscreen-menu')) {
+    const pageContent = document.querySelector('[id$="page-content"]')
+
+    const header = document.querySelector('header')
+    const nav = document.querySelector('nav')
+
+    const hero = document.getElementById('hero')
+    const blog = document.getElementById('blog')
+    const post = document.getElementById('post')
+
+    if (pageContent.classList.contains('light-content')) {
+      nav.style.backgroundColor = header.dataset.menucolor
+
+      gsap.to('main', {
+        duration: 0.5,
+        backgroundColor: pageContent.dataset.bgcolor,
+        ease: Power2.easeInOut,
+      })
+
+      magicCursor.classList.add('light-content')
+
+      if (hero) {
+        if (hero.classList.contains('has-image')) {
           header.style.backgroundColor = 'transparent'
         } else {
-          if (
-            document.getElementById('blog') ||
-            document.getElementById('post')
-          ) {
-            header.style.backgroundColor = '#171717'
-          }
-        }
-      }
-    } else {
-      header.style.backgroundColor = 'transparent'
-    }
-  } else {
-    document.addEventListener('DOMContentLoaded', function () {
-      const nav = document.querySelector('nav') // or use the appropriate selector
-      const header = document.querySelector('header') // or use the appropriate selector
-
-      if (nav && header && header.dataset.menucolor) {
-        nav.style.backgroundColor = header.dataset.menucolor
-      } else {
-        console.log(
-          'Nav or header element not found, or menucolor data attribute is missing',
-        )
-      }
-    })
-
-    gsap.to('main', {
-      duration: 0.5,
-      backgroundColor: pageContent.getAttribute('data-bgcolor'),
-      ease: Power2.easeInOut,
-    })
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const hero = document.querySelector('.hero') // Adjust this selector if needed
-      const header = document.querySelector('header') // Adjust this selector if needed
-
-      if (header) {
-        if (hero) {
-          if (hero.classList.contains('has-image')) {
+          if (header.classList.contains('fullscreen-menu')) {
             header.style.backgroundColor = 'transparent'
           } else {
-            if (header.classList.contains('fullscreen-menu')) {
-              header.style.backgroundColor = 'transparent'
-            } else {
-              if (
-                document.getElementById('blog') ||
-                document.getElementById('post')
-              ) {
-                header.style.backgroundColor = '#fff'
-              }
+            if (blog || post) {
+              header.style.backgroundColor = '#171717'
             }
           }
-        } else {
-          header.style.backgroundColor = 'transparent'
         }
       } else {
-        console.log('Header element not found')
+        header.style.backgroundColor = 'transparent'
       }
-    })
+    } else {
+      nav.style.backgroundColor = header.dataset.menucolor
+
+      gsap.to('main', {
+        duration: 0.5,
+        backgroundColor: pageContent.dataset.bgcolor,
+        ease: Power2.easeInOut,
+      })
+
+      magicCursor.classList.remove('light-content')
+
+      if (hero) {
+        if (hero.classList.contains('has-image')) {
+          header.style.backgroundColor = 'transparent'
+        } else {
+          if (header.classList.contains('fullscreen-menu')) {
+            header.style.backgroundColor = 'transparent'
+          } else {
+            if (blog || post) {
+              header.style.backgroundColor = '#fff'
+            }
+          }
+        }
+      } else {
+        header.style.backgroundColor = 'transparent'
+      }
+    }
 
     document.querySelectorAll('.video-cover').forEach((cover) => {
       const image = cover.dataset.src
@@ -306,5 +289,7 @@ export function FirstLoad() {
         )
       }
     })
-  }
+  })
 }
+
+ 

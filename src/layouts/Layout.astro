@@ -12,6 +12,7 @@ interface Props {
   bodyClass?: string;
   menuColor?: string;
   primaryColor?: string;
+   
 }
 
 const { title } = Astro.props
@@ -19,6 +20,7 @@ const { headerClass = '' } = Astro.props
 const { menuColor } = Astro.props
 const { bodyClass = "" } = Astro.props
 const { primaryColor } = Astro.props
+ 
 
 
 ---
@@ -28,7 +30,7 @@ const { primaryColor } = Astro.props
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
-  <body style="background-color: black;" class={bodyClass} data-primary-color={primaryColor}>
+  <body class={bodyClass} data-primary-color={primaryColor}>
     <!-- <Preloader centerLine="Loading" /> -->
    
    <!-- <Header class={headerClass} menuColor={menuColor} />   -->

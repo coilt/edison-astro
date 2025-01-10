@@ -51,6 +51,14 @@
 	 	
 	}
 
+	.black {
+		background-color: #000;
+	}
+
+	.white {
+		background-color: #fff;
+	}
+
   
 	html {
 		box-sizing: border-box;

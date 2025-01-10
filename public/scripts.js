@@ -14,7 +14,7 @@ import {
 
 gsap.registerPlugin(ScrollTrigger)
 
-import { ScrollEffects } from '/scrollEffects.js'
+// import { ScrollEffects } from '/scrollEffects.js'
 import { Sliders } from '/sliders.js'
 import { FirstLoad } from './firstLoad.js'
 import { Shortcodes } from './shortcodes.js'

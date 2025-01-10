@@ -5,8 +5,6 @@ import {
   Power4,
   Flip,
   ScrollTrigger,
-  toArray,
- 
 } from '/node_modules/gsap/all'
 
 function isMobile() {
@@ -16,9 +14,8 @@ function isMobile() {
 }
 
 export function ScrollEffects() {
-
-  const heroElement = document.getElementById('#hero');
-  console.log(heroElement);
+  const heroElement = document.getElementById('#hero')
+  console.log(heroElement)
 
   gsap.defaults({ overwrite: 'auto' })
   gsap.registerPlugin(ScrollTrigger, Flip)
@@ -51,140 +48,109 @@ export function ScrollEffects() {
     document.getElementById('#main-content').addClass('portfolio-page')
   }
 
-  let enableSmoothScrollMobile = true
-  if (isMobile()) {
-    if (!enableSmoothScrollMobile) {
-      document.body.classList.remove('smooth-scroll')
-    }
-  }
+  // if (document.body.classList.contains('smooth-scroll')) {
+  //   const ScrollArea = document.getElementById('#content-scroll')
 
-  if (document.body.classList.contains('smooth-scroll')) {
-    const ScrollArea = document.getElementById('#content-scroll')
-    class EdgeEasingPlugin extends Scrollbar.ScrollbarPlugin {
-      constructor() {
-        super(...arguments)
-        this._remainMomentum = {
-          x: 0,
-          y: 0,
-        }
-      }
-      transformDelta(delta) {
-        const { limit, offset } = this.scrollbar
-        const x = this._remainMomentum.x + delta.x
-        const y = this._remainMomentum.y + delta.y
-        // clamps momentum within [-offset, limit - offset]
-        this.scrollbar.setMomentum(
-          Math.max(-offset.x, Math.min(x, limit.x - offset.x)),
-          Math.max(-offset.y, Math.min(y, limit.y - offset.y)),
-        )
-        return { x: 0, y: 0 }
-      }
-      onRender(remainMomentum) {
-        Object.assign(this._remainMomentum, remainMomentum)
-      }
-    }
+  //   // EdgeEasingPlugin.pluginName = 'edgeEasing'
+  //   // Scrollbar.use(EdgeEasingPlugin)
 
-    EdgeEasingPlugin.pluginName = 'edgeEasing'
-    Scrollbar.use(EdgeEasingPlugin)
+  //   // Config
 
-    // Config
+  //   // if (!isMobile()) {
+  //   //   const ScrollbarOptions = {
+  //   //     damping: 0.1,
+  //   //     renderByPixel: true,
+  //   //     continuousScrolling: true,
+  //   //     syncCallbacks: true,
+  //   //   }
+  //   // }
 
-    if (!isMobile()) {
-      const ScrollbarOptions = {
-        damping: 0.1,
-        renderByPixel: true,
-        continuousScrolling: true,
-        syncCallbacks: true,
-      }
-    }
+  //   // if (isMobile()) {
+  //   //   const ScrollbarOptions = {
+  //   //     damping: 0.2,
+  //   //     renderByPixel: true,
+  //   //     continuousScrolling: true,
+  //   //     syncCallbacks: true,
+  //   //   }
+  //   // }
 
-    if (isMobile()) {
-      const ScrollbarOptions = {
-        damping: 0.2,
-        renderByPixel: true,
-        continuousScrolling: true,
-        syncCallbacks: true,
-      }
-    }
+  //   // Initialise
+  //   const scrollbar = Scrollbar.init(ScrollArea /*ScrollbarOptions*/)
 
-    // Initialise
-    const scrollbar = Scrollbar.init(ScrollArea /*ScrollbarOptions*/)
+  //   ScrollTrigger.scrollerProxy('#content-scroll', {
+  //     scrollTop(value) {
+  //       if (arguments.length) {
+  //         scrollbar.scrollTop = value
+  //       }
+  //       return scrollbar.scrollTop
+  //     },
+  //   })
 
-    ScrollTrigger.scrollerProxy('#content-scroll', {
-      scrollTop(value) {
-        if (arguments.length) {
-          scrollbar.scrollTop = value
-        }
-        return scrollbar.scrollTop
-      },
-    })
+  //   scrollbar.addEventListener(ScrollTrigger.update)
+  //   ScrollTrigger.defaults({ scroller: ScrollArea })
+  // } // End Smooth Scroll
 
-    scrollbar.addEventListener(ScrollTrigger.update)
-    ScrollTrigger.defaults({ scroller: ScrollArea })
-  } // End Smooth Scroll
+  // if (isMobile()) {
+  //   const heroTranslate = document.querySelector('.hero-translate').offsetHeight
+  //   const winHeight = window.innerHeight
+  //   const footer_height = document.querySelector('footer').offsetHeight
 
-  if (isMobile()) {
-    const heroTranslate = document.querySelector('.hero-translate').offsetHeight
-    const winHeight = window.innerHeight
-    const footer_height = document.querySelector('footer').offsetHeight
+  //   const elementsToResize = document.querySelectorAll(
+  //     '.smooth-scroll main, .has-parallax, nav, .clapat-slider-wrapper:not(.content-slider), .showcase-lists .clapat-sync-slider, .next-project-image-wrapper, .slider-fixed-content',
+  //   )
+  //   elementsToResize.forEach((el) => (el.style.height = `${winHeight}px`))
 
-    const elementsToResize = document.querySelectorAll(
-      '.smooth-scroll main, .has-parallax, nav, .clapat-slider-wrapper:not(.content-slider), .showcase-lists .clapat-sync-slider, .next-project-image-wrapper, .slider-fixed-content',
-    )
-    elementsToResize.forEach((el) => (el.style.height = `${winHeight}px`))
+  //   const mainPageContent = document.querySelector(
+  //     '#main-page-content.project-page',
+  //   )
+  //   if (mainPageContent) {
+  //     mainPageContent.style.marginBottom = `${winHeight * 2 - footer_height}px`
+  //   }
 
-    const mainPageContent = document.querySelector(
-      '#main-page-content.project-page',
-    )
-    if (mainPageContent) {
-      mainPageContent.style.marginBottom = `${winHeight * 2 - footer_height}px`
-    }
+  //   if (!document.body.classList.contains('project-nav-text')) {
+  //     const projectNav = document.querySelector('#project-nav')
+  //     if (projectNav) {
+  //       projectNav.style.height = `${winHeight * 2}px`
+  //       projectNav.style.bottom = `${-winHeight * 2}px`
+  //     }
+  //   }
 
-    if (!document.body.classList.contains('project-nav-text')) {
-      const projectNav = document.querySelector('#project-nav')
-      if (projectNav) {
-        projectNav.style.height = `${winHeight * 2}px`
-        projectNav.style.bottom = `${-winHeight * 2}px`
-      }
-    }
+  //   document
+  //     .querySelectorAll('.icon-wrap')
+  //     .forEach((el) => el.classList.remove('parallax-wrap'))
 
-    document
-      .querySelectorAll('.icon-wrap')
-      .forEach((el) => el.classList.remove('parallax-wrap'))
+  //   let resizeTime
+  //   window.addEventListener('resize', () => {
+  //     clearTimeout(resizeTime)
+  //     resizeTime = setTimeout(doneResizing, 100)
+  //   })
 
-    let resizeTime
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTime)
-      resizeTime = setTimeout(doneResizing, 100)
-    })
+  //   function doneResizing() {
+  //     const heroTranslate =
+  //       document.querySelector('.hero-translate').offsetHeight
+  //     const winHeight = window.innerHeight
+  //     const footer_height = document.querySelector('footer').offsetHeight
 
-    function doneResizing() {
-      const heroTranslate =
-        document.querySelector('.hero-translate').offsetHeight
-      const winHeight = window.innerHeight
-      const footer_height = document.querySelector('footer').offsetHeight
+  //     elementsToResize.forEach((el) => (el.style.height = `${winHeight}px`))
 
-      elementsToResize.forEach((el) => (el.style.height = `${winHeight}px`))
+  //     if (mainPageContent) {
+  //       mainPageContent.style.marginBottom = `${winHeight * 2 - footer_height}px`
+  //     }
 
-      if (mainPageContent) {
-        mainPageContent.style.marginBottom = `${winHeight * 2 - footer_height}px`
-      }
+  //     if (!document.body.classList.contains('project-nav-text')) {
+  //       const projectNav = document.querySelector('#project-nav')
+  //       if (projectNav) {
+  //         projectNav.style.height = `${winHeight * 2}px`
+  //         projectNav.style.bottom = `${-winHeight * 2}px`
+  //       }
+  //     }
 
-      if (!document.body.classList.contains('project-nav-text')) {
-        const projectNav = document.querySelector('#project-nav')
-        if (projectNav) {
-          projectNav.style.height = `${winHeight * 2}px`
-          projectNav.style.bottom = `${-winHeight * 2}px`
-        }
-      }
+  //     document
+  //       .querySelectorAll('.icon-wrap')
+  //       .forEach((el) => el.classList.remove('parallax-wrap'))
+  //   }
+  // }
 
-      document
-        .querySelectorAll('.icon-wrap')
-        .forEach((el) => el.classList.remove('parallax-wrap'))
-    }
-  }
-
-  // Hero AutoScroll On Page Load
   // Hero AutoScroll On Page Load
   let autoScroll = null
 
@@ -221,29 +187,6 @@ export function ScrollEffects() {
       }
     }
   }
-
-  // // Slider Center on click
-  //  document.querySelector('.autocenter').addEventListener('click', function () {
-  //   const $window = window
-  //   const $element = this
-  //   const elementTop = $element.offsetTop
-  //   const elementHeight = $element.offsetHeight
-  //   const viewportHeight = $window.innerHeight
-  //   const scrollIt = elementTop - (viewportHeight - elementHeight) / 2
-
-  //   if (document.body.classList.contains('smooth-scroll')) {
-  //     const scrollOffset =
-  //       scrollbar.offset.y +
-  //       (elementTop - scrollbar.getSize().container.height / 2)
-  //     autoScroll = gsap.to(scrollbar, {
-  //       duration: 0.8,
-  //       scrollTop: scrollOffset + elementHeight / 2,
-  //       ease: Power4.easeInOut,
-  //     })
-  //   } else {
-  //     window.scrollTo({ top: scrollIt, behavior: 'smooth' })
-  //   }
-  // })
 
   // Add an event listener for the mousewheel event
   window.addEventListener('wheel', function (event) {
@@ -346,25 +289,6 @@ export function ScrollEffects() {
         delay: 0.1,
         ease: Power4.easeInOut,
       })
-      gsap.to('#ball', {
-        duration: 0.3,
-        borderWidth: '4px',
-        scale: 0.5,
-        borderColor: '#999999',
-        delay: 0.15,
-      })
-    } else {
-      document.documentElement.scrollTo({
-        top: 0,
-        behavior: 'smooth', // Ensure a smooth scroll
-      })
-      gsap.to('#ball', {
-        duration: 0.3,
-        borderWidth: '4px',
-        scale: 0.5,
-        borderColor: '#999999',
-        delay: 0.15,
-      })
     }
   })
 
@@ -408,7 +332,7 @@ export function ScrollEffects() {
   })
 
   // Zoom Gallery
-  
+
   const zoomGalleries = Array.from(document.querySelectorAll('.zoom-gallery'))
 
   zoomGalleries.forEach((zoomGallery) => {
@@ -624,66 +548,66 @@ export function ScrollEffects() {
         },
       })
 
-      if (!isMobile()) {
-        const clapatItemsThumbs = Array.from(
-          document.querySelectorAll(
-            '.carousel-shortcode-thumbs .clapat-item .slide-inner',
-          ),
-        )
-        const showcasePortfolioClapatItems = Array.from(
-          document.querySelectorAll(
-            '.showcase-portfolio .clapat-item .slide-inner',
-          ),
-        )
+      // if (!isMobile()) {
+      //   const clapatItemsThumbs = Array.from(
+      //     document.querySelectorAll(
+      //       '.carousel-shortcode-thumbs .clapat-item .slide-inner',
+      //     ),
+      //   )
+      //   const showcasePortfolioClapatItems = Array.from(
+      //     document.querySelectorAll(
+      //       '.showcase-portfolio .clapat-item .slide-inner',
+      //     ),
+      //   )
 
-        clapatItemsThumbs.forEach((element) => {
-          element.addEventListener('mouseenter', function () {
-            const $this = this
-            gsap.to('#ball', {
-              duration: 0.3,
-              borderWidth: '2px',
-              scale: 1.4,
-              borderColor: 'rgba(255,255,255,0)',
-              backgroundColor: 'rgba(255,255,255,0.1)',
-            })
-            gsap.to('#ball-loader', {
-              duration: 0.2,
-              borderWidth: '2px',
-              top: 2,
-              left: 2,
-            })
-            document.getElementById('ball').classList.add('with-blur')
-            const centerlineElement = document.createElement('p')
-            centerlineElement.classList.add('center-first')
-            centerlineElement.textContent = $this.dataset.centerline
-            document.getElementById('ball').appendChild(centerlineElement)
-            this.querySelectorAll('video').forEach((video) => {
-              video.play()
-            })
-          })
+      //   clapatItemsThumbs.forEach((element) => {
+      //     element.addEventListener('mouseenter', function () {
+      //       const $this = this
+      //       gsap.to('#ball', {
+      //         duration: 0.3,
+      //         borderWidth: '2px',
+      //         scale: 1.4,
+      //         borderColor: 'rgba(255,255,255,0)',
+      //         backgroundColor: 'rgba(255,255,255,0.1)',
+      //       })
+      //       gsap.to('#ball-loader', {
+      //         duration: 0.2,
+      //         borderWidth: '2px',
+      //         top: 2,
+      //         left: 2,
+      //       })
+      //       document.getElementById('ball').classList.add('with-blur')
+      //       const centerlineElement = document.createElement('p')
+      //       centerlineElement.classList.add('center-first')
+      //       centerlineElement.textContent = $this.dataset.centerline
+      //       document.getElementById('ball').appendChild(centerlineElement)
+      //       this.querySelectorAll('video').forEach((video) => {
+      //         video.play()
+      //       })
+      //     })
 
-          element.addEventListener('mouseleave', function () {
-            gsap.to('#ball', {
-              duration: 0.2,
-              borderWidth: '4px',
-              scale: 0.5,
-              borderColor: '#999999',
-              backgroundColor: 'transparent',
-            })
-            gsap.to('#ball-loader', {
-              duration: 0.2,
-              borderWidth: '4px',
-              top: 0,
-              left: 0,
-            })
-            document.getElementById('ball').classList.remove('with-blur')
-            document.querySelectorAll('#ball p').forEach((p) => p.remove())
-            this.querySelectorAll('video').forEach((video) => {
-              video.pause()
-            })
-          })
-        })
-      }
+      //     element.addEventListener('mouseleave', function () {
+      //       gsap.to('#ball', {
+      //         duration: 0.2,
+      //         borderWidth: '4px',
+      //         scale: 0.5,
+      //         borderColor: '#999999',
+      //         backgroundColor: 'transparent',
+      //       })
+      //       gsap.to('#ball-loader', {
+      //         duration: 0.2,
+      //         borderWidth: '4px',
+      //         top: 0,
+      //         left: 0,
+      //       })
+      //       document.getElementById('ball').classList.remove('with-blur')
+      //       document.querySelectorAll('#ball p').forEach((p) => p.remove())
+      //       this.querySelectorAll('video').forEach((video) => {
+      //         video.pause()
+      //       })
+      //     })
+      //   })
+      // }
 
       // Mouseenter event
       document
@@ -1020,84 +944,84 @@ export function ScrollEffects() {
     const totalItems = listItems.length - 1
     const angleIncrement = 180 / totalItems
 
-    if (!isMobile()) {
-      listItems.forEach(function (item, index) {
-        const rotationAngle = index * angleIncrement
-        const fontSize = gsap.getProperty(item, 'fontSize')
-        const lineHeight = gsap.getProperty(item, 'lineHeight')
-        const translateZ = (parseFloat(fontSize) + parseFloat(lineHeight)) * 1.8
+    // if (!isMobile()) {
+    //   listItems.forEach(function (item, index) {
+    //     const rotationAngle = index * angleIncrement
+    //     const fontSize = gsap.getProperty(item, 'fontSize')
+    //     const lineHeight = gsap.getProperty(item, 'lineHeight')
+    //     const translateZ = (parseFloat(fontSize) + parseFloat(lineHeight)) * 1.8
 
-        gsap.set(item, {
-          rotationX: -rotationAngle,
-          transformOrigin: `center center 0`,
-          transform: `rotateX(${-rotationAngle}deg) translateZ(${translateZ}px)`,
-          zIndex: totalItems - index,
-        })
-      })
+    //     gsap.set(item, {
+    //       rotationX: -rotationAngle,
+    //       transformOrigin: `center center 0`,
+    //       transform: `rotateX(${-rotationAngle}deg) translateZ(${translateZ}px)`,
+    //       zIndex: totalItems - index,
+    //     })
+    //   })
 
-      function setlistRotatorProperties() {
-        gsap.set(listRotatorWrapper, { height: window.innerHeight * 3 })
-        gsap.set(listRotatorHeight, { height: window.innerHeight * 4 })
-        gsap.set(listRotator, { height: window.innerHeight })
-        ScrollTrigger.refresh()
-      }
+    //   function setlistRotatorProperties() {
+    //     gsap.set(listRotatorWrapper, { height: window.innerHeight * 3 })
+    //     gsap.set(listRotatorHeight, { height: window.innerHeight * 4 })
+    //     gsap.set(listRotator, { height: window.innerHeight })
+    //     ScrollTrigger.refresh()
+    //   }
 
-      gsap.set(listRotator, { rotationX: -90 })
+    //   gsap.set(listRotator, { rotationX: -90 })
 
-      setlistRotatorProperties()
+    //   setlistRotatorProperties()
 
-      window.addEventListener('resize', setlistRotatorProperties)
+    //   window.addEventListener('resize', setlistRotatorProperties)
 
-      gsap.to(listRotatorTitle, {
-        scrollTrigger: {
-          trigger: listRotatorTitle,
-          start: function () {
-            const startPin = 0
-            return 'top +=' + startPin
-          },
-          end: function () {
-            const endPin = window.innerHeight * 2.5
-            return '+=' + endPin
-          },
-          pin: true,
-          scrub: true,
-          pinSpacing: false,
-        },
-      })
+    //   gsap.to(listRotatorTitle, {
+    //     scrollTrigger: {
+    //       trigger: listRotatorTitle,
+    //       start: function () {
+    //         const startPin = 0
+    //         return 'top +=' + startPin
+    //       },
+    //       end: function () {
+    //         const endPin = window.innerHeight * 2.5
+    //         return '+=' + endPin
+    //       },
+    //       pin: true,
+    //       scrub: true,
+    //       pinSpacing: false,
+    //     },
+    //   })
 
-      gsap.to(listRotatorPin, {
-        scrollTrigger: {
-          trigger: listRotatorPin,
-          start: function () {
-            const startPin = 0
-            return 'top +=' + startPin
-          },
-          end: function () {
-            const endPin = window.innerHeight * 6
-            return '+=' + endPin
-          },
-          pin: true,
-          scrub: true,
-          pinSpacing: false,
-        },
-      })
+    //   gsap.to(listRotatorPin, {
+    //     scrollTrigger: {
+    //       trigger: listRotatorPin,
+    //       start: function () {
+    //         const startPin = 0
+    //         return 'top +=' + startPin
+    //       },
+    //       end: function () {
+    //         const endPin = window.innerHeight * 6
+    //         return '+=' + endPin
+    //       },
+    //       pin: true,
+    //       scrub: true,
+    //       pinSpacing: false,
+    //     },
+    //   })
 
-      gsap.to(listRotator, {
-        scrollTrigger: {
-          trigger: listRotatorWrapper,
-          start: function () {
-            const startPin = window.innerHeight * 0.8
-            return 'top +=' + startPin
-          },
-          end: function () {
-            const endPin = window.innerHeight * 5.5
-            return '+=' + endPin
-          },
-          scrub: true,
-        },
-        rotationX: 285,
-      })
-    }
+    //   gsap.to(listRotator, {
+    //     scrollTrigger: {
+    //       trigger: listRotatorWrapper,
+    //       start: function () {
+    //         const startPin = window.innerHeight * 0.8
+    //         return 'top +=' + startPin
+    //       },
+    //       end: function () {
+    //         const endPin = window.innerHeight * 5.5
+    //         return '+=' + endPin
+    //       },
+    //       scrub: true,
+    //     },
+    //     rotationX: 285,
+    //   })
+    // }
   })
 
   // Clipped Image
@@ -1517,14 +1441,14 @@ export function ScrollEffects() {
     // Create Scripts
   } else {
     if (document.querySelector('#hero').classList.contains('has-image')) {
-
-      const heroCaption = document.querySelector('#hero.has-image #hero-caption');
-      const heroImage = document.querySelector('#hero-image-wrapper');
-
+      const heroCaption = document.querySelector(
+        '#hero.has-image #hero-caption',
+      )
+      const heroImage = document.querySelector('#hero-image-wrapper')
 
       function setheroImageProperties() {
-        gsap.set(heroCaption, { height: window.innerHeight });
-        gsap.set(heroImage, { height: window.innerHeight });
+        gsap.set(heroCaption, { height: window.innerHeight })
+        gsap.set(heroImage, { height: window.innerHeight })
       }
 
       setheroImageProperties()
@@ -1592,8 +1516,8 @@ export function ScrollEffects() {
           end: () => `+=${document.querySelector('#hero').offsetHeight}`,
           scrub: true,
         },
-      }
-    );
+      },
+    )
 
     // Page and Project Navigation
 
@@ -1686,7 +1610,7 @@ export function ScrollEffects() {
             `+=${
               Array.from(document.querySelectorAll('#page-nav')).reduce(
                 (total, element) => total + element.offsetHeight,
-                0
+                0,
               ) + document.querySelector('footer').offsetHeight
             }`,
           scrub: true,
@@ -1759,7 +1683,6 @@ export function ScrollEffects() {
     // document.querySelector('.has-cover').style.backgroundColor = function() {
     //   return document.querySelector('.has-cover').closest('.content-row').dataset.bgcolor;
     // };
-    
 
     // .has-mask
     document.querySelectorAll('.has-mask').forEach((element) => {
@@ -1921,150 +1844,148 @@ export function ScrollEffects() {
       })
     })
 
-  // Content Row Options
+    // Content Row Options
 
-  if ($(".content-row").hasClass("light-section")) {
-    $(".light-section").each(function(i) {				
-      $(this).wrap( "<div class='light-section-wrapper'><div class='light-section-container content-max-width'></div></div>" );
-      $("body").find(".light-section-wrapper").each(function(i) {				
-        $(this).css('background-color', function () {
-          return $(this).children().children().data('bgcolor')
-        });
-      });
-    });
+    if ($('.content-row').hasClass('light-section')) {
+      $('.light-section').each(function (i) {
+        $(this).wrap(
+          "<div class='light-section-wrapper'><div class='light-section-container content-max-width'></div></div>",
+        )
+        $('body')
+          .find('.light-section-wrapper')
+          .each(function (i) {
+            $(this).css('background-color', function () {
+              return $(this).children().children().data('bgcolor')
+            })
+          })
+      })
+    }
+
+    if ($('.content-row').hasClass('dark-section')) {
+      $('.dark-section').each(function (i) {
+        $(this).wrap(
+          "<div class='dark-section-wrapper'><div class='dark-section-container content-max-width'></div></div>",
+        )
+        $('body')
+          .find('.dark-section-wrapper')
+          .each(function (i) {
+            $(this).css('background-color', function () {
+              return $(this).children().children().data('bgcolor')
+            })
+          })
+      })
+    }
+
+    // Clip Path
+    document.querySelectorAll('.content-row.has-clip-path').forEach((row) => {
+      row
+        .closest('.light-section-wrapper, .dark-section-wrapper')
+        .classList.add('clip-effects')
+    })
+
+    const hasClipPath = gsap.utils.toArray('.has-clip-path')
+    hasClipPath.forEach((hClipPath) => {
+      const clipPath = gsap.to(hClipPath.closest('.clip-effects'), {
+        clipPath: 'inset(0% 0%)',
+        duration: 1,
+        ease: 'Linear.easeNone',
+      })
+
+      ScrollTrigger.create({
+        trigger: hClipPath,
+        start: 'top 100%',
+        end: `+=${window.innerHeight / 3}`,
+        animation: clipPath,
+        scrub: 1,
+      })
+    })
+
+    // Change Header Color
+    if (document.querySelector('.change-header-color')) {
+      imagesLoaded('body', () => {
+        setTimeout(() => {
+          const changeHeaderColor = gsap.utils.toArray('.change-header-color')
+          const pageHeader = document.querySelector('header')
+
+          changeHeaderColor.forEach((changeHeaderElement) => {
+            gsap.to(changeHeaderElement, {
+              scrollTrigger: {
+                trigger: changeHeaderElement,
+                start: 'top 8%',
+                end: () => `+=${changeHeaderElement.offsetHeight}`,
+                onEnter: () => pageHeader.classList.add('white-header'),
+                onEnterBack: () => pageHeader.classList.add('white-header'),
+                onLeave: () => pageHeader.classList.remove('white-header'),
+                onLeaveBack: () => pageHeader.classList.remove('white-header'),
+              },
+            })
+          })
+        }, 100)
+      })
+    }
+
+    if ($('#page-content').hasClass('light-content')) {
+      if ($('#project-nav').hasClass('change-header')) {
+        imagesLoaded('body', function () {
+          setTimeout(function () {
+            var pageNav = document.querySelector('#project-nav.change-header')
+            if (pageNav) {
+              var pageContent = document.querySelector('#page-content')
+              var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
+                scrollTrigger: {
+                  trigger: pageNav,
+                  start: 'top 8%',
+                  end: () => `+=${pageNav.offsetHeight}`,
+                  onEnter: function () {
+                    pageContent.classList.remove('light-content')
+                  },
+                  onEnterBack: function () {
+                    pageContent.classList.remove('light-content')
+                  },
+                  onLeave: function () {
+                    pageContent.classList.add('light-content')
+                  },
+                  onLeaveBack: function () {
+                    pageContent.classList.add('light-content')
+                  },
+                },
+              })
+            }
+          }, 100)
+        })
+      }
+    }
+
+    if ($('#page-content').hasClass('dark-content')) {
+      if ($('#project-nav').hasClass('change-header')) {
+        imagesLoaded('body', function () {
+          setTimeout(function () {
+            var pageNav = document.querySelector('#project-nav')
+            if (pageNav) {
+              var pageContent = document.querySelector('#page-content')
+              var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
+                scrollTrigger: {
+                  trigger: pageNav,
+                  start: 'top 8%',
+                  end: () => `+=${pageNav.offsetHeight}`,
+                  onEnter: function () {
+                    pageContent.classList.add('light-content')
+                  },
+                  onEnterBack: function () {
+                    pageContent.classList.add('light-content')
+                  },
+                  onLeave: function () {
+                    pageContent.classList.remove('light-content')
+                  },
+                  onLeaveBack: function () {
+                    pageContent.classList.remove('light-content')
+                  },
+                },
+              })
+            }
+          }, 100)
+        })
+      }
+    }
   }
-  
-  if ($(".content-row").hasClass("dark-section")) {
-    $(".dark-section").each(function(i) {				
-      $(this).wrap( "<div class='dark-section-wrapper'><div class='dark-section-container content-max-width'></div></div>" );			
-      $("body").find(".dark-section-wrapper").each(function(i) {				
-        $(this).css('background-color', function () {
-          return $(this).children().children().data('bgcolor')
-        });
-      });
-    });
-  }
-
-// Clip Path
-document.querySelectorAll('.content-row.has-clip-path').forEach((row) => {
-  row.closest('.light-section-wrapper, .dark-section-wrapper').classList.add('clip-effects');
-});
-
-const hasClipPath = gsap.utils.toArray('.has-clip-path');
-hasClipPath.forEach((hClipPath) => {
-  const clipPath = gsap.to(hClipPath.closest('.clip-effects'), {
-    clipPath: 'inset(0% 0%)',
-    duration: 1,
-    ease: 'Linear.easeNone'
-  });
-
-  ScrollTrigger.create({
-    trigger: hClipPath,
-    start: 'top 100%',
-    end: `+=${window.innerHeight / 3}`,
-    animation: clipPath,
-    scrub: 1
-  });
-});
-
-// Change Header Color
-if (document.querySelector('.change-header-color')) {
-  imagesLoaded('body', () => {
-    setTimeout(() => {
-      const changeHeaderColor = gsap.utils.toArray('.change-header-color');
-      const pageHeader = document.querySelector('header');
-
-      changeHeaderColor.forEach((changeHeaderElement) => {
-        gsap.to(changeHeaderElement, {
-          scrollTrigger: {
-            trigger: changeHeaderElement,
-            start: "top 8%",
-            end: () => `+=${changeHeaderElement.offsetHeight}`,
-            onEnter: () => pageHeader.classList.add('white-header'),
-            onEnterBack: () => pageHeader.classList.add('white-header'),
-            onLeave: () => pageHeader.classList.remove('white-header'),
-            onLeaveBack: () => pageHeader.classList.remove('white-header')
-          }
-        });
-      });
-    }, 100);
-  });
 }
-
-
-if ($('#page-content').hasClass("light-content")) {
-  if ($('#project-nav').hasClass("change-header")) {
-      imagesLoaded('body', function() {
-      setTimeout(function() {	
-        var pageNav = document.querySelector('#project-nav.change-header');
-        if (pageNav) {
-          var pageContent = document.querySelector('#page-content');	
-          var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
-            scrollTrigger: {
-              trigger: pageNav,
-              start: "top 8%",
-              end: () => `+=${pageNav.offsetHeight}`,
-              onEnter: function() {
-                pageContent.classList.remove('light-content');
-              },
-              onEnterBack: function() {
-                pageContent.classList.remove('light-content');
-              },
-              onLeave: function() {
-                pageContent.classList.add('light-content');
-              },
-              onLeaveBack: function() {
-                pageContent.classList.add('light-content');
-              }
-            }							
-          });
-        }
-      }, 100);
-    });
-  }
-}
-
-
-if ($('#page-content').hasClass("dark-content")) {
-  if ($('#project-nav').hasClass("change-header")) {
-      imagesLoaded('body', function() {
-      setTimeout(function() {	
-        var pageNav = document.querySelector('#project-nav');
-        if (pageNav) {
-          var pageContent = document.querySelector('#page-content');
-          var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
-            scrollTrigger: {
-              trigger: pageNav,
-              start: "top 8%",
-              end: () => `+=${pageNav.offsetHeight}`,
-              onEnter: function() {
-                pageContent.classList.add('light-content');
-              },
-              onEnterBack: function() {
-                pageContent.classList.add('light-content');
-              },
-              onLeave: function() {
-                pageContent.classList.remove('light-content');
-              },
-              onLeaveBack: function() {
-                pageContent.classList.remove('light-content');
-              }
-            }							
-          });
-        }
-      }, 100);
-    });
-  }
-}
-
-
-
- 
-
-
-
-   
-  }
-}
-
-

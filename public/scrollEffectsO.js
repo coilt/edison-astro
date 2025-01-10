@@ -47,13 +47,7 @@ export function ScrollEffects() {
   if ($('.portfolio').length > 0) {
     $('#main-content').addClass('portfolio-page')
   }
-
-  let enableSmoothScrollMobile = true
-  if (isMobile()) {
-    if (!enableSmoothScrollMobile) {
-      document.body.classList.remove('smooth-scroll')
-    }
-  }
+ 
 
   if (document.body.classList.contains('smooth-scroll')) {
     const ScrollArea = document.querySelector('#content-scroll')

@@ -14,12 +14,29 @@ import {
 
 gsap.registerPlugin(ScrollTrigger)
 
-import { ScrollEffects } from '/scrollEffects.js'
+// Broken down ScrollEffects imports
+
+import { HeroElement } from './heroElement.js'
+import { CarouselPin } from './carouselPin.js'
+import { TriggerItem } from './triggerItem.js'
+import { NewsShortcode } from './NewsShortcode.js'
+import { listRotator } from './ListRotator.js'
+import { ClippedImage } from './ClippedImage.js'
+import { HorizontalGallery } from './HorizontalGallery.js'
+import { PinnedGallery } from './PinnedGallery.js'
+import { HeroSectionEffects } from './HeroSectionEffects.js'
+
+
+// End of ScrollEffects
+
+
 import { Sliders } from '/sliders.js'
 import { FirstLoad } from './firstLoad.js'
 import { Shortcodes } from './shortcodes.js'
 import { JustifiedGrid } from './justifiedGrid.js'
 import { Lightbox } from './lightbox.js'
+import { SlowedPin } from './SlowedPin.js'
+
 
 
 import { FitThumbScreenWEBGL } from './fitThumbScreenWEBGL.js'
@@ -44,8 +61,23 @@ function isMobile() {
 function initializeApp() {
   'use strict'
 
+  HeroElement()
+  CarouselPin()
+  TriggerItem()
+  NewsShortcode()
+  listRotator()
+  ClippedImage()
+  HorizontalGallery()
+  SlowedPin() 
+  PinnedGallery()
+  HeroSectionEffects()
+
+
+
+
+
   PageLoad()
-  ScrollEffects()
+   
   Sliders()
   FirstLoad()
   PageLoadActions()
@@ -5207,9 +5239,27 @@ function ShowcaseGallery() {
 }
 
 function LoadViaAjax() {
+
+
+  HeroElement()
+  CarouselPin()
+  TriggerItem()
+  NewsShortcode()
+  listRotator()
+  ClippedImage()
+  HorizontalGallery()
+  SlowedPin() 
+  PinnedGallery()
+  HeroSectionEffects()
+
+
+
+
+
+
   CleanupBeforeAjax()
   FirstLoad()
-  ScrollEffects()
+ 
   Sliders()
   PageLoadActions()
   FitThumbScreenGSAP()

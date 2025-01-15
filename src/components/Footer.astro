@@ -2,7 +2,7 @@
 const currentPath = Astro.url.pathname
 ---
 
-<footer class="hidden">
+<footer class="hidden dark">
   <div id="footer-container">
     <div id="backtotop" class="button-wrap left">
       <div class="icon-wrap parallax-wrap">
@@ -33,7 +33,8 @@ const currentPath = Astro.url.pathname
               class="parallax-element"
               href="https://www.dribbble.com/edison"
               target="_blank">Db</a
-            ></span>
+            ></span
+          >
         </li>
         <li>
           <span class="parallax-wrap"
@@ -41,7 +42,8 @@ const currentPath = Astro.url.pathname
               class="parallax-element"
               href="https://www.twitter.com/edison"
               target="_blank">Tw</a
-            ></span>
+            ></span
+          >
         </li>
         <li>
           <span class="parallax-wrap"
@@ -49,7 +51,8 @@ const currentPath = Astro.url.pathname
               class="parallax-element"
               href="https://www.behance.com/edison"
               target="_blank">Be</a
-            ></span>
+            ></span
+          >
         </li>
         <li>
           <span class="parallax-wrap"
@@ -57,16 +60,33 @@ const currentPath = Astro.url.pathname
               class="parallax-element"
               href="https://www.facebook.com/edison"
               target="_blank">Fb</a
-            ></span>
+            ></span
+          >
         </li>
         <li>
           <span class="parallax-wrap"
             ><a
               class="parallax-element"
               href="https://www.instagram.com/edison/">In</a
-            ></span>
+            ></span
+          >
         </li>
       </ul>
     </div>
   </div>
 </footer>
+
+<script>
+  const backToTopButton = document.getElementById('backtotop');
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
+
+  if (backToTopButton) {
+    backToTopButton.addEventListener('click', scrollToTop);
+  }
+</script> 

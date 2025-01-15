@@ -2883,9 +2883,10 @@
 		position:relative;
 		margin-left: calc(50% - 50vw)!important;
 		margin-right: calc(50% - 50vw)!important;
-		max-width: 1000%!important;
+		max-width: 500%!important;
 		width: 100vw!important;
 		overflow:hidden;
+	 
 	}
 	
 	.clipped-image-pin {

@@ -1,5 +1,10 @@
-.video-wrapper {
-  height: 1080px;
-  width: 1920px;
-  background-color: aqua;
+/* .video-wrapper {
+  
+  
+} */
+
+
+.clipped-image {
+  clip-path: url(#customMask);
+  transform: scale(1.5); /* Adjust as needed */
 }

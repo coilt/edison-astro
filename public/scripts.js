@@ -20,7 +20,7 @@ import { FirstLoad } from './firstLoad.js'
 import { Shortcodes } from './shortcodes.js'
 import { JustifiedGrid } from './justifiedGrid.js'
 import { Lightbox } from './lightbox.js'
-import { PlayVideo } from './playVideo.js'
+
 
 import { FitThumbScreenWEBGL } from './fitThumbScreenWEBGL.js'
 import '/plugins.js'
@@ -61,7 +61,7 @@ function initializeApp() {
   JustifiedGrid()
   Lightbox()
   ContactForm()
-  PlayVideo()
+  
   ContactMap()
   CustomFunction()
 }
@@ -5223,7 +5223,7 @@ function LoadViaAjax() {
   Shortcodes()
   JustifiedGrid()
   Lightbox()
-  PlayVideo()
+ 
   ContactForm()
   ContactMap()
   CustomFunction()

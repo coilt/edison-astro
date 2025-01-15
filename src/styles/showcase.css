@@ -312,6 +312,7 @@
 		width:auto;
 		-webkit-text-fill-color: rgba(0,0,0,0.1);
 		-webkit-background-clip: text;
+		background-clip: text;
 		background-repeat: no-repeat;
 		background-image: linear-gradient(#000, #000);
   		background-size: 0% 100%;
@@ -1484,9 +1485,6 @@
 		opacity:0.1;
 	}
 	
-	.showcase-lists .clapat-sync-slide:hover .slide-title {
-		
-	}
 	
 	.showcase-lists .slide-title span {
 		transform: translateY(160px);
@@ -1796,13 +1794,13 @@
 		z-index:10;
 		opacity:0;
 		pointer-events:none;
-		webkit-transform:scale(0.8);
+		-webkit-transform:scale(0.8);
 		transform: scale(0.8);
 	}
 	
-	.grid-open .showcase-gallery .gallery-zoom-wrapper a.slide-link {
-		/*pointer-events:initial;*/
-	}
+	/* .grid-open .showcase-gallery .gallery-zoom-wrapper a.slide-link {
+		 
+	} */
 	
 	.showcase-gallery a.slide-link .parallax-wrap {
 		width: 80px;

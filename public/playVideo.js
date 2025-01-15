@@ -1,49 +1,26 @@
 export function PlayVideo() {
- 
-
-
   if (document.querySelectorAll('.video-wrapper').length > 0) {
+    document.querySelectorAll('.video-wrapper').forEach((wrapper) => {
+      wrapper.addEventListener('mouseenter', function (e) {})
+    })
 
-    document.querySelectorAll(".video-wrapper").forEach(wrapper => {
-        wrapper.addEventListener("mouseenter", function(e) {
-            if (this.classList.contains("play")) {
-                document.getElementById("ball").classList.add("pause-movie");
-            }
-            gsap.to('#ball', {duration: 0.2, borderWidth: '2px', scale: 1, borderColor:'#fff'});
-            document.getElementById("ball").classList.add("over-movie");
-            document.getElementById("ball").innerHTML = '<i class="fa fa-play"></i><i class="fa fa-pause"></i>';
-        });
+    var videocenter =
+      (window.innerHeight -
+        document.querySelector('.video-cover').offsetHeight) /
+      2
 
-        wrapper.addEventListener("mouseleave", function(e) {
-            gsap.to('#ball', {duration: 0.2, borderWidth: '4px', scale:0.5, borderColor:'#999999'});
-            document.getElementById("ball").classList.remove("over-movie", "pause-movie");
-            document.getElementById("ball").innerHTML = '';
-        });
-
-        wrapper.querySelector(".control").addEventListener("mouseenter", function(e) {
-            gsap.to('#ball', {duration: 0.2, borderWidth: '20px', scale: 0});
-        });
-
-        wrapper.querySelector(".control").addEventListener("mouseleave", function(e) {
-            gsap.to('#ball', {duration: 0.2, borderWidth: '2px', scale: 1, borderColor:'#fff'});
-        });
-    });
-
-    var videocenter = (window.innerHeight - document.querySelector('.video-cover').offsetHeight) / 2;
-
-    var playpause = function(videoObj) {
-        if (videoObj != null) {
-            if (videoObj.paused || videoObj.ended) {
-                videoObj.parentNode.classList.add('play');
-                videoObj.play();
-            } else {
-                videoObj.parentNode.classList.remove('play');
-                videoObj.pause();
-            }
+    var playpause = function (videoObj) {
+      if (videoObj != null) {
+        if (videoObj.paused || videoObj.ended) {
+          videoObj.parentNode.classList.add('play')
+          videoObj.play()
+        } else {
+          videoObj.parentNode.classList.remove('play')
+          videoObj.pause()
         }
-    };
+      }
+    }
 
- 
     //Time format converter - 00:00
     var timeFormat = function (seconds) {
       var m =
@@ -264,7 +241,6 @@ export function PlayVideo() {
       document.addEventListener('DOMContentLoaded', function () {
         const mainPageContent = document.getElementById('main-page-content')
         const videos = mainPageContent.querySelectorAll('video')
-        const ball = document.getElementById('ball')
 
         videos.forEach(function (video) {
           const video_wrapper = video.parentElement

@@ -3089,6 +3089,7 @@
 		width: 100vw!important;
 		height:300vh;
 		overflow:hidden;
+		background-color: #f9f9f9;
 	}
 	
 	.list-rotator-title {

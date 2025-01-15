@@ -152,263 +152,263 @@ export function ScrollEffects() {
   // }
 
   // Hero AutoScroll On Page Load
-  let autoScroll = null
+  // let autoScroll = null
 
-  if (
-    document.body.classList.contains('load-project-thumb') ||
-    document.body.classList.contains('load-project-thumb-with-title')
-  ) {
-    const delayTime = document.body.classList.contains(
-      'load-project-thumb-with-title',
-    )
-      ? 0.6
-      : 1.2
+  // if (
+  //   document.body.classList.contains('load-project-thumb') ||
+  //   document.body.classList.contains('load-project-thumb-with-title')
+  // ) {
+  //   const delayTime = document.body.classList.contains(
+  //     'load-project-thumb-with-title',
+  //   )
+  //     ? 0.6
+  //     : 1.2
 
-    if (
-      document
-        .getElementById('#hero.has-image')
-        .classList.contains('autoscroll')
-    ) {
-      if (document.body.classList.contains('smooth-scroll')) {
-        scrollbar.scrollTop = 0 // Reset the scrollbar position to 0
-        autoScroll = gsap.to(scrollbar, {
-          duration: 0.7,
-          scrollTop: 120,
-          delay: delayTime,
-          ease: Power2.easeInOut,
-        })
-      } else {
-        autoScroll = gsap.to(window, {
-          duration: 0.7,
-          scrollTo: 120,
-          delay: delayTime,
-          ease: Power2.easeInOut,
-        })
-      }
-    }
-  }
+  //   if (
+  //     document
+  //       .getElementById('#hero.has-image')
+  //       .classList.contains('autoscroll')
+  //   ) {
+  //     if (document.body.classList.contains('smooth-scroll')) {
+  //       scrollbar.scrollTop = 0 // Reset the scrollbar position to 0
+  //       autoScroll = gsap.to(scrollbar, {
+  //         duration: 0.7,
+  //         scrollTop: 120,
+  //         delay: delayTime,
+  //         ease: Power2.easeInOut,
+  //       })
+  //     } else {
+  //       autoScroll = gsap.to(window, {
+  //         duration: 0.7,
+  //         scrollTo: 120,
+  //         delay: delayTime,
+  //         ease: Power2.easeInOut,
+  //       })
+  //     }
+  //   }
+  // }
 
   // Add an event listener for the mousewheel event
-  window.addEventListener('wheel', function (event) {
-    if (autoScroll !== null) {
-      // Kill the scroll trigger animation
-      autoScroll.kill()
-      autoScroll = null
-    }
-  })
+  // window.addEventListener('wheel', function (event) {
+  //   if (autoScroll !== null) {
+  //     // Kill the scroll trigger animation
+  //     autoScroll.kill()
+  //     autoScroll = null
+  //   }
+  // })
 
-  if (document.body.classList.contains('swap-logo')) {
-    const imgLogoWhite = document.querySelector('.white-logo')
-    const originalSrcWhite = 'images/logo-white.png'
-    const updatedSrcWhite = 'images/logo-white-symbol.png'
+  // if (document.body.classList.contains('swap-logo')) {
+  //   const imgLogoWhite = document.querySelector('.white-logo')
+  //   const originalSrcWhite = 'images/logo-white.png'
+  //   const updatedSrcWhite = 'images/logo-white-symbol.png'
 
-    const imgLogoBlack = document.querySelector('.black-logo')
-    const originalSrcBlack = 'images/logo.png'
-    const updatedSrcBlack = 'images/logo-symbol.png'
+  //   const imgLogoBlack = document.querySelector('.black-logo')
+  //   const originalSrcBlack = 'images/logo.png'
+  //   const updatedSrcBlack = 'images/logo-symbol.png'
 
-    // Create a scroll trigger
-    ScrollTrigger.create({
-      trigger: 'header', // Set the trigger element
-      start: 'top 120px',
-      onEnter: function () {
-        // Restore the original image source
-        imgLogoWhite.src = originalSrcWhite
-        imgLogoBlack.src = originalSrcBlack
-        gsap.to('#logo', { duration: 0.2, opacity: 1 })
-      },
-      onEnterBack: function () {
-        // Restore the original image source
-        gsap.to('#logo', {
-          duration: 0.2,
-          opacity: 0,
-          onComplete: function () {
-            imgLogoWhite.src = originalSrcWhite
-            imgLogoBlack.src = originalSrcBlack
-            gsap.to('#logo', { duration: 0.2, opacity: 1 })
-          },
-        })
-        document.querySelector('header').classList.remove('swapped-logo')
-      },
-      onLeave: function () {
-        // Change the image source
-        gsap.to('#logo', {
-          duration: 0.2,
-          opacity: 0,
-          onComplete: function () {
-            imgLogoWhite.src = updatedSrcWhite
-            imgLogoBlack.src = updatedSrcBlack
-            gsap.to('#logo', { duration: 0.2, opacity: 1 })
-          },
-        })
-        document.querySelector('header').classList.add('swapped-logo')
-      },
-      onLeaveBack: function () {
-        // Change the image source
-        gsap.to('#logo', {
-          duration: 0.2,
-          opacity: 0,
-          onComplete: function () {
-            imgLogoWhite.src = updatedSrcWhite
-            imgLogoBlack.src = updatedSrcBlack
-            gsap.to('#logo', { duration: 0.2, opacity: 1 })
-          },
-        })
-        document.querySelector('header').classList.add('swapped-logo')
-      },
-    })
+  //   // Create a scroll trigger
+  //   ScrollTrigger.create({
+  //     trigger: 'header', // Set the trigger element
+  //     start: 'top 120px',
+  //     onEnter: function () {
+  //       // Restore the original image source
+  //       imgLogoWhite.src = originalSrcWhite
+  //       imgLogoBlack.src = originalSrcBlack
+  //       gsap.to('#logo', { duration: 0.2, opacity: 1 })
+  //     },
+  //     onEnterBack: function () {
+  //       // Restore the original image source
+  //       gsap.to('#logo', {
+  //         duration: 0.2,
+  //         opacity: 0,
+  //         onComplete: function () {
+  //           imgLogoWhite.src = originalSrcWhite
+  //           imgLogoBlack.src = originalSrcBlack
+  //           gsap.to('#logo', { duration: 0.2, opacity: 1 })
+  //         },
+  //       })
+  //       document.querySelector('header').classList.remove('swapped-logo')
+  //     },
+  //     onLeave: function () {
+  //       // Change the image source
+  //       gsap.to('#logo', {
+  //         duration: 0.2,
+  //         opacity: 0,
+  //         onComplete: function () {
+  //           imgLogoWhite.src = updatedSrcWhite
+  //           imgLogoBlack.src = updatedSrcBlack
+  //           gsap.to('#logo', { duration: 0.2, opacity: 1 })
+  //         },
+  //       })
+  //       document.querySelector('header').classList.add('swapped-logo')
+  //     },
+  //     onLeaveBack: function () {
+  //       // Change the image source
+  //       gsap.to('#logo', {
+  //         duration: 0.2,
+  //         opacity: 0,
+  //         onComplete: function () {
+  //           imgLogoWhite.src = updatedSrcWhite
+  //           imgLogoBlack.src = updatedSrcBlack
+  //           gsap.to('#logo', { duration: 0.2, opacity: 1 })
+  //         },
+  //       })
+  //       document.querySelector('header').classList.add('swapped-logo')
+  //     },
+  //   })
 
-    document
-      .querySelectorAll('a.ajax-link, a.slide-link, a.next-ajax-link-page')
-      .forEach((link) => {
-        link.addEventListener('click', function () {
-          // Restore the original image source when you leave the page
-          if (
-            document.querySelector('header').classList.contains('swapped-logo')
-          ) {
-            gsap.to('#logo', {
-              duration: 0.2,
-              opacity: 0,
-              onComplete: function () {
-                imgLogoWhite.src = originalSrcWhite
-                imgLogoBlack.src = originalSrcBlack
-                gsap.to('#logo', { duration: 0.2, opacity: 1 })
-              },
-            })
-          }
-        })
-      })
-  }
+  //   document
+  //     .querySelectorAll('a.ajax-link, a.slide-link, a.next-ajax-link-page')
+  //     .forEach((link) => {
+  //       link.addEventListener('click', function () {
+  //         // Restore the original image source when you leave the page
+  //         if (
+  //           document.querySelector('header').classList.contains('swapped-logo')
+  //         ) {
+  //           gsap.to('#logo', {
+  //             duration: 0.2,
+  //             opacity: 0,
+  //             onComplete: function () {
+  //               imgLogoWhite.src = originalSrcWhite
+  //               imgLogoBlack.src = originalSrcBlack
+  //               gsap.to('#logo', { duration: 0.2, opacity: 1 })
+  //             },
+  //           })
+  //         }
+  //       })
+  //     })
+  // }
 
   // Back To Top
-  document.getElementById('backtotop').addEventListener('click', function () {
-    if (document.body.classList.contains('smooth-scroll')) {
-      // Assuming scrollbar is a DOM element with an ID
-      gsap.to(document.getElementById('scrollbar'), {
-        duration: 1.5,
-        scrollTop: 0,
-        delay: 0.1,
-        ease: Power4.easeInOut,
-      })
-    }
-  })
+  // document.getElementById('backtotop').addEventListener('click', function () {
+  //   if (document.body.classList.contains('smooth-scroll')) {
+  //     // Assuming scrollbar is a DOM element with an ID
+  //     gsap.to(document.getElementById('scrollbar'), {
+  //       duration: 1.5,
+  //       scrollTop: 0,
+  //       delay: 0.1,
+  //       ease: Power4.easeInOut,
+  //     })
+  //   }
+  // })
 
   //Scroll Down
-  const scrollElements = document.querySelectorAll(
-    '.scroll-down, .hero-arrow.link',
-  )
+  // const scrollElements = document.querySelectorAll(
+  //   '.scroll-down, .hero-arrow.link',
+  // )
 
-  scrollElements.forEach((element) => {
-    element.addEventListener('click', function () {
-      const heroHeight = document.getElementById('hero').clientHeight // Get height using clientHeight for accurate calculation
+  // scrollElements.forEach((element) => {
+  //   element.addEventListener('click', function () {
+  //     const heroHeight = document.getElementById('hero').clientHeight // Get height using clientHeight for accurate calculation
 
-      if (document.body.classList.contains('smooth-scroll')) {
-        // Assuming scrollbar is a DOM element with an ID
-        gsap.to(document.getElementById('scrollbar'), {
-          duration: 1.5,
-          scrollTop: heroHeight,
-          ease: Power4.easeInOut,
-        })
-        gsap.to('#ball', {
-          duration: 0.3,
-          borderWidth: '4px',
-          scale: 0.5,
-          borderColor: '#999999',
-          delay: 0.15,
-        })
-      } else {
-        document.documentElement.scrollTo({
-          top: heroHeight,
-          behavior: 'smooth', // Ensure a smooth scroll
-        })
-        gsap.to('#ball', {
-          duration: 0.3,
-          borderWidth: '4px',
-          scale: 0.5,
-          borderColor: '#999999',
-          delay: 0.15,
-        })
-      }
-    })
-  })
+  //     if (document.body.classList.contains('smooth-scroll')) {
+  //       // Assuming scrollbar is a DOM element with an ID
+  //       gsap.to(document.getElementById('scrollbar'), {
+  //         duration: 1.5,
+  //         scrollTop: heroHeight,
+  //         ease: Power4.easeInOut,
+  //       })
+  //       gsap.to('#ball', {
+  //         duration: 0.3,
+  //         borderWidth: '4px',
+  //         scale: 0.5,
+  //         borderColor: '#999999',
+  //         delay: 0.15,
+  //       })
+  //     } else {
+  //       document.documentElement.scrollTo({
+  //         top: heroHeight,
+  //         behavior: 'smooth', // Ensure a smooth scroll
+  //       })
+  //       gsap.to('#ball', {
+  //         duration: 0.3,
+  //         borderWidth: '4px',
+  //         scale: 0.5,
+  //         borderColor: '#999999',
+  //         delay: 0.15,
+  //       })
+  //     }
+  //   })
+  // })
 
   // Zoom Gallery
 
-  const zoomGalleries = Array.from(document.querySelectorAll('.zoom-gallery'))
+  // const zoomGalleries = Array.from(document.querySelectorAll('.zoom-gallery'))
 
-  zoomGalleries.forEach((zoomGallery) => {
-    const zoomGalleryWrapper = zoomGallery.querySelector(
-      '.zoom-wrapper-gallery',
-    )
-    const zoomWrapperThumb = zoomGallery.querySelector('.zoom-wrapper-thumb')
-    const ZoomItem = zoomGallery.querySelector('.zoom-center .zoom-img-wrapper')
-    const zoomImgsWrapper = Array.from(
-      zoomGallery.querySelectorAll('li:not(.zoom-center) .zoom-img-wrapper'),
-    )
-    const zoomImgsWrapperAll = Array.from(
-      zoomGallery.querySelectorAll('li .zoom-img-wrapper'),
-    )
-    const heightRatio = parseFloat(zoomGalleryWrapper.dataset.heightratio)
-    const zoomImgsHeight = ZoomItem.offsetWidth * heightRatio
-    const paddingBottom = (window.innerHeight - zoomImgsHeight) / 2
+  // zoomGalleries.forEach((zoomGallery) => {
+  //   const zoomGalleryWrapper = zoomGallery.querySelector(
+  //     '.zoom-wrapper-gallery',
+  //   )
+  //   const zoomWrapperThumb = zoomGallery.querySelector('.zoom-wrapper-thumb')
+  //   const ZoomItem = zoomGallery.querySelector('.zoom-center .zoom-img-wrapper')
+  //   const zoomImgsWrapper = Array.from(
+  //     zoomGallery.querySelectorAll('li:not(.zoom-center) .zoom-img-wrapper'),
+  //   )
+  //   const zoomImgsWrapperAll = Array.from(
+  //     zoomGallery.querySelectorAll('li .zoom-img-wrapper'),
+  //   )
+  //   const heightRatio = parseFloat(zoomGalleryWrapper.dataset.heightratio)
+  //   const zoomImgsHeight = ZoomItem.offsetWidth * heightRatio
+  //   const paddingBottom = (window.innerHeight - zoomImgsHeight) / 2
 
-    gsap.set(zoomGallery, { paddingBottom })
-    gsap.set(zoomGalleryWrapper, { height: zoomImgsHeight })
-    gsap.set(zoomWrapperThumb, {
-      top: -paddingBottom,
-      height: window.innerHeight,
-    })
+  //   gsap.set(zoomGallery, { paddingBottom })
+  //   gsap.set(zoomGalleryWrapper, { height: zoomImgsHeight })
+  //   gsap.set(zoomWrapperThumb, {
+  //     top: -paddingBottom,
+  //     height: window.innerHeight,
+  //   })
 
-    gsap.to(zoomGallery, {
-      scrollTrigger: {
-        trigger: zoomGallery,
-        start: function () {
-          const startPin =
-            (window.innerHeight - zoomGalleryWrapper.offsetHeight) / 2
-          return 'top +=' + startPin
-        },
-        end: '+=200%',
-        scrub: true,
-        pin: true,
-      },
-    })
+  //   gsap.to(zoomGallery, {
+  //     scrollTrigger: {
+  //       trigger: zoomGallery,
+  //       start: function () {
+  //         const startPin =
+  //           (window.innerHeight - zoomGalleryWrapper.offsetHeight) / 2
+  //         return 'top +=' + startPin
+  //       },
+  //       end: '+=200%',
+  //       scrub: true,
+  //       pin: true,
+  //     },
+  //   })
 
-    gsap.to(zoomImgsWrapper, {
-      scale: 0.9,
-      opacity: 0,
-      borderRadius: '0',
-      ease: Linear.easeNone,
-      scrollTrigger: {
-        trigger: zoomGallery,
-        start: function () {
-          const startPin =
-            (window.innerHeight - zoomGalleryWrapper.offsetHeight) / 2
-          return 'top +=' + startPin
-        },
-        end: '+=25%',
-        scrub: true,
-      },
-    })
+  //   gsap.to(zoomImgsWrapper, {
+  //     scale: 0.9,
+  //     opacity: 0,
+  //     borderRadius: '0',
+  //     ease: Linear.easeNone,
+  //     scrollTrigger: {
+  //       trigger: zoomGallery,
+  //       start: function () {
+  //         const startPin =
+  //           (window.innerHeight - zoomGalleryWrapper.offsetHeight) / 2
+  //         return 'top +=' + startPin
+  //       },
+  //       end: '+=25%',
+  //       scrub: true,
+  //     },
+  //   })
 
-    const state = Flip.getState(ZoomItem)
-    zoomWrapperThumb.appendChild(ZoomItem)
+  //   const state = Flip.getState(ZoomItem)
+  //   zoomWrapperThumb.appendChild(ZoomItem)
 
-    const zoomAnimation = Flip.from(state, {
-      borderRadius: '0',
-      absolute: true,
-    })
+  //   const zoomAnimation = Flip.from(state, {
+  //     borderRadius: '0',
+  //     absolute: true,
+  //   })
 
-    ScrollTrigger.create({
-      trigger: zoomGalleryWrapper,
-      start: function () {
-        const startPin =
-          (window.innerHeight - zoomGalleryWrapper.offsetHeight) / 2
-        return 'top +=' + startPin
-      },
-      end: '+=200%',
-      scrub: true,
-      animation: zoomAnimation,
-    })
-  })
+  //   ScrollTrigger.create({
+  //     trigger: zoomGalleryWrapper,
+  //     start: function () {
+  //       const startPin =
+  //         (window.innerHeight - zoomGalleryWrapper.offsetHeight) / 2
+  //       return 'top +=' + startPin
+  //     },
+  //     end: '+=200%',
+  //     scrub: true,
+  //     animation: zoomAnimation,
+  //   })
+  // })
 
   gsap.utils
     .toArray('.carousel-shortcode-pin')
@@ -610,180 +610,166 @@ export function ScrollEffects() {
       // }
 
       // Mouseenter event
-      document
-        .querySelectorAll('.showcase-portfolio .clapat-item .slide-inner')
-        .forEach((element) => {
-          element.addEventListener('mouseenter', function () {
-            if (
-              !document
-                .querySelector('.showcase-portfolio')
-                .classList.contains('list-grid')
-            ) {
-              gsap.set(this.querySelectorAll('.slide-title span'), {
-                y: 30,
-                opacity: 0,
-              })
-              gsap.set(this.querySelectorAll('.slide-cat span'), {
-                y: 30,
-                opacity: 0,
-              })
-              gsap.to(this.querySelectorAll('.slide-caption'), {
-                duration: 0.2,
-                opacity: 1,
-                ease: Power2.easeOut,
-              })
-              gsap.to(this.querySelectorAll('.slide-title span'), {
-                duration: 0.3,
-                y: 0,
-                opacity: 1,
-                ease: Power2.easeOut,
-              })
-              gsap.to(this.querySelectorAll('.slide-cat span'), {
-                duration: 0.3,
-                y: 0,
-                opacity: 1,
-                ease: Power2.easeOut,
-              })
-            }
-          })
-        })
+      // document
+      //   .querySelectorAll('.showcase-portfolio .clapat-item .slide-inner')
+      //   .forEach((element) => {
+      //     element.addEventListener('mouseenter', function () {
+      //       if (
+      //         !document
+      //           .querySelector('.showcase-portfolio')
+      //           .classList.contains('list-grid')
+      //       ) {
+      //         gsap.set(this.querySelectorAll('.slide-title span'), {
+      //           y: 30,
+      //           opacity: 0,
+      //         })
+      //         gsap.set(this.querySelectorAll('.slide-cat span'), {
+      //           y: 30,
+      //           opacity: 0,
+      //         })
+      //         gsap.to(this.querySelectorAll('.slide-caption'), {
+      //           duration: 0.2,
+      //           opacity: 1,
+      //           ease: Power2.easeOut,
+      //         })
+      //         gsap.to(this.querySelectorAll('.slide-title span'), {
+      //           duration: 0.3,
+      //           y: 0,
+      //           opacity: 1,
+      //           ease: Power2.easeOut,
+      //         })
+      //         gsap.to(this.querySelectorAll('.slide-cat span'), {
+      //           duration: 0.3,
+      //           y: 0,
+      //           opacity: 1,
+      //           ease: Power2.easeOut,
+      //         })
+      //       }
+      //     })
+      //   })
 
       // Mouseleave event
-      document
-        .querySelectorAll('.showcase-portfolio .clapat-item .slide-inner')
-        .forEach((element) => {
-          element.addEventListener('mouseleave', function () {
-            if (
-              !document
-                .querySelector('.showcase-portfolio')
-                .classList.contains('list-grid')
-            ) {
-              gsap.to(this.querySelectorAll('.slide-caption'), {
-                duration: 0.3,
-                opacity: 0,
-                delay: 0.1,
-                ease: Power2.easeOut,
-              })
-              gsap.to(this.querySelectorAll('.slide-title span'), {
-                duration: 0.3,
-                y: -30,
-                opacity: 0,
-                ease: Power2.easeOut,
-              })
-              gsap.to(this.querySelectorAll('.slide-cat span'), {
+      // document
+      //   .querySelectorAll('.showcase-portfolio .clapat-item .slide-inner')
+      //   .forEach((element) => {
+      //     element.addEventListener('mouseleave', function () {
+      //       if (
+      //         !document
+      //           .querySelector('.showcase-portfolio')
+      //           .classList.contains('list-grid')
+      //       ) {
+      //         gsap.to(this.querySelectorAll('.slide-caption'), {
+      //           duration: 0.3,
+      //           opacity: 0,
+      //           delay: 0.1,
+      //           ease: Power2.easeOut,
+      //         })
+      //         gsap.to(this.querySelectorAll('.slide-title span'), {
+      //           duration: 0.3,
+      //           y: -30,
+      //           opacity: 0,
+      //           ease: Power2.easeOut,
+      //         })
+      //         gsap.to(this.querySelectorAll('.slide-cat span'), {
+      //           duration: 0.5,
+      //           y: -30,
+      //           delay: 0.05,
+      //           opacity: 0,
+      //           ease: Power2.easeOut,
+      //         })
+      //       }
+      //     })
+      //   })
+
+      // Trigger item click
+      // document.querySelectorAll('.trigger-item').forEach((element) => {
+      //   element.addEventListener('click', function () {
+      //     document.body.classList.add('load-project-thumb')
+      //     document
+      //       .querySelectorAll('.carousel-shortcode-thumbs .trigger-item')
+      //       .forEach((item) => {
+      //         if (!item.classList.contains('above')) {
+      //           gsap.to(item, {
+      //             duration: 0.5,
+      //             delay: 0,
+      //             opacity: 0,
+      //             ease: Power4.easeInOut,
+      //           })
+      //         } else {
+      //           gsap.to(item.parentElement, {
+      //             duration: 0.3,
+      //             opacity: 1,
+      //             ease: Power4.easeInOut,
+      //           })
+      //           gsap.to(item, {
+      //             duration: 0.5,
+      //             delay: 0.4,
+      //             opacity: 0,
+      //             ease: Power4.easeInOut,
+      //           })
+      //         }
+      //       })
+      //     setTimeout(() => {
+      //       document.body.classList.add('show-loader')
+      //     }, 300)
+      //     gsap.to(
+      //       'footer, .carousel-nav-wrapper, .showcase-portfolio.list-grid',
+      //       {
+      //         duration: 0.5,
+      //         opacity: 0,
+      //         ease: Power4.easeInOut,
+      //       },
+      //     )
+      //     gsap.to('#ball', {
+      //       duration: 0.3,
+      //       borderWidth: '4px',
+      //       scale: 0.5,
+      //       borderColor: '#999999',
+      //       backgroundColor: 'transparent',
+      //     })
+      //     gsap.to('#ball-loader', {
+      //       duration: 0.3,
+      //       borderWidth: '4px',
+      //       top: 0,
+      //       left: 0,
+      //     })
+      //     document.getElementById('ball').classList.remove('with-blur')
+      //     document.querySelectorAll('#ball p').forEach((p) => p.remove())
+      //   })
+      // })
+
+      document.querySelector('.trigger-item').on('click', function () {
+        document.body.classList.add('load-project-thumb')
+
+        document
+          .querySelectorAll('.carousel-shortcode-thumbs .trigger-item')
+          .forEach(function (item) {
+            if (!item.classList.contains('above')) {
+              gsap.to(item, {
                 duration: 0.5,
-                y: -30,
-                delay: 0.05,
+                delay: 0,
                 opacity: 0,
-                ease: Power2.easeOut,
+                ease: Power4.easeInOut,
+              })
+            } else {
+              gsap.to(item.parentElement, {
+                duration: 0.3,
+                opacity: 1,
+                ease: Power4.easeInOut,
+              })
+              gsap.to(item, {
+                duration: 0.5,
+                delay: 0.4,
+                opacity: 0,
+                ease: Power4.easeInOut,
               })
             }
           })
-        })
 
-      // Trigger item click
-      document.querySelectorAll('.trigger-item').forEach((element) => {
-        element.addEventListener('click', function () {
-          document.body.classList.add('load-project-thumb')
-          document
-            .querySelectorAll('.carousel-shortcode-thumbs .trigger-item')
-            .forEach((item) => {
-              if (!item.classList.contains('above')) {
-                gsap.to(item, {
-                  duration: 0.5,
-                  delay: 0,
-                  opacity: 0,
-                  ease: Power4.easeInOut,
-                })
-              } else {
-                gsap.to(item.parentElement, {
-                  duration: 0.3,
-                  opacity: 1,
-                  ease: Power4.easeInOut,
-                })
-                gsap.to(item, {
-                  duration: 0.5,
-                  delay: 0.4,
-                  opacity: 0,
-                  ease: Power4.easeInOut,
-                })
-              }
-            })
-          setTimeout(() => {
-            document.body.classList.add('show-loader')
-          }, 300)
-          gsap.to(
-            'footer, .carousel-nav-wrapper, .showcase-portfolio.list-grid',
-            {
-              duration: 0.5,
-              opacity: 0,
-              ease: Power4.easeInOut,
-            },
-          )
-          gsap.to('#ball', {
-            duration: 0.3,
-            borderWidth: '4px',
-            scale: 0.5,
-            borderColor: '#999999',
-            backgroundColor: 'transparent',
-          })
-          gsap.to('#ball-loader', {
-            duration: 0.3,
-            borderWidth: '4px',
-            top: 0,
-            left: 0,
-          })
-          document.getElementById('ball').classList.remove('with-blur')
-          document.querySelectorAll('#ball p').forEach((p) => p.remove())
-        })
-      })
-
-      document.querySelector('.trigger-item').on('click', function () {
-        $('body').addClass('load-project-thumb')
-        $('.carousel-shortcode-thumbs .trigger-item').each(function () {
-          if (!$(this).hasClass('above')) {
-            gsap.to($(this), {
-              duration: 0.5,
-              delay: 0,
-              opacity: 0,
-              ease: Power4.easeInOut,
-            })
-          } else {
-            gsap.to($(this).parent(), {
-              duration: 0.3,
-              opacity: 1,
-              ease: Power4.easeInOut,
-            })
-            gsap.to($(this), {
-              duration: 0.5,
-              delay: 0.4,
-              opacity: 0,
-              ease: Power4.easeInOut,
-            })
-          }
-        })
-        setTimeout(function () {
-          $('body').addClass('show-loader')
-        }, 300)
         gsap.to(
           'footer, .carousel-nav-wrapper, .showcase-portfolio.list-grid',
           { duration: 0.5, opacity: 0, ease: Power4.easeInOut },
         )
-        gsap.to('#ball', {
-          duration: 0.3,
-          borderWidth: '4px',
-          scale: 0.5,
-          borderColor: '#999999',
-          backgroundColor: 'transparent',
-        })
-        gsap.to('#ball-loader', {
-          duration: 0.3,
-          borderWidth: '4px',
-          top: 0,
-          left: 0,
-        })
-        $('#ball').removeClass('with-blur')
-        $('#ball p').remove()
       })
     })
 
@@ -823,21 +809,6 @@ export function ScrollEffects() {
         opacity: 0,
         ease: Power4.easeInOut,
       })
-      gsap.to('#ball', {
-        duration: 0.3,
-        borderWidth: '4px',
-        scale: 0.5,
-        borderColor: '#999999',
-        backgroundColor: 'transparent',
-      })
-      gsap.to('#ball-loader', {
-        duration: 0.3,
-        borderWidth: '4px',
-        top: 0,
-        left: 0,
-      })
-      document.getElementById('ball').classList.remove('with-blur')
-      document.querySelectorAll('#ball p').forEach((p) => p.remove())
     })
 
   // News Shortcode
@@ -861,6 +832,7 @@ export function ScrollEffects() {
       gsap.to(newsPost, {
         scrollTrigger: {
           trigger: newsPost,
+          markers: false,
           start: () => {
             const startPin = window.innerHeight / 2 + newsPost.offsetHeight / 2
             return 'top +=' + startPin
@@ -944,84 +916,84 @@ export function ScrollEffects() {
     const totalItems = listItems.length - 1
     const angleIncrement = 180 / totalItems
 
-    // if (!isMobile()) {
-    //   listItems.forEach(function (item, index) {
-    //     const rotationAngle = index * angleIncrement
-    //     const fontSize = gsap.getProperty(item, 'fontSize')
-    //     const lineHeight = gsap.getProperty(item, 'lineHeight')
-    //     const translateZ = (parseFloat(fontSize) + parseFloat(lineHeight)) * 1.8
+    if (!isMobile()) {
+      listItems.forEach(function (item, index) {
+        const rotationAngle = index * angleIncrement
+        const fontSize = gsap.getProperty(item, 'fontSize')
+        const lineHeight = gsap.getProperty(item, 'lineHeight')
+        const translateZ = (parseFloat(fontSize) + parseFloat(lineHeight)) * 1.8
 
-    //     gsap.set(item, {
-    //       rotationX: -rotationAngle,
-    //       transformOrigin: `center center 0`,
-    //       transform: `rotateX(${-rotationAngle}deg) translateZ(${translateZ}px)`,
-    //       zIndex: totalItems - index,
-    //     })
-    //   })
+        gsap.set(item, {
+          rotationX: -rotationAngle,
+          transformOrigin: `center center 0`,
+          transform: `rotateX(${-rotationAngle}deg) translateZ(${translateZ}px)`,
+          zIndex: totalItems - index,
+        })
+      })
 
-    //   function setlistRotatorProperties() {
-    //     gsap.set(listRotatorWrapper, { height: window.innerHeight * 3 })
-    //     gsap.set(listRotatorHeight, { height: window.innerHeight * 4 })
-    //     gsap.set(listRotator, { height: window.innerHeight })
-    //     ScrollTrigger.refresh()
-    //   }
+      function setlistRotatorProperties() {
+        gsap.set(listRotatorWrapper, { height: window.innerHeight * 3 })
+        gsap.set(listRotatorHeight, { height: window.innerHeight * 4 })
+        gsap.set(listRotator, { height: window.innerHeight })
+        ScrollTrigger.refresh()
+      }
 
-    //   gsap.set(listRotator, { rotationX: -90 })
+      gsap.set(listRotator, { rotationX: -90 })
 
-    //   setlistRotatorProperties()
+      setlistRotatorProperties()
 
-    //   window.addEventListener('resize', setlistRotatorProperties)
+      window.addEventListener('resize', setlistRotatorProperties)
 
-    //   gsap.to(listRotatorTitle, {
-    //     scrollTrigger: {
-    //       trigger: listRotatorTitle,
-    //       start: function () {
-    //         const startPin = 0
-    //         return 'top +=' + startPin
-    //       },
-    //       end: function () {
-    //         const endPin = window.innerHeight * 2.5
-    //         return '+=' + endPin
-    //       },
-    //       pin: true,
-    //       scrub: true,
-    //       pinSpacing: false,
-    //     },
-    //   })
+      gsap.to(listRotatorTitle, {
+        scrollTrigger: {
+          trigger: listRotatorTitle,
+          start: function () {
+            const startPin = 0
+            return 'top +=' + startPin
+          },
+          end: function () {
+            const endPin = window.innerHeight * 2.5
+            return '+=' + endPin
+          },
+          pin: true,
+          scrub: true,
+          pinSpacing: false,
+        },
+      })
 
-    //   gsap.to(listRotatorPin, {
-    //     scrollTrigger: {
-    //       trigger: listRotatorPin,
-    //       start: function () {
-    //         const startPin = 0
-    //         return 'top +=' + startPin
-    //       },
-    //       end: function () {
-    //         const endPin = window.innerHeight * 6
-    //         return '+=' + endPin
-    //       },
-    //       pin: true,
-    //       scrub: true,
-    //       pinSpacing: false,
-    //     },
-    //   })
+      gsap.to(listRotatorPin, {
+        scrollTrigger: {
+          trigger: listRotatorPin,
+          start: function () {
+            const startPin = 0
+            return 'top +=' + startPin
+          },
+          end: function () {
+            const endPin = window.innerHeight * 6
+            return '+=' + endPin
+          },
+          pin: true,
+          scrub: true,
+          pinSpacing: false,
+        },
+      })
 
-    //   gsap.to(listRotator, {
-    //     scrollTrigger: {
-    //       trigger: listRotatorWrapper,
-    //       start: function () {
-    //         const startPin = window.innerHeight * 0.8
-    //         return 'top +=' + startPin
-    //       },
-    //       end: function () {
-    //         const endPin = window.innerHeight * 5.5
-    //         return '+=' + endPin
-    //       },
-    //       scrub: true,
-    //     },
-    //     rotationX: 285,
-    //   })
-    // }
+      gsap.to(listRotator, {
+        scrollTrigger: {
+          trigger: listRotatorWrapper,
+          start: function () {
+            const startPin = window.innerHeight * 0.8
+            return 'top +=' + startPin
+          },
+          end: function () {
+            const endPin = window.innerHeight * 5.5
+            return '+=' + endPin
+          },
+          scrub: true,
+        },
+        rotationX: 285,
+      })
+    }
   })
 
   // Clipped Image
@@ -1814,178 +1786,106 @@ export function ScrollEffects() {
       )
     })
 
-    // .title-moving-forward animation
-    const titleMovingForward = gsap.utils.toArray('.title-moving-forward')
-    titleMovingForward.forEach((movingTitle) => {
-      const parallax = gsap.to(movingTitle, 1, {
-        x: -(movingTitle.offsetWidth - window.innerWidth),
-        ease: Linear.easeNone,
-      })
-      const parallaxScene = ScrollTrigger.create({
-        trigger: movingTitle,
-        end: () => `+=${movingTitle.offsetHeight + window.innerHeight}`,
-        animation: parallax,
-        scrub: 2,
-      })
-    })
+    // // .title-moving-forward animation
+    // const titleMovingForward = gsap.utils.toArray('.title-moving-forward')
+    // titleMovingForward.forEach((movingTitle) => {
+    //   const parallax = gsap.to(movingTitle, 1, {
+    //     x: -(movingTitle.offsetWidth - window.innerWidth),
+    //     ease: Linear.easeNone,
+    //   })
+    //   const parallaxScene = ScrollTrigger.create({
+    //     trigger: movingTitle,
+    //     end: () => `+=${movingTitle.offsetHeight + window.innerHeight}`,
+    //     animation: parallax,
+    //     scrub: 2,
+    //   })
+    // })
 
-    // .title-moving-backward animation
-    const titleMovingBackward = gsap.utils.toArray('.title-moving-backward')
-    titleMovingBackward.forEach((movingTitle) => {
-      gsap.set(movingTitle, {
-        x: -(movingTitle.offsetWidth - window.innerWidth),
-      })
-      const parallax = gsap.to(movingTitle, 1, { x: 0, ease: Linear.easeNone })
-      const parallaxScene = ScrollTrigger.create({
-        trigger: movingTitle,
-        end: () => `+=${movingTitle.offsetHeight + window.innerHeight}`,
-        animation: parallax,
-        scrub: 2,
-      })
-    })
+    // // .title-moving-backward animation
+    // const titleMovingBackward = gsap.utils.toArray('.title-moving-backward')
+    // titleMovingBackward.forEach((movingTitle) => {
+    //   gsap.set(movingTitle, {
+    //     x: -(movingTitle.offsetWidth - window.innerWidth),
+    //   })
+    //   const parallax = gsap.to(movingTitle, 1, { x: 0, ease: Linear.easeNone })
+    //   const parallaxScene = ScrollTrigger.create({
+    //     trigger: movingTitle,
+    //     end: () => `+=${movingTitle.offsetHeight + window.innerHeight}`,
+    //     animation: parallax,
+    //     scrub: 2,
+    //   })
+    // })
 
     // Content Row Options
 
-    if ($('.content-row').hasClass('light-section')) {
-      $('.light-section').each(function (i) {
-        $(this).wrap(
-          "<div class='light-section-wrapper'><div class='light-section-container content-max-width'></div></div>",
-        )
-        $('body')
-          .find('.light-section-wrapper')
-          .each(function (i) {
-            $(this).css('background-color', function () {
-              return $(this).children().children().data('bgcolor')
-            })
-          })
-      })
-    }
+    // const contentRows = document.querySelectorAll('.content-row')
+    // contentRows.forEach((row) => {
+    //   if (row.classList.contains('light-section')) {
+    //     const lightSections = document.querySelectorAll('.light-section')
+    //     lightSections.forEach((section) => {
+    //       const wrapper = document.createElement('div')
+    //       wrapper.className = 'light-section-wrapper'
+    //       const container = document.createElement('div')
+    //       container.className = 'light-section-container content-max-width'
+    //       wrapper.appendChild(container)
+    //       section.parentNode.insertBefore(wrapper, section)
+    //       container.appendChild(section)
+    //     })
 
-    if ($('.content-row').hasClass('dark-section')) {
-      $('.dark-section').each(function (i) {
-        $(this).wrap(
-          "<div class='dark-section-wrapper'><div class='dark-section-container content-max-width'></div></div>",
-        )
-        $('body')
-          .find('.dark-section-wrapper')
-          .each(function (i) {
-            $(this).css('background-color', function () {
-              return $(this).children().children().data('bgcolor')
-            })
-          })
-      })
-    }
+    //     const lightSectionWrappers = document.querySelectorAll(
+    //       '.light-section-wrapper',
+    //     )
+    //     lightSectionWrappers.forEach((wrapper) => {
+    //       const bgcolor =
+    //         wrapper.querySelector('.light-section').dataset.bgcolor
+    //       wrapper.style.backgroundColor = bgcolor
+    //     })
+    //   }
 
-    // Clip Path
-    document.querySelectorAll('.content-row.has-clip-path').forEach((row) => {
-      row
-        .closest('.light-section-wrapper, .dark-section-wrapper')
-        .classList.add('clip-effects')
-    })
+    //   if (row.classList.contains('dark-section')) {
+    //     const darkSections = document.querySelectorAll('.dark-section')
+    //     darkSections.forEach((section) => {
+    //       const wrapper = document.createElement('div')
+    //       wrapper.className = 'dark-section-wrapper'
+    //       const container = document.createElement('div')
+    //       container.className = 'dark-section-container content-max-width'
+    //       wrapper.appendChild(container)
+    //       section.parentNode.insertBefore(wrapper, section)
+    //       container.appendChild(section)
+    //     })
 
-    const hasClipPath = gsap.utils.toArray('.has-clip-path')
-    hasClipPath.forEach((hClipPath) => {
-      const clipPath = gsap.to(hClipPath.closest('.clip-effects'), {
-        clipPath: 'inset(0% 0%)',
-        duration: 1,
-        ease: 'Linear.easeNone',
-      })
+    //     const darkSectionWrappers = document.querySelectorAll(
+    //       '.dark-section-wrapper',
+    //     )
+    //     darkSectionWrappers.forEach((wrapper) => {
+    //       const bgcolor = wrapper.querySelector('.dark-section').dataset.bgcolor
+    //       wrapper.style.backgroundColor = bgcolor
+    //     })
+    //   }
+    // })
 
-      ScrollTrigger.create({
-        trigger: hClipPath,
-        start: 'top 100%',
-        end: `+=${window.innerHeight / 3}`,
-        animation: clipPath,
-        scrub: 1,
-      })
-    })
+    // // Clip Path
+    // document.querySelectorAll('.content-row.has-clip-path').forEach((row) => {
+    //   row
+    //     .closest('.light-section-wrapper, .dark-section-wrapper')
+    //     .classList.add('clip-effects')
+    // })
 
-    // Change Header Color
-    if (document.querySelector('.change-header-color')) {
-      imagesLoaded('body', () => {
-        setTimeout(() => {
-          const changeHeaderColor = gsap.utils.toArray('.change-header-color')
-          const pageHeader = document.querySelector('header')
+    // const hasClipPath = gsap.utils.toArray('.has-clip-path')
+    // hasClipPath.forEach((hClipPath) => {
+    //   const clipPath = gsap.to(hClipPath.closest('.clip-effects'), {
+    //     clipPath: 'inset(0% 0%)',
+    //     duration: 1,
+    //     ease: 'Linear.easeNone',
+    //   })
 
-          changeHeaderColor.forEach((changeHeaderElement) => {
-            gsap.to(changeHeaderElement, {
-              scrollTrigger: {
-                trigger: changeHeaderElement,
-                start: 'top 8%',
-                end: () => `+=${changeHeaderElement.offsetHeight}`,
-                onEnter: () => pageHeader.classList.add('white-header'),
-                onEnterBack: () => pageHeader.classList.add('white-header'),
-                onLeave: () => pageHeader.classList.remove('white-header'),
-                onLeaveBack: () => pageHeader.classList.remove('white-header'),
-              },
-            })
-          })
-        }, 100)
-      })
-    }
-
-    if ($('#page-content').hasClass('light-content')) {
-      if ($('#project-nav').hasClass('change-header')) {
-        imagesLoaded('body', function () {
-          setTimeout(function () {
-            var pageNav = document.querySelector('#project-nav.change-header')
-            if (pageNav) {
-              var pageContent = document.querySelector('#page-content')
-              var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
-                scrollTrigger: {
-                  trigger: pageNav,
-                  start: 'top 8%',
-                  end: () => `+=${pageNav.offsetHeight}`,
-                  onEnter: function () {
-                    pageContent.classList.remove('light-content')
-                  },
-                  onEnterBack: function () {
-                    pageContent.classList.remove('light-content')
-                  },
-                  onLeave: function () {
-                    pageContent.classList.add('light-content')
-                  },
-                  onLeaveBack: function () {
-                    pageContent.classList.add('light-content')
-                  },
-                },
-              })
-            }
-          }, 100)
-        })
-      }
-    }
-
-    if ($('#page-content').hasClass('dark-content')) {
-      if ($('#project-nav').hasClass('change-header')) {
-        imagesLoaded('body', function () {
-          setTimeout(function () {
-            var pageNav = document.querySelector('#project-nav')
-            if (pageNav) {
-              var pageContent = document.querySelector('#page-content')
-              var nextPageCaptionParallax = gsap.to('.page-nav-caption', {
-                scrollTrigger: {
-                  trigger: pageNav,
-                  start: 'top 8%',
-                  end: () => `+=${pageNav.offsetHeight}`,
-                  onEnter: function () {
-                    pageContent.classList.add('light-content')
-                  },
-                  onEnterBack: function () {
-                    pageContent.classList.add('light-content')
-                  },
-                  onLeave: function () {
-                    pageContent.classList.remove('light-content')
-                  },
-                  onLeaveBack: function () {
-                    pageContent.classList.remove('light-content')
-                  },
-                },
-              })
-            }
-          }, 100)
-        })
-      }
-    }
+    //   ScrollTrigger.create({
+    //     trigger: hClipPath,
+    //     start: 'top 100%',
+    //     end: `+=${window.innerHeight / 3}`,
+    //     animation: clipPath,
+    //     scrub: 1,
+    //   })
+    // })
   }
 }

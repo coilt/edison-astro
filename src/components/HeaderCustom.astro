@@ -2,13 +2,14 @@
 import '../styles/menu.css'
 import '../styles/nav.button.css'
 import '../styles/header.css'
+import '@styles/globals.css'
  
 ---
 
 
  
  
-
+<header>
   <nav class="menu-wrapper">
     <div id="nav-button">
       <span></span>
@@ -60,6 +61,7 @@ import '../styles/header.css'
       </ul>
     </div>
   </nav>
+</header> 
  
  
   
@@ -86,13 +88,18 @@ import '../styles/header.css'
 });
 
  
-  document.addEventListener('DOMContentLoaded', () => {
-  const navButton = document.getElementById('nav-button')
-  const menuList = document.querySelector('.menu-list')
-  const menuItems = document.querySelectorAll('.menu-list li a')
-  const menuOverlay = document.querySelector('.menu-overlay')
+document.addEventListener('DOMContentLoaded', () => {
+  const navButton = document.getElementById('nav-button');
+  const menuList = document.querySelector('.menu-list');
+  const menuItems = document.querySelectorAll('.menu-list li a');
+  const menuOverlay = document.querySelector('.menu-overlay');
 
-  let tl = gsap.timeline({paused: true});
+  if (!navButton || !menuList || !menuOverlay) {
+    console.error('One or more required elements not found');
+    return;
+  }
+
+  let tl = gsap.timeline({ paused: true });
 
   tl.to(menuItems, {
     y: '0%',
@@ -112,12 +119,13 @@ import '../styles/header.css'
     menuOverlay.classList.toggle('active');
 
     if (menuList.classList.contains('active')) {
-      gsap.set(menuItems, {y: '100%', opacity: 0});
+      gsap.set(menuItems, { y: '100%', opacity: 0 });
       tl.restart();
     } else {
       tl.reverse();
     }
   });
 });
+
 
 </script>

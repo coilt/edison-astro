@@ -1,13 +1,13 @@
 
 #nav-button {
-  top: 50%;
-  display: block;
   width: 1.5rem;
   height: 2.5rem;
-  position: relative;
+  position: fixed;
   cursor: pointer;
   transition: 0.3s ease-in-out;
   z-index: 1000;
+  margin-right: 40px;
+  
 }
 
 #nav-button span {

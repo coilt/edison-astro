@@ -476,7 +476,7 @@ export function FitThumbScreenWEBGL() {
         )
       
 
-      var $body = $('body')
+      const $body = document.body
 
       document.body.addEventListener('mousedown', function (evt) {
         const handler = function (evt) {

@@ -1,29 +1,22 @@
 ---
 // import Header from '@components/Header.astro'
-import Header from '@components/HeaderCustom.astro'
-import Footer from '@components/Footer.astro'
-import Preloader from '@components/Preloader.astro'
 import Menu from '@components/Menu.astro'
-import { initSliderCenter } from '../lib/sliderCenter';
-
+import Footer from '@components/Footer.astro'
+import { initSliderCenter } from '../lib/sliderCenter'
 
 interface Props {
-  title?: string;
-  headerClass?: string;
-  bodyClass?: string;
-  menuColor?: string;
-  primaryColor?: string;
-   
+  title?: string
+  headerClass?: string
+  bodyClass?: string
+  menuColor?: string
+  primaryColor?: string
 }
 
 const { title } = Astro.props
 const { headerClass = '' } = Astro.props
 const { menuColor } = Astro.props
-const { bodyClass = "" } = Astro.props
+const { bodyClass = '' } = Astro.props
 const { primaryColor } = Astro.props
- 
-
-
 ---
 
 <html lang="en">
@@ -32,12 +25,9 @@ const { primaryColor } = Astro.props
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body class={bodyClass} data-primary-color={primaryColor}>
-    <!-- <Preloader centerLine="Loading" /> -->
-   
-    
+    <Menu />
     <article>
       <slot />
-      <!-- your content is injected here -->
     </article>
     <Footer />
   </body>

@@ -1,3 +1,5 @@
+@import url(./variables.css);
+
 
 /*--------------------------------------------------
 	General Styles
@@ -690,13 +692,14 @@
 		line-height:30px;
 		font-weight: 500;
 		font-family: 'Poppins', sans-serif;
-		color: #000;
+		color: var(--primary-light);
 		overflow:hidden;
 		text-align:center;
 	}
 	
 	.showcase-carousel .clapat-slide .slide-caption .slide-title em {
 		font-family: 'Poppins', sans-serif;
+		color: var(--primary-light);
 	}
 	
 	.showcase-carousel .slide-caption .slide-title span {
@@ -729,7 +732,7 @@
 		font-size: calc(1rem + 5.15vw);
 		line-height: calc(1rem + 5.5vw);
 		font-weight: 500;
-		color: #000;
+		color: var(--primary-light);
 		overflow:hidden;
 		text-align:center;
 	}
@@ -894,7 +897,7 @@
 	}
 	
 	.showcase-slider .large-titles .slide-title.change-header {
-		color: #000;
+		color: var(--primary-light);
 	}
 	
 	.uppercase-titles .showcase-slider .large-titles .slide-title {
@@ -1208,7 +1211,7 @@
 		font-size: 20px;
 		line-height:30px;
 		font-weight: 500;
-		color: #000;
+		color: var(--primary-light);
 		overflow:hidden;
 	}
 	
@@ -1228,7 +1231,7 @@
 		font-size: 14px;
 		line-height:30px;
 		font-weight: 500;
-		color: #000;
+		color: var(--primary-light);
 		z-index:10;
 		position:absolute;
 		top:0;
@@ -1245,7 +1248,7 @@
 	}
 	
 	.light-content .showcase-portfolio .slide-caption .slide-cat {
-		color: #fff;
+		color: var(--primary-light);
 	}
 	
 	.showcase-portfolio .slide-caption .slide-cat span {
@@ -1357,11 +1360,11 @@
 	}
 	
 	.showcase-portfolio.list-grid .clapat-item:hover .slide-cat {
-		color: #fff;
+		color: var(--primary-light);
 	}
 	
 	.light-content .showcase-portfolio.list-grid .clapat-item:hover .slide-cat {
-		color: #000;
+		color: var(--primary-light);
 	}
 	
 	.showcase-portfolio.list-grid .clapat-item .slide-date {
@@ -1721,16 +1724,7 @@
 		padding-top: 140%;
 		content: "";
 	}
-	
-	.showcase-gallery .slide-inner {
-		padding-top: 0;
-		width: 16%;
-		height: auto;
-		margin:0px;
-		overflow:visible;
-		aspect-ratio: 10/14;
-	}
-	
+
 	.showcase-gallery .slide-inner::after {
 		display: block;
 		content: "";
@@ -1923,7 +1917,7 @@
 	}
 	
 	.light-content .showcase-gallery .slide-caption .slide-cat {
-		color: #fff;
+		color: var(--primary-light);
 	}
 	
 	.showcase-gallery .slide-caption .slide-cat span {

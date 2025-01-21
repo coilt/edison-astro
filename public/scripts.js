@@ -33,21 +33,30 @@ import { HeroSectionEffects } from './HeroSectionEffects.js'
 import { Sliders } from '/sliders.js'
 import { FirstLoad } from './firstLoad.js'
 import { Shortcodes } from './shortcodes.js'
-import { JustifiedGrid } from './justifiedGrid.js'
+ 
 import { Lightbox } from './lightbox.js'
 import { SlowedPin } from './SlowedPin.js'
+import { ElementsAnimation } from './ElementsAnimation.js'
+import { ParallaxEffects } from './ParallaxEffect.js'
+import { AnimationEffects } from './AnimationEffects.js'
+import { MaskEffects } from './MaskEffects.js'
+import { OpacityEffects } from './OpacityEffects.js'
+import { Counter } from './Counter.js'
+
+
+
+import { WaitForImages } from './WaitForImages.js'
 
 
 
 import { FitThumbScreenWEBGL } from './fitThumbScreenWEBGL.js'
-import '/plugins.js'
 import { ContactForm } from '/contact.js'
 import { ContactMap } from '/contact.js'
 import { FitThumbScreenGSAP } from './FitThumbScreenGSAP.js'
 import { Core } from './core.js'
 
 gsap.config({ nullTargetWarn: false })
-// import 'https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js'
+
 
 // Dummy ImagesLoaded
 import { ImagesLoaded } from './imagesLoaded.js'
@@ -71,9 +80,12 @@ function initializeApp() {
   SlowedPin() 
   PinnedGallery()
   HeroSectionEffects()
-
-
-
+  ElementsAnimation()
+  ParallaxEffects()
+  AnimationEffects()
+  MaskEffects()
+  OpacityEffects()
+  Counter()
 
 
   PageLoad()
@@ -90,7 +102,7 @@ function initializeApp() {
   FitThumbScreenWEBGL()
   Shortcodes()
   Core()
-  JustifiedGrid()
+ 
   Lightbox()
   ContactForm()
   
@@ -5251,8 +5263,12 @@ function LoadViaAjax() {
   SlowedPin() 
   PinnedGallery()
   HeroSectionEffects()
-
-
+  ElementsAnimation()
+  ParallaxEffects()  
+  AnimationEffects()
+  MaskEffects()
+  OpacityEffects()
+  Counter()
 
 
 
@@ -5271,7 +5287,7 @@ function LoadViaAjax() {
   FitThumbScreenWEBGL()
   LazyLoad()
   Shortcodes()
-  JustifiedGrid()
+ 
   Lightbox()
  
   ContactForm()

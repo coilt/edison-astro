@@ -1170,7 +1170,7 @@
 	}
 	
 	.light-content .light-section a.link {
-		color:#000;
+		color: var(--primary-light);
 	}
 	
 	a.link::before {

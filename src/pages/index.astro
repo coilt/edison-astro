@@ -25,19 +25,8 @@ const { class: className = '', menuColor = '#000000' } = Astro.props
   headerClass="white-header fullscreen-menu invert-header"
   bodyClass="black"
   primaryColor="#8c6144"
-  >
-
-  <svg width="0" height="0" style="position: absolute;">
-    <defs>
-      <clipPath id="customMask" clipPathUnits="objectBoundingBox">
-        <!-- Your custom mask path here -->
-        <path d="M0,0 C0.5,0 0.5,1 1,1 L1,0 Z"/>
-      </clipPath>
-    </defs>
-  </svg>
-  
+>
   <main>
-    <Menu /> 
     <div class="cd-index cd-main-content">
       <div id="page-content" class="light-content" data-bgcolor="#080532">
         <Hero />
@@ -54,6 +43,5 @@ const { class: className = '', menuColor = '#000000' } = Astro.props
 </Layout>
 
 <script is:inline src="/scripts.js" type="module" "client:load": true;></script>
-<script is:inline src="/plugins.js" type="module" "client:load": true;></script>
 <script is:inline src="/GridToFullScreen.js" type="module" "client:load": true;
 ></script>

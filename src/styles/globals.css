@@ -6,6 +6,7 @@
 @import url("./portfolio.css");
 @import url("./shortcodes.css");
 @import url("./showcase.css");
+@import url("./variables.css");
 
 @font-face {
     font-family: 'mona-sansextrabold_wide';
@@ -22,6 +23,7 @@
     font-weight: normal;
     font-style: normal;
 }
+ 
 
 /*------------------------------------------------------------------
 
@@ -46,8 +48,8 @@
 		font-size:16px;
 		height:100%;
 		width:100%;
-		color:#444;
-		background-color:#fff;
+		color: var(--primary-light);
+		 
 	 	
 	}
 
@@ -64,17 +66,19 @@
 	}
 
 	.light-text {
-		color: #e4e4e4 ;
+		color: var(--primary-light);
 	}
+
+
 
  
 	.dark {
 		background-color:#00011d ;	
-		color: #e4e4e4;	 
+		color: var(--primary-light);
 	}
 
 	.light {
-		background-color:#fcfcfc ;			  
+		color: var(--primary-light);		  
 	}
 
 
@@ -143,17 +147,17 @@
 	b,
 	strong {
 		font-weight: 600;
-		color:#000;
+		 
 	}
 	
 	.light-content b, .light-content strong, .dark-section b, .dark-section strong {
 		font-weight: 600;
-		color:#fff;
+		color: var(--primary-light);
 	}
 	
 	.light-content .light-section b, .light-content .light-section strong {
 		font-weight: 600;
-		color:#000;
+		color: var(--primary-light);
 	}
 	
 	cite,
@@ -166,20 +170,20 @@
 	mark, ins {
 		background: none repeat scroll 0 0 #000;
 		text-decoration: none;
-		color: #fff;
+		color: var(--primary-light);
 		padding: 2px 8px;
 		display: inline-block;
 		border-radius: 2px;
 	}
 	
 	.light-content mark, .light-content ins, .dark-section mark, .dark-section ins {
-		background: none repeat scroll 0 0 #fff;
-		color:#000;
+		background: none repeat scroll 0 0;
+		 
 	}
 	
 	.light-content .light-section mark, .light-content .light-section ins {
-		background: none repeat scroll 0 0 #111;
-		color:#fff;
+		background: none repeat scroll 0 0;
+		 
 	}
 	
 	code,
@@ -212,13 +216,11 @@
 	}
 	
 	.light-content pre, .dark-section pre {
-		background-color:rgba(255,255,255,0.05);
-		color:#fff;
+		 
 	}
 	
 	.light-content .light-section pre {
-		background-color:rgba(0,0,0,0.05);
-		color:#000;
+		 
 	}
 	
 	blockquote,
@@ -239,7 +241,7 @@
 	}
 	
 	blockquote {
-		color: #000;
+		color: var(--primary-light);
 		line-height: 1.6;
 		font-size: 1.5rem;
 		margin-bottom: 2.1875rem;
@@ -250,7 +252,7 @@
 	}
 	
 	.light-content blockquote, .dark-section blockquote {
-		color: #fff;
+		color: var(--primary-light);
 	}
 	
 	.light-content .light-section blockquote {
@@ -1824,7 +1826,7 @@
 		font-size: 14px;
 		line-height: 30px;
 		font-weight: 500;
-		color: #000;
+		color: #e5e5e5;
 		pointer-events: initial;
 		display: table;
 		width: auto;
@@ -1842,7 +1844,7 @@
 	.socials-wrap {
 		position:relative;
 		float: right;
-		color: #000;
+		color: var(--primary-light);
 		width: 240px;
 		height: 160px;
 		box-sizing: border-box;
@@ -1990,7 +1992,7 @@
 	}
 	
 	.socials li a {
-		color: #000;		
+		color: var(--primary-light);
 		font-size:14px;
 		font-weight: 500;
 		display: block;
@@ -2007,7 +2009,7 @@
 	}
 	
 	.socials li a:hover {
-		color: #000;
+		color: var(--primary-light);
 		opacity:1;
 	}
 	
@@ -2100,7 +2102,7 @@
 	.button-icon {
 		height: 40px;
 		width: 40px;
-		color: #000;
+		color: var(--primary-light);
 		text-align: center;
 		line-height: 40px;
 		font-size: 18px;
@@ -2150,7 +2152,7 @@
 		overflow: hidden;
 		width:auto;
 		padding:0 10px;
-		color:#000;
+		color: var(--primary-light);
 		-webkit-transition: color 0.05s ease-in-out;
 		transition: color 0.05s ease-in-out;
 	}

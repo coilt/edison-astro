@@ -1,9 +1,11 @@
 import { gsap, Power4 } from '/node_modules/gsap/all'
 
 export function TriggerItem() {
-  document
-    .querySelector('.trigger-item')
-    .addEventListener('click', function () {
+  // Check if the element with class "trigger-item" exists on the page
+  const triggerItem = document.querySelector('.trigger-item')
+  if (triggerItem) {
+    // If the element is found, add the event listener and perform the animation
+    triggerItem.addEventListener('click', function () {
       document.body.classList.add('load-project-thumb')
       document
         .querySelectorAll('.carousel-shortcode-thumbs .trigger-item')
@@ -38,4 +40,9 @@ export function TriggerItem() {
         ease: Power4.easeInOut,
       })
     })
+  } else {
+    // If the element is not found, return early from the function
+    console.log('Element with class "trigger-item" not found on page')
+    return
+  }
 }

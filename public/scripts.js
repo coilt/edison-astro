@@ -18,7 +18,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 import { HeroElement } from './heroElement.js'
 import { CarouselPin } from './carouselPin.js'
-import { TriggerItem } from './triggerItem.js'
+import { TriggerItem } from './TriggerItem.js'
 import { NewsShortcode } from './NewsShortcode.js'
 import { listRotator } from './ListRotator.js'
 import { ClippedImage } from './ClippedImage.js'
@@ -224,114 +224,117 @@ function PageLoad() {
         ease: Power2.easeOut,
       })
 
+
+
+
+
       if (document.getElementById('hero').classList.contains('has-image')) {
-        gsap.set(document.getElementById('hero-bg-image'), {
+        gsap.set('#hero-bg-image', {
           scale: 1.1,
           opacity: 0,
-        })
-        gsap.set(document.querySelectorAll('hero-caption .hero-title span'), {
+        });
+      
+        gsap.set('#hero-caption .hero-title span', {
           y: 120,
           opacity: 0,
-        })
-        gsap.set(
-          document.querySelectorAll('hero-caption .hero-subtitle span'),
-          { y: 30, opacity: 0 },
-        )
-
-        gsap.to(document.getElementById('#hero-bg-image'), {
+        });
+      
+        gsap.set('#hero-caption .hero-subtitle span', {
+          y: 30,
+          opacity: 0,
+        });
+      
+        gsap.to('#hero-bg-image', {
           duration: 1,
           scale: 1,
           opacity: 1,
           delay: 0.2,
           ease: Power2.easeOut,
-        })
-        gsap.to(
-          document.querySelectorAll('#hero-caption .caption-timeline span'),
-          {
-            duration: 0.7,
-            y: 0,
-            opacity: 1,
-            stagger: 0.1,
-            delay: 0.7,
-            ease: Power3.easeOut,
-            onComplete: function () {
-              gsap.to(
-                document.querySelectorAll(
-                  '.hero-footer-left, .hero-footer-right',
-                ),
-                {
-                  duration: 1,
-                  y: 0,
-                  opacity: 1,
-                  delay: 0,
-                  ease: Power2.easeOut,
-                },
-              )
-              gsap.to(
-                document.querySelectorAll('#main-page-content, #page-nav'),
-                { duration: 0.4, opacity: 1, delay: 0, ease: Power2.easeOut },
-              )
-            },
+        });
+      
+        gsap.to('#hero-caption .caption-timeline span', {
+          duration: 0.7,
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          delay: 0.7,
+          ease: Power3.easeOut,
+          onComplete: function () {
+            gsap.to('.hero-footer-left, .hero-footer-right', {
+              duration: 1,
+              y: 0,
+              opacity: 1,
+              delay: 0,
+              ease: Power2.easeOut,
+            });
+      
+            gsap.to('#main-page-content, #page-nav', {
+              duration: 0.4,
+              opacity: 1,
+              delay: 0,
+              ease: Power2.easeOut,
+            });
           },
-        )
+        });
       } else {
-        gsap.set(document.querySelectorAll('#hero-caption .hero-title span'), {
+        gsap.set('#hero-caption .hero-title span', {
           y: 120,
           opacity: 0,
-        })
-        gsap.set(
-          document.querySelectorAll('#hero-caption .hero-subtitle span'),
-          { y: 30, opacity: 0 },
-        )
-
-        gsap.to(
-          document.querySelectorAll('#hero-caption .caption-timeline span'),
-          {
-            duration: 0.7,
-            y: 0,
-            opacity: 1,
-            stagger: 0.1,
-            delay: 0.8,
-            ease: Power3.easeOut,
-            onComplete: function () {
-              gsap.to(document.querySelectorAll('.error-button'), {
-                duration: 0.3,
-                y: 0,
-                opacity: 1,
-                rotation: 0,
-                delay: 0,
-                ease: Power2.easeOut,
-              })
-            },
+        });
+      
+        gsap.set('#hero-caption .hero-subtitle span', {
+          y: 30,
+          opacity: 0,
+        });
+      
+        gsap.to('#hero-caption .caption-timeline span', {
+          duration: 0.7,
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          delay: 0.8,
+          ease: Power3.easeOut,
+          onComplete: function () {
+            gsap.to('.error-button', {
+              duration: 0.3,
+              y: 0,
+              opacity: 1,
+              rotation: 0,
+              delay: 0,
+              ease: Power2.easeOut,
+            });
           },
-        )
-
-        gsap.to(document.querySelectorAll('#main-page-content, #page-nav'), {
+        });
+      
+        gsap.to('#main-page-content, #page-nav', {
           duration: 0.3,
           opacity: 1,
           delay: 1.4,
           ease: Power2.easeOut,
-        })
-
-        gsap.to(
-          document.querySelectorAll('.hero-footer-left, .hero-footer-right'),
-          {
-            duration: 0.3,
-            y: 0,
-            opacity: 1,
-            delay: 1.3,
-            ease: Power2.easeOut,
-            onComplete: function () {
-              const heroFooter = document.querySelector(
-                '#hero-footer.has-border',
-              )
-              if (heroFooter) {
-                heroFooter.classList.add('visible')
-              }
-            },
+        });
+      
+        gsap.to('.hero-footer-left, .hero-footer-right', {
+          duration: 0.3,
+          y: 0,
+          opacity: 1,
+          delay: 1.3,
+          ease: Power2.easeOut,
+          onComplete: function () {
+            const heroFooter = document.querySelector('#hero-footer.has-border');
+            if (heroFooter) {
+              heroFooter.classList.add('visible');
+            }
           },
-        )
+        });
       }
+
+
+
+
+
+
+
+
 
       // Fading In Showcase Carousel elements on Finised
       gsap.set(

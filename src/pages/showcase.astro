@@ -44,19 +44,21 @@ const { class: className = '', menuColor = '#000000' } = Astro.props
                             <a
                               class="slide-link"
                               data-type="page-transition"
-                              href="project01.html"></a>
+                              href="/project01">
                             <div class="section-image trigger-item-link">
                               <img
                                 src="images/01hero.jpg"
                                 class="item-image grid__item-img"
                                 alt=""
                               />
+                              
                             </div>
                             <img
                               src="images/01hero.jpg"
                               class="grid__item-img grid__item-img--large"
                               alt=""
                             />
+                          </a>
                           </div>
                           <div
                             class="slide-caption trigger-item-link-secondary"
@@ -398,5 +400,4 @@ const { class: className = '', menuColor = '#000000' } = Astro.props
 
 <script src="../lib/clapat"></script>
 <script is:inline src="/scripts.js" type="module" "client:load": true;></script>
-<script is:inline src="/GridToFullScreen.js" type="module" "client:load": true;
-></script>
+<script is:inline src="/GridToFullScreen.js" type="module" "client:load": true;></script>

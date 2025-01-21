@@ -1,4 +1,5 @@
 import { gsap, Linear } from '/node_modules/gsap/all'
+ 
 
 export function HeroSectionEffects() {
   if (document.body.classList.contains('hero-below-caption')) {
@@ -6,7 +7,7 @@ export function HeroSectionEffects() {
   } else {
     if (document.querySelector('#hero').classList.contains('has-image')) {
       const heroCaption = document.querySelector(
-        '#hero.has-image #hero-caption'
+        '#hero.has-image #hero-caption',
       )
       const heroImage = document.querySelector('#hero-image-wrapper')
 
@@ -19,55 +20,88 @@ export function HeroSectionEffects() {
 
       const heroImagePin = gsap.to('#hero-image-wrapper', {
         scrollTrigger: {
-          trigger: document.getElementById('#hero.has-image'),
+          trigger: '#hero.has-image',
+
           start: 'top top',
           end: function () {
-            const durationHeight =
-              document.getElementById('#hero.has-image').outerHeight() -
-              window.innerHeight
+            const heroElement = document.querySelector('#hero.has-image')
+            const durationHeight = heroElement.offsetHeight - window.innerHeight
             return '+=' + durationHeight
           },
+
           pin: '#hero-background-layer',
         },
       })
 
       window.addEventListener('resize', setheroImageProperties)
 
-      const heroImageParallax = gsap.to(
-        '.parallax-scroll-image #hero-bg-image',
-        {
-          duration: 1,
-          backgroundPosition: 'center 95%',
-          ease: Linear.easeNone,
-          scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: () =>
-              `+=${
-                document.getElementById('hero').offsetHeight -
-                window.innerHeight
-              }`,
-            scrub: true,
-          },
-        }
-      )
+      // const heroImageParallax = gsap.to(
+      //   '.parallax-scroll-image #hero-bg-image',
+      //   {
+      //     duration: 1,
+      //     backgroundPosition: 'center 95%',
+      //     ease: Linear.easeNone,
+      //     scrollTrigger: {
+      //       trigger: '#hero',
+      //       start: 'top top',
+      //       end: () =>
+      //         `+=${
+      //           document.getElementById('hero').offsetHeight -
+      //           window.innerHeight
+      //         }`,
+      //       scrub: true,
+      //     },
+      //   },
+      // )
 
-      const heroFooterParallax = gsap.to('#hero-footer', {
-        duration: 1,
-        yPercent: 15,
-        opacity: 0,
-        ease: Linear.easeNone,
-        scrollTrigger: {
-          trigger: '#hero-description',
-          start: 'top 50%',
-          end: function () {
-            const durationHeight =
-              document.getElementById('#hero-description').outerHeight() * 2
-            return '+=' + durationHeight
-          },
-          scrub: true,
-        },
-      })
+		
+      // const heroImageParallax = gsap.to('.parallax-scroll-image #hero-bg-image', {
+      //   duration: 1, 
+      //   backgroundPosition: "center " + 95 +"%", 
+      //   ease:Linear.easeNone,
+      //   scrollTrigger: {
+      //     trigger: '#hero',
+      //     start: "top top",
+      //     end: () => {
+      //       const heroElement = document.getElementById('hero');
+      //       const durationHeight = heroElement.offsetHeight - window.innerHeight;
+      //       return `+=${durationHeight}`;
+      //   },
+      //     scrub: true,
+      //   }
+      // });
+
+
+
+
+      const heroFooter = document.getElementById('#hero-footer')
+      if (heroFooter) {
+        const heroDescription = document.getElementById('#hero-description')
+        if (heroDescription) {
+          gsap.to('#hero-footer', {
+            duration: 1,
+            yPercent: 15,
+            opacity: 0,
+            ease: Linear.easeNone,
+            scrollTrigger: {
+              trigger: '#hero-description',
+              start: 'top 50%',
+              end: function () {
+                const durationHeight =
+                  document.getElementById('#hero-description').outerHeight() * 2
+                return '+=' + durationHeight
+              },
+              scrub: true,
+            },
+          })
+        } else {
+          console.log(
+            'Element with ID "hero-description" not found in the document',
+          )
+        }
+      } else {
+        console.log('Element with ID "hero-footer" not found in the document')
+      }
     }
 
     const heroCaptionParallax = gsap.to(
@@ -83,7 +117,7 @@ export function HeroSectionEffects() {
           end: () => `+=${document.querySelector('#hero').offsetHeight}`,
           scrub: true,
         },
-      }
+      },
     )
 
     // Page and Project Navigation
@@ -177,7 +211,7 @@ export function HeroSectionEffects() {
             `+=${
               Array.from(document.querySelectorAll('#page-nav')).reduce(
                 (total, element) => total + element.offsetHeight,
-                0
+                0,
               ) + document.querySelector('footer').offsetHeight
             }`,
           scrub: true,

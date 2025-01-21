@@ -50,40 +50,6 @@ export function Lightbox() {
     gsap.to(detailsPreloader, { duration: 0.2, opacity: 1 })
     gsap.set(detailImage, { opacity: 0 })
 
-    document.querySelectorAll('.link, .button').forEach((el) => {
-      el.addEventListener('mouseenter', () => {
-        gsap.to('#ball', {
-          duration: 0.2,
-          borderWidth: '0px',
-          scale: 1.5,
-          backgroundColor: 'rgba(153, 153, 153, 1)',
-          opacity: 0.15,
-        })
-        gsap.to('#ball-loader', {
-          duration: 0.2,
-          borderWidth: '2px',
-          top: 4,
-          left: 4,
-        })
-      })
-
-      el.addEventListener('mouseleave', () => {
-        gsap.to('#ball', {
-          duration: 0.3,
-          borderWidth: '4px',
-          scale: 0.5,
-          backgroundColor: 'rgba(153, 153, 153, 0)',
-          opacity: 1,
-        })
-        gsap.to('#ball-loader', {
-          duration: 0.2,
-          borderWidth: '4px',
-          top: 0,
-          left: 0,
-        })
-      })
-    })
-
     let onLoad = () => {
       gsap.to(detailsPreloader, { duration: 0.2, opacity: 0 })
       gsap.set(detailImage, { opacity: 1 })
@@ -222,47 +188,6 @@ export function Lightbox() {
     .toArray('.image-link')
     .forEach((item) => item.addEventListener('click', () => showDetails(item)))
 
-  document.querySelectorAll('.image-link').forEach((item) => {
-    item.addEventListener('mouseenter', function (e) {
-      gsap.to('#ball', {
-        duration: 0.2,
-        borderWidth: '2px',
-        scale: 1,
-        borderColor: '#fff',
-      })
-      gsap.to('#ball-loader', {
-        duration: 0.2,
-        borderWidth: '2px',
-        top: 2,
-        left: 2,
-      })
-
-      const ball = document.querySelector('#ball')
-      ball.classList.add('with-icon')
-      ball.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-plus"></i>')
-    })
-
-    item.addEventListener('mouseleave', function (e) {
-      gsap.to('#ball', {
-        duration: 0.2,
-        borderWidth: '4px',
-        scale: 0.5,
-        borderColor: '#999999',
-      })
-      gsap.to('#ball-loader', {
-        duration: 0.2,
-        borderWidth: '4px',
-        top: 0,
-        left: 0,
-      })
-
-      const ball = document.querySelector('#ball')
-      ball.classList.remove('with-icon')
-      const icon = ball.querySelector('i')
-      if (icon) icon.remove()
-    })
-  })
-
   // Video Popup
   const videoItems = gsap.utils.toArray('.video-link')
 
@@ -375,45 +300,4 @@ export function Lightbox() {
     .forEach((item) =>
       item.addEventListener('click', (e) => showVideoDetails(e, item)),
     )
-
-  document.querySelectorAll('.video-link').forEach((item) => {
-    item.addEventListener('mouseenter', function (e) {
-      gsap.to('#ball', {
-        duration: 0.2,
-        borderWidth: '2px',
-        scale: 1,
-        borderColor: '#fff',
-      })
-      gsap.to('#ball-loader', {
-        duration: 0.2,
-        borderWidth: '2px',
-        top: 2,
-        left: 2,
-      })
-
-      const ball = document.querySelector('#ball')
-      ball.classList.add('with-icon')
-      ball.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-play"></i>')
-    })
-
-    item.addEventListener('mouseleave', function (e) {
-      gsap.to('#ball', {
-        duration: 0.2,
-        borderWidth: '4px',
-        scale: 0.5,
-        borderColor: '#999999',
-      })
-      gsap.to('#ball-loader', {
-        duration: 0.2,
-        borderWidth: '4px',
-        top: 0,
-        left: 0,
-      })
-
-      const ball = document.querySelector('#ball')
-      ball.classList.remove('with-icon')
-      const icon = ball.querySelector('i')
-      if (icon) icon.remove()
-    })
-  })
 }

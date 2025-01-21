@@ -16,6 +16,7 @@ a.hover-item, a.original-item {
 }
 
 .menu-list {
+  text-transform: uppercase;
   display: none;
   flex-direction: column;
   list-style-type: none;

@@ -1,4 +1,4 @@
-import { gsap, Linear } from '/node_modules/gsap/all'
+import { gsap, Linear, ScrollTrigger } from '/node_modules/gsap/all'
 
 export function ParallaxEffects() {
   const hasParallax = gsap.utils.toArray('.has-parallax')

@@ -1,11 +1,4 @@
-import {
-  gsap,
-  Linear,
-  Power2,
-  Power4,
-  Flip,
-  ScrollTrigger,
-} from '/node_modules/gsap/all'
+import { gsap, Linear, Power2, Power4, Flip, ScrollTrigger } from '/node_modules/gsap/all'
 
 function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -697,29 +690,23 @@ export function ScrollEffects() {
       })
     }
 
-    // Vertical Parallax Columns
-    if (window.innerWidth > 767) {
-      gsap.utils.toArray('.vertical-parallax').forEach((parallaxElement) => {
-        const startMovement = -(
-          parallaxElement.offsetHeight * parallaxElement.dataset.startparallax
-        )
-        const endMovement = -(
-          parallaxElement.offsetHeight * parallaxElement.dataset.endparallax
-        )
-        gsap.fromTo(
-          parallaxElement,
-          { y: -startMovement },
-          {
-            y: endMovement,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: parallaxElement,
-              scrub: 0.5,
-            },
-          },
-        )
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM fully loaded and parsed')
+
+      // Select all elements with the class 'vertical-parallax'
+      const parallaxElements = document.querySelectorAll('.vertical-parallax')
+      console.log(`Found ${parallaxElements.length} parallax elements.`)
+
+      // Apply a simple GSAP animation to change opacity
+      gsap.to(parallaxElements, {
+        opacity: 0.5,
+        duration: 1,
+        ease: 'power1.inOut',
+        onComplete: () => {
+          console.log('Animation complete for all parallax elements')
+        },
       })
-    }
+    })
 
     // Moving Gallery
     gsap.utils.toArray('.moving-gallery').forEach((section, index) => {
@@ -1233,7 +1220,5 @@ export function ScrollEffects() {
         },
       )
     })
-
-     
   }
 }

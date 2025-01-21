@@ -42,7 +42,7 @@ export function TriggerItem() {
     })
   } else {
     // If the element is not found, return early from the function
-    console.log('Element with class "trigger-item" not found on page')
+    // console.log('Element with class "trigger-item" not found on page')
     return
   }
 }

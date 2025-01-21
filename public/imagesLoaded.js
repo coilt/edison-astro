@@ -1,5 +1,5 @@
 export function ImagesLoaded(elements, callback) {
-  console.log('Dummy ImagesLoaded called');
+  // console.log('Dummy ImagesLoaded called');
   
   const dummyInstance = {
     elements: Array.from(elements || []),

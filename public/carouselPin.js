@@ -1,28 +1,27 @@
 import { gsap, Power4 } from '/node_modules/gsap/all'
 
 export function CarouselPin() {
-  console.log('CarouselPin loaded')
   gsap.utils
     .toArray('.carousel-shortcode-pin')
     .forEach((carouselShortcodePin) => {
       console.log('Carousel Shortcodes executed')
       const carouselShortcodeThumbs = carouselShortcodePin.querySelector(
-        '.carousel-shortcode-thumbs'
+        '.carousel-shortcode-thumbs',
       )
       const carouselShortcodeCaption = carouselShortcodePin.querySelector(
-        '.carousel-shortcode-caption'
+        '.carousel-shortcode-caption',
       )
       const carouselShortcodeWrapper = carouselShortcodePin.closest(
-        '.carousel-shortcode-wrapper'
+        '.carousel-shortcode-wrapper',
       )
       const carouselShortcodeTitleHide = carouselShortcodePin.querySelectorAll(
-        '.carousel-shortcode-title-hide span'
+        '.carousel-shortcode-title-hide span',
       )
       const carouselShortcodeTitleShow = carouselShortcodePin.querySelectorAll(
-        '.carousel-shortcode-title-show span'
+        '.carousel-shortcode-title-show span',
       )
       const carouselShortcodeCTA = carouselShortcodePin.querySelector(
-        '.carousel-shortcode-cta'
+        '.carousel-shortcode-cta',
       )
 
       carouselShortcodeTitleHide.forEach((element) => {
@@ -38,7 +37,7 @@ export function CarouselPin() {
       })
 
       const clapatItems = carouselShortcodePin.querySelectorAll(
-        '.carousel-shortcode-thumbs .clapat-item'
+        '.carousel-shortcode-thumbs .clapat-item',
       )
 
       gsap.set(clapatItems, {
@@ -92,7 +91,7 @@ export function CarouselPin() {
               carouselShortcodeThumbs.classList.add('is_active')
             },
           },
-          'clapatItemsPause'
+          'clapatItemsPause',
         )
 
       const showHideTitle = gsap
@@ -116,7 +115,7 @@ export function CarouselPin() {
             y: 0,
             stagger: -0.02,
           },
-          '+=4'
+          '+=4',
         )
         .to(
           carouselShortcodeCTA,
@@ -125,7 +124,7 @@ export function CarouselPin() {
             scale: 1,
             y: 0,
           },
-          '<+=50%'
+          '<+=50%',
         )
 
       gsap.to(carouselShortcodePin, {
@@ -171,7 +170,7 @@ export function CarouselPin() {
 
         gsap.to(
           'footer, .carousel-nav-wrapper, .showcase-portfolio.list-grid',
-          { duration: 0.5, opacity: 0, ease: Power4.easeInOut }
+          { duration: 0.5, opacity: 0, ease: Power4.easeInOut },
         )
       })
     })

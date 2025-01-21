@@ -100,7 +100,7 @@ export function HeroSectionEffects() {
           )
         }
       } else {
-        console.log('Element with ID "hero-footer" not found in the document')
+        // console.log('Element with ID "hero-footer" not found in the document')
       }
     }
 

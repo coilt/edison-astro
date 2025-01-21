@@ -12,6 +12,8 @@ import {
   ScrollTrigger,
 } from '/node_modules/gsap/all'
 
+  
+
 gsap.registerPlugin(ScrollTrigger)
 
 // Broken down ScrollEffects imports
@@ -25,6 +27,7 @@ import { ClippedImage } from './ClippedImage.js'
 import { HorizontalGallery } from './HorizontalGallery.js'
 import { PinnedGallery } from './PinnedGallery.js'
 import { HeroSectionEffects } from './HeroSectionEffects.js'
+import { VerticalParallaxEffects} from '././VerticalParallaxEffects.js'
 
 
 // End of ScrollEffects
@@ -86,6 +89,7 @@ function initializeApp() {
   MaskEffects()
   OpacityEffects()
   Counter()
+  VerticalParallaxEffects()
 
 
   PageLoad()
@@ -5272,7 +5276,7 @@ function LoadViaAjax() {
   MaskEffects()
   OpacityEffects()
   Counter()
-
+  VerticalParallaxEffects()
 
 
 

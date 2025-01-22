@@ -3,3 +3,14 @@
   width: 1000px;
   height: 800px;
 }
+
+ 
+
+.spacer-end {
+  width: 100vw;
+  height: 100vh;
+  /* border-width: 1px;
+  border-style: solid;
+  border-color: blueviolet;
+  background-color: blueviolet; */
+}

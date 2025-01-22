@@ -1,5 +1,4 @@
-import { gsap, Linear } from '/node_modules/gsap/all'
- 
+import { gsap, Linear, ScrollTrigger } from '/node_modules/gsap/all'
 
 export function HeroSectionEffects() {
   if (document.body.classList.contains('hero-below-caption')) {
@@ -54,10 +53,9 @@ export function HeroSectionEffects() {
       //   },
       // )
 
-		
       // const heroImageParallax = gsap.to('.parallax-scroll-image #hero-bg-image', {
-      //   duration: 1, 
-      //   backgroundPosition: "center " + 95 +"%", 
+      //   duration: 1,
+      //   backgroundPosition: "center " + 95 +"%",
       //   ease:Linear.easeNone,
       //   scrollTrigger: {
       //     trigger: '#hero',
@@ -70,9 +68,6 @@ export function HeroSectionEffects() {
       //     scrub: true,
       //   }
       // });
-
-
-
 
       const heroFooter = document.getElementById('#hero-footer')
       if (heroFooter) {
@@ -161,6 +156,8 @@ export function HeroSectionEffects() {
         },
       })
 
+      // next project transition 
+
       const nextProjectProgress = gsap.to('.next-hero-progress span', {
         duration: 1,
         width: '100%',
@@ -170,8 +167,36 @@ export function HeroSectionEffects() {
           start: 'top top',
           end: '+=100%',
           scrub: true,
+          onUpdate: (self) => {
+            const progressBar = document.querySelector('.next-hero-progress span')
+            const width = parseFloat(progressBar.style.width)
+            
+            if (width > 80) {
+              const nextLink = document.querySelector('.next-ajax-link-project')
+              const nextPage = nextLink.getAttribute('href')
+              if (nextPage) {
+                window.location.href = nextPage
+              }
+            }
+          },
         },
       })
+      
+      // Add spacer-end trigger as backup
+      ScrollTrigger.create({
+        markers: true,
+        trigger: '.spacer-end',
+        start: 'top 10%',
+        end: 'top 10%',
+        onEnter: () => {
+          const nextLink = document.querySelector('.next-ajax-link-project')
+          const nextPage = nextLink.getAttribute('href')
+          if (nextPage) {
+            window.location.href = nextPage
+          }
+        },
+      })
+      
 
       const startCount = 0
       const num = { const: startCount }

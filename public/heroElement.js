@@ -15,7 +15,7 @@ function isMobile() {
 
 export function HeroElement() {
   const heroElement = document.getElementById('#hero')
-  console.log(heroElement)
+  // console.log(heroElement)
 
   gsap.defaults({ overwrite: 'auto' })
   gsap.registerPlugin(ScrollTrigger, Flip)

@@ -765,150 +765,152 @@ export function PageLoadActions() {
         .querySelectorAll('#hero-footer')
         .forEach((_element27) => _element27.classList.add('white-header'))
     }
-    document.querySelectorAll('.next-ajax-link-project').forEach((_element28) =>
-      _element28.addEventListener('click', function () {
-        document
-          .querySelectorAll('body')
-          .forEach((_element29) =>
-            _element29.classList.add('load-project-thumb'),
-          )
-        document
-          .querySelectorAll('header')
-          .forEach((_element30) => _element30.classList.remove('white-header'))
-        document
-          .querySelectorAll('#app')
-          .forEach((_element31) =>
-            _element31.parentNode.removeChild(_element31),
-          )
-        const _start = document.querySelectorAll('.next-project-image-wrapper')
-        _start.forEach((_element38) => _element38.classList.add('temporary'))
-        const _chain3 = document
-          .querySelectorAll(_start)
-          .appendTo('body')
-          .toArray()
-        if (
-          !document
-            .querySelectorAll('.next-ajax-link-project')
-            .classList.contains('auto-trigger')
-        ) {
-          document
-            .querySelectorAll('body')
-            .forEach((_element33) => _element33.classList.add('show-loader'))
-        }
-        gsap.to(document.querySelectorAll('.next-hero-counter span'), {
-          duration: 0.3,
-          y: -20,
-          opacity: 0,
-          delay: 0,
-          ease: Power2.easeInOut,
-        })
-        gsap.to(document.querySelectorAll('.next-hero-title span'), {
-          duration: 0.3,
-          y: -80,
-          opacity: 0,
-          stagger: 0.05,
-          delay: 0,
-          ease: Power2.easeInOut,
-        })
-        gsap.to(document.querySelectorAll('.next-hero-subtitle span'), {
-          duration: 0.3,
-          y: -40,
-          opacity: 0,
-          stagger: 0.05,
-          delay: 0.1,
-          ease: Power2.easeInOut,
-        })
-        gsap.set(
-          document.querySelectorAll(
-            '#project-nav.change-header, .next-hero-progress',
-          ),
-          {
-            backgroundColor: 'transparent',
-          },
-        )
-        gsap.to(document.querySelectorAll('.next-hero-progress span'), {
-          duration: 0.4,
-          width: '100%',
-          ease: Power2.easeInOut,
-          onComplete: function () {
-            gsap.to(document.querySelectorAll('.next-hero-progress'), {
-              duration: 0.4,
-              width: '0%',
-              ease: Power2.easeInOut,
-            })
-          },
-        })
+  //   document.querySelectorAll('.next-ajax-link-project').forEach((_element28) =>
+  //     _element28.addEventListener('click', function () {
+  //       document
+  //         .querySelectorAll('body')
+  //         .forEach((_element29) =>
+  //           _element29.classList.add('load-project-thumb'),
+  //         )
+  //       document
+  //         .querySelectorAll('header')
+  //         .forEach((_element30) => _element30.classList.remove('white-header'))
+  //       document
+  //         .querySelectorAll('#app')
+  //         .forEach((_element31) =>
+  //           _element31.parentNode.removeChild(_element31),
+  //         )
+  //       const _start = document.querySelectorAll('.next-project-image-wrapper')
+  //       _start.forEach((_element38) => _element38.classList.add('temporary'))
+  //       const _chain3 = document
+  //         .querySelectorAll(_start)
+  //         .appendTo('body')
+  //         .toArray()
+  //       if (
+  //         !document
+  //           .querySelectorAll('.next-ajax-link-project')
+  //           .classList.contains('auto-trigger')
+  //       ) {
+  //         document
+  //           .querySelectorAll('body')
+  //           .forEach((_element33) => _element33.classList.add('show-loader'))
+  //       }
+  //       gsap.to(document.querySelectorAll('.next-hero-counter span'), {
+  //         duration: 0.3,
+  //         y: -20,
+  //         opacity: 0,
+  //         delay: 0,
+  //         ease: Power2.easeInOut,
+  //       })
+  //       gsap.to(document.querySelectorAll('.next-hero-title span'), {
+  //         duration: 0.3,
+  //         y: -80,
+  //         opacity: 0,
+  //         stagger: 0.05,
+  //         delay: 0,
+  //         ease: Power2.easeInOut,
+  //       })
+  //       gsap.to(document.querySelectorAll('.next-hero-subtitle span'), {
+  //         duration: 0.3,
+  //         y: -40,
+  //         opacity: 0,
+  //         stagger: 0.05,
+  //         delay: 0.1,
+  //         ease: Power2.easeInOut,
+  //       })
+  //       gsap.set(
+  //         document.querySelectorAll(
+  //           '#project-nav.change-header, .next-hero-progress',
+  //         ),
+  //         {
+  //           backgroundColor: 'transparent',
+  //         },
+  //       )
+  //       gsap.to(document.querySelectorAll('.next-hero-progress span'), {
+  //         duration: 0.4,
+  //         width: '100%',
+  //         ease: Power2.easeInOut,
+  //         onComplete: function () {
+  //           gsap.to(document.querySelectorAll('.next-hero-progress'), {
+  //             duration: 0.4,
+  //             width: '0%',
+  //             ease: Power2.easeInOut,
+  //           })
+  //         },
+  //       })
 
-        gsap.to(
-          document.querySelectorAll(
-            '#main-page-content, #hero, #hero-image-wrapper',
-          ),
-          {
-            duration: 0.3,
-            opacity: 0,
-          },
-        )
-        gsap.to(document.querySelectorAll('.next-project-image'), {
-          duration: 0.6,
-          scale: 1.02,
-          clipPath: 'inset(0 0%)',
-          opacity: 1,
-          ease: Power2.easeInOut,
-          onComplete: function () {
-            document
-              .querySelectorAll('.temporary .next-project-image')
-              .forEach((_element37) => _element37.classList.add('visible'))
-          },
-        })
-        gsap.to(document.querySelectorAll('footer, .all-works'), {
-          duration: 0.3,
-          opacity: 0,
-          ease: Power2.easeInOut,
-        })
-      }),
-    )
-  } else if (
-    document.querySelectorAll('body').classList.contains('disable-ajaxload')
-  ) {
-    document.querySelectorAll('.next-ajax-link-project').forEach((_element39) =>
-      _element39.addEventListener('click', function () {
-        const _start2 = document.querySelectorAll('body')
-        _start2.forEach((_element46) =>
-          _element46.classList.add('load-project-thumb-with-title'),
-        )
-        _start2.forEach((_element47) => _element47.classList.add('show-loader'))
-        document
-          .querySelectorAll('header')
-          .forEach((_element41) => _element41.classList.remove('white-header'))
-        document
-          .querySelectorAll('#app')
-          .forEach((_element42) =>
-            _element42.parentNode.removeChild(_element42),
-          )
+  //       gsap.to(
+  //         document.querySelectorAll(
+  //           '#main-page-content, #hero, #hero-image-wrapper',
+  //         ),
+  //         {
+  //           duration: 0.3,
+  //           opacity: 0,
+  //         },
+  //       )
+  //       gsap.to(document.querySelectorAll('.next-project-image'), {
+  //         duration: 0.6,
+  //         scale: 1.02,
+  //         clipPath: 'inset(0 0%)',
+  //         opacity: 1,
+  //         ease: Power2.easeInOut,
+  //         onComplete: function () {
+  //           document
+  //             .querySelectorAll('.temporary .next-project-image')
+  //             .forEach((_element37) => _element37.classList.add('visible'))
+  //         },
+  //       })
+  //       gsap.to(document.querySelectorAll('footer, .all-works'), {
+  //         duration: 0.3,
+  //         opacity: 0,
+  //         ease: Power2.easeInOut,
+  //       })
+  //     }),
+  //   )
+  // } else if (
+  //   document.querySelectorAll('body').classList.contains('disable-ajaxload')
+  // ) {
+  //   document.querySelectorAll('.next-ajax-link-project').forEach((_element39) =>
+  //     _element39.addEventListener('click', function () {
+  //       const _start2 = document.querySelectorAll('body')
+  //       _start2.forEach((_element46) =>
+  //         _element46.classList.add('load-project-thumb-with-title'),
+  //       )
+  //       _start2.forEach((_element47) => _element47.classList.add('show-loader'))
+  //       document
+  //         .querySelectorAll('header')
+  //         .forEach((_element41) => _element41.classList.remove('white-header'))
+  //       document
+  //         .querySelectorAll('#app')
+  //         .forEach((_element42) =>
+  //           _element42.parentNode.removeChild(_element42),
+  //         )
 
-        gsap.to(
-          document.querySelectorAll(
-            '#main-page-content, #hero, #hero-image-wrapper, #project-nav',
-          ),
-          {
-            duration: 0.3,
-            opacity: 0,
-          },
-        )
-        gsap.to(document.querySelectorAll('.next-project-image'), {
-          duration: 0.6,
-          scale: 1,
-          opacity: 0,
-          ease: Power2.easeOut,
-        })
-        gsap.to(document.querySelectorAll('footer, .all-works'), {
-          duration: 0.3,
-          opacity: 0,
-          ease: Power2.easeInOut,
-        })
-      }),
-    )
-  }
+  //       gsap.to(
+  //         document.querySelectorAll(
+  //           '#main-page-content, #hero, #hero-image-wrapper, #project-nav',
+  //         ),
+  //         {
+  //           duration: 0.3,
+  //           opacity: 0,
+  //         },
+  //       )
+  //       gsap.to(document.querySelectorAll('.next-project-image'), {
+  //         duration: 0.6,
+  //         scale: 1,
+  //         opacity: 0,
+  //         ease: Power2.easeOut,
+  //       })
+  //       gsap.to(document.querySelectorAll('footer, .all-works'), {
+  //         duration: 0.3,
+  //         opacity: 0,
+  //         ease: Power2.easeInOut,
+  //       })
+  //     }),
+  //   )
+   }
+
+
 } // Page Load Actions
 
 /*--------------------------------------------------

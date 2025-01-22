@@ -11,11 +11,6 @@ import '@styles/testing.css'
 ---
 
 <Layout>
-
-  <head>
-  <ClientRouter />
-</head>
-
   <body class="uppercase-titles">
     <main>
       <div class="cd-index cd-main-content">
@@ -97,7 +92,7 @@ import '@styles/testing.css'
                 <div id="hero-background-layer" class="parallax-scroll-image">
                   <div
                     id="hero-bg-image"
-                    style="background-image:url(images/01hero.jpg)"
+                    style="background-image:url(images/02hero.jpg)"
                   >
                   </div>
                 </div>
@@ -250,59 +245,10 @@ import '@styles/testing.css'
             </div>
           </div>
         </div>
-        <div>
-     
-        </div>
+        <div></div>
       </div>
     </main>
-
     <div class="spacer-end"></div>
-
-<!--     
-    <script is:inline>
-      let hasTriggered = false
-      
-      const observer = new IntersectionObserver(
-        (entries) => {
-          console.log('Observer callback triggered')
-          entries.forEach((entry) => {
-            console.log('Entry intersection status:', entry.isIntersecting)
-    
-            if (entry.isIntersecting && !hasTriggered) {
-              hasTriggered = true
-              const nextLink = document.querySelector('.next-ajax-link-project')
-              console.log('Found next link:', nextLink)
-              
-              const nextPage = nextLink.getAttribute('href')
-              if (nextPage) {
-                window.location.replace(nextPage)
-              }
-            }
-          })
-        },
-        {
-          threshold: 0.8
-        }
-      )
-    
-      const spacerEnd = document.querySelector('.spacer-end')
-      console.log('Found spacer-end element:', spacerEnd)
-      if (spacerEnd) {
-        console.log('Starting observation of spacer-end')
-        observer.observe(spacerEnd)
-      }
-    </script> -->
-    
-    
-    
-    
-    
-
- 
-
-    
-
- 
   </body>
 </Layout>
 
@@ -317,8 +263,3 @@ import '@styles/testing.css'
 <script is:inline src="/scripts.js" type="module" "client:load": true;></script>
 <script is:inline src="/GridToFullScreen.js" type="module" "client:load": true;
 ></script>
-
-
-
-
- 

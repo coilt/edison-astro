@@ -186,8 +186,8 @@ export function HeroSectionEffects() {
       ScrollTrigger.create({
         markers: true,
         trigger: '.spacer-end',
-        start: 'top 10%',
-        end: 'top 10%',
+        start: 'top 15%',
+        end: 'top 20%',
         onEnter: () => {
           const nextLink = document.querySelector('.next-ajax-link-project')
           const nextPage = nextLink.getAttribute('href')

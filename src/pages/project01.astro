@@ -1,7 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
 import Layout from 'src/layouts/Layout.astro'
-import ProjectHero from '@components/ProjectHero.astro'
 import { ClientRouter } from 'astro:transitions'
 
 import '@styles/globals.css'
@@ -11,10 +9,6 @@ import '@styles/testing.css'
 ---
 
 <Layout>
-  <head>
-    <ClientRouter />
-  </head>
-
   <body class="uppercase-titles">
     <main>
       <div class="cd-index cd-main-content">

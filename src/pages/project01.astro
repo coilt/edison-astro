@@ -1,6 +1,5 @@
 ---
 import Layout from 'src/layouts/Layout.astro'
-import { ClientRouter } from 'astro:transitions'
 
 import '@styles/globals.css'
 import '@styles/all.min.css'
@@ -186,7 +185,7 @@ import '@styles/testing.css'
                     data-bgcolor="#171717"
                   >
                     <figure class="has-parallax">
-                      <img src="images/01hero.jpg" alt="Image Title" />
+                      <img src="/images/01hero.jpg" alt="Image Title" />
                     </figure>
                   </div>
                 </div>
@@ -257,7 +256,6 @@ import '@styles/testing.css'
 </div>
 <div id="rotate-device"></div>
 
-<script src="../lib/clapat"></script>
-<script is:inline src="/scripts.js" type="module" "client:load": true;></script>
-<script is:inline src="/GridToFullScreen.js" type="module" "client:load": true;
-></script>
+ 
+<script is:inline src="/scripts/scripts.js" type="module" "client:load": true;></script>
+ 

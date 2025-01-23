@@ -6,10 +6,12 @@
       "@assets/*": ["src/assets/*"],
       "@lib/*": ["src/lib/*"],
       "@styles/*": ["src/styles/*"],
-      "@types/*": ["src/types/*"]
-    }
+      "@types/*": ["src/types/*"],
+      "@scripts/*": ["public/scripts/*"]
+    },
+    "types": ["astro/client", "astro/content"]
   },
   "extends": "astro/tsconfigs/strict",
-  "include": ["src/**/*", "src/types/**/*"],
+  "include": ["src/**/*", "src/types/**/*", "src/content/config.*"],
   "exclude": ["dist"]
 }

@@ -156,47 +156,51 @@ export function HeroSectionEffects() {
         },
       })
 
-      // next project transition 
+      // next project transition
+      const nextLink = document.querySelector('.next-ajax-link-project')
+      if (nextLink) {
+        const nextProjectProgress = gsap.to('.next-hero-progress span', {
+          duration: 1,
+          width: '100%',
+          ease: Linear.easeNone,
+          scrollTrigger: {
+            trigger: '#project-nav',
+            start: 'top top',
+            end: '+=100%',
+            scrub: true,
+            onUpdate: (self) => {
+              const progressBar = document.querySelector(
+                '.next-hero-progress span',
+              )
+              const width = parseFloat(progressBar.style.width)
 
-      const nextProjectProgress = gsap.to('.next-hero-progress span', {
-        duration: 1,
-        width: '100%',
-        ease: Linear.easeNone,
-        scrollTrigger: {
-          trigger: '#project-nav',
-          start: 'top top',
-          end: '+=100%',
-          scrub: true,
-          onUpdate: (self) => {
-            const progressBar = document.querySelector('.next-hero-progress span')
-            const width = parseFloat(progressBar.style.width)
-            
-            if (width > 80) {
-              const nextLink = document.querySelector('.next-ajax-link-project')
-              const nextPage = nextLink.getAttribute('href')
-              if (nextPage) {
-                window.location.href = nextPage
+              if (width > 80) {
+                const nextPage = nextLink.getAttribute('href')
+                if (nextPage) {
+                  window.location.href = nextPage
+                }
               }
-            }
+            },
           },
-        },
-      })
-      
-      // Add spacer-end trigger as backup
-      ScrollTrigger.create({
-        markers: true,
-        trigger: '.spacer-end',
-        start: 'top 15%',
-        end: 'top 20%',
-        onEnter: () => {
-          const nextLink = document.querySelector('.next-ajax-link-project')
-          const nextPage = nextLink.getAttribute('href')
-          if (nextPage) {
-            window.location.href = nextPage
-          }
-        },
-      })
-      
+        })
+      }
+
+      // redundancy transition using ScollTrigger 
+
+      // if (nextLink) {
+      //   ScrollTrigger.create({
+      //     markers: true,
+      //     trigger: '.spacer-end',
+      //     start: 'top 15%',
+      //     end: 'top 20%',
+      //     onEnter: () => {
+      //       const nextPage = nextLink.getAttribute('href')
+      //       if (nextPage) {
+      //         window.location.href = nextPage
+      //       }
+      //     },
+      //   })
+      // }
 
       const startCount = 0
       const num = { const: startCount }

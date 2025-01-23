@@ -21,11 +21,11 @@ export function HeroElement() {
   gsap.registerPlugin(ScrollTrigger, Flip)
   gsap.config({ nullTargetWarn: false })
 
-  setTimeout(function () {
-    const threeapp = document.getElementById('app')
-    threeapp.className += 'active'
-    document.body.append(threeapp)
-  }, 0)
+  // setTimeout(function () {
+  //   const threeapp = document.getElementById('app')
+  //   threeapp.className += 'active'
+  //   document.body.append(threeapp)
+  // }, 0)
 
   if (document.getElementById('#showcase-slider')) {
     setTimeout(function () {

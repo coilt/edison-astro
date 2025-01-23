@@ -27,13 +27,13 @@ import { ClippedImage } from './ClippedImage.js'
 import { HorizontalGallery } from './HorizontalGallery.js'
 import { PinnedGallery } from './PinnedGallery.js'
 import { HeroSectionEffects } from './HeroSectionEffects.js'
-import { VerticalParallaxEffects} from '././VerticalParallaxEffects.js'
+import { VerticalParallaxEffects} from './VerticalParallaxEffects.js'
 
 
 // End of ScrollEffects
 
 
-import { Sliders } from '/sliders.js'
+import { Sliders } from './sliders.js'
 import { FirstLoad } from './firstLoad.js'
 import { Shortcodes } from './shortcodes.js'
  
@@ -53,8 +53,8 @@ import { WaitForImages } from './WaitForImages.js'
 
 
 import { FitThumbScreenWEBGL } from './fitThumbScreenWEBGL.js'
-import { ContactForm } from '/contact.js'
-import { ContactMap } from '/contact.js'
+import { ContactForm } from './contact.js'
+import { ContactMap } from './contact.js'
 import { FitThumbScreenGSAP } from './FitThumbScreenGSAP.js'
 import { Core } from './core.js'
 

@@ -1,4 +1,5 @@
-a.hover-item, a.original-item {
+a.hover-item,
+a.original-item {
   color: #ffffff !important;
   font-family: sans-serif !important;
   text-decoration: none !important;
@@ -59,7 +60,7 @@ a.hover-item, a.original-item {
 
 .original-item {
   color: rgb(221, 221, 221);
-  transform: rotateX(0deg) translateZ(calc(5vh + 1rem));
+  transform: rotateX(0deg) translateZ(70px);
   transition: opacity 0.2s ease-in-out;
   backface-visibility: hidden;
   position: absolute;
@@ -91,6 +92,24 @@ a.hover-item, a.original-item {
 .menu-overlay.active {
   display: block;
 }
+
+@media (max-width: 780px) {
+  .original-item {
+    transform: rotateX(0deg) translateZ(60px);
+  }
+}
+
+@media (min-width: 781px) and (max-width: 1200px) {
+  .original-item {
+    transform: rotateX(0deg) translateZ(70px);
+  }
+}
+
+
+
+
+
+
 
 /* 
 .menu-item-mask:hover .menu-item-wrapper {

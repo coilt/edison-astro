@@ -380,11 +380,11 @@
 	}
 	
 	#hero-description p {
-		color:#000;
+		color: var(--primary-light)
 	}
 	
 	.light-content #hero-description p {
-		color: #fff;
+		color: var(--primary-light)
 	}
 	
 	#share {

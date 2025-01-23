@@ -5,9 +5,13 @@
   position: fixed;
   cursor: pointer;
   transition: 0.3s ease-in-out;
-  z-index: 1000;
+  z-index: 100;
   margin-right: 40px;
   
+}
+
+.fullscreen-mode #nav-button {
+  display: none;
 }
 
 #nav-button span {

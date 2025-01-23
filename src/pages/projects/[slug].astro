@@ -2,18 +2,42 @@
 import { type CollectionEntry, getCollection } from 'astro:content'
 import Layout from 'src/layouts/Layout.astro'
 import ProjectHero from '@components/ProjectHero.astro'
-import { ClientRouter } from 'astro:transitions'
 
 import '@styles/globals.css'
 import '@styles/all.min.css'
 import '@styles/shortcodes.css'
 import '@styles/testing.css'
+
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+
+interface GalleryItem {
+  image: string
+  caption: string
+}
+
+// Generate paths for all projects
+export async function getStaticPaths() {
+  const projects: CollectionEntry<'projects'>[] =
+    await getCollection('projects')
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }))
+}
+
+// Get current project data
+const { project } = Astro.props as { project: CollectionEntry<'projects'> }
+const { title, date, role, heroImage, description, gallery, nextProject } =
+  project.data
 ---
 
 <Layout>
   <body class="uppercase-titles">
     <main>
-      <div class="cd-index cd-main-content">
+      <div class="cd-index cd-main-content  light-content">
         <div id="page-content">
           <div id="content-scroll">
             <div id="main">
@@ -27,7 +51,7 @@ import '@styles/testing.css'
                       <h1
                         class="hero-title caption-timeline primary-font-title"
                       >
-                        <span><em>The</em> Handbag</span>
+                        <span>{title}</span>
                       </h1>
                       <div class="hero-arrow link caption-timeline">
                         <span><i class="arrow-icon"></i></span>
@@ -36,19 +60,13 @@ import '@styles/testing.css'
                   </div>
                   <div id="hero-description" class="content-max-width">
                     <div class="inner">
-                      <p class="bigger">About The Project</p>
-                      <p class="has-opacity">
-                        Explore our project pages for a showcase of diverse
-                        content created using unique shortcodes, highlighting
-                        our template's impressive features.
-                      </p>
+                      <p class="bigger">Challenge</p>
+                      <p class="has-opacity ">{description}</p>
                       <br />
                       <p class="bigger no-margins">Date</p>
-                      <p class="has-opacity">May 2023</p>
+                      <p class="has-opacity">{date}</p>
                       <p class="bigger no-margins">Role</p>
-                      <p class="has-opacity no-margins">
-                        Art Direction, Web Design, Production
-                      </p>
+                      <p class="has-opacity no-margins">{role}</p>
                       <hr />
                       <p class="has-animation">
                         [ <a
@@ -70,20 +88,11 @@ import '@styles/testing.css'
                             <i class="arrow-icon-down"></i>
                           </div>
                         </div>
-                        <div class="button-text sticky right">
-                          <span data-hover="Scroll to Explore"
-                            >Scroll to Explore</span
-                          >
-                        </div>
+              
                       </div>
                     </div>
                     <div class="hero-footer-right">
-                      <div
-                        id="share"
-                        class="page-action-content"
-                        data-text="Share:"
-                      >
-                      </div>
+               
                     </div>
                   </div>
                 </div>
@@ -92,12 +101,11 @@ import '@styles/testing.css'
                 <div id="hero-background-layer" class="parallax-scroll-image">
                   <div
                     id="hero-bg-image"
-                    style="background-image:url(images/02hero.jpg)"
+                    style={`background-image:url(${heroImage})`}
                   >
                   </div>
                 </div>
               </div>
-
               <div id="main-content">
                 <div id="main-page-content">
                   <div
@@ -106,69 +114,68 @@ import '@styles/testing.css'
                   >
                     <h2 class="has-mask-fill no-margins secondary-font-title">
                       The
-                    </h2>
-                    <h2 class="has-mask-fill">Gallery</h2>
+                    </h2><h2 class="has-mask-fill">Gallery</h2>
                   </div>
 
                   <div
                     class="content-row row_padding_bottom dark-section"
                     data-bgcolor="#0c0c0c"
                   >
-                    <div
-                      class="one_third vertical-parallax"
-                      data-startparallax="0"
-                      data-endparallax="0.3"
-                    >
-                      <figure>
-                        <a
-                          href="images/projects/manifesto01.jpg"
-                          class="image-link"
-                          ><img
-                            src="images/projects/manifesto01.jpg"
-                            alt="Image Title"
-                          /></a
-                        >
-                        <figcaption>Image Caption Here</figcaption>
-                      </figure>
+                    <!-- Floating Gallery -->
+                    <div class="gallery-grid">
+                      {
+                        gallery.map(
+                          (
+                            item: { image: string; caption: string },
+                            index: number,
+                          ) => {
+                            const randomParallax = (
+                              Math.random() - 0.5
+                            ).toFixed(2)
+                            return (
+                              <div
+                                class={`one_third ${index === gallery.length - 1 ? 'last' : ''} vertical-parallax`}
+                                data-startparallax="0"
+                                data-endparallax={randomParallax}
+                              >
+                                <figure>
+                                  <div class="gallery-item" data-index={index}>
+                                    <img src={item.image} alt={item.caption} />
+                                  </div>
+                                  <figcaption>{item.caption}</figcaption>
+                                </figure>
+                              </div>
+                            )
+                          },
+                        )
+                      }
                     </div>
 
-                    <div
-                      class="one_third vertical-parallax"
-                      data-startparallax="0"
-                      data-endparallax="-0.1"
-                    >
-                      <figure>
-                        <a
-                          href="images/projects/manifesto02.jpg"
-                          class="image-link"
-                          ><img
-                            src="images/projects/manifesto02.jpg"
-                            alt="Image Title"
-                          /></a
-                        >
-                        <figcaption>Image Caption Here</figcaption>
-                      </figure>
-                    </div>
-
-                    <div
-                      class="one_third last vertical-parallax"
-                      data-startparallax="0"
-                      data-endparallax="0.15"
-                    >
-                      <figure>
-                        <a
-                          href="images/projects/manifesto03.jpg"
-                          class="image-link"
-                          ><img
-                            src="images/projects/manifesto03.jpg"
-                            alt="Image Title"
-                          /></a
-                        >
-                        <figcaption>Image Caption Here</figcaption>
-                      </figure>
+                    <!-- Fullscreen Swiper -->
+                    <div class="swiper-container fullscreen-swiper">
+                      <div class="swiper-wrapper">
+                        {
+                          gallery.map(
+                            (
+                              item: { image: string; caption: string },
+                              index: number,
+                            ) => (
+                              <div class="swiper-slide">
+                                <div class="swiper-zoom-container">
+                                  <img src={item.image} alt={item.caption} />
+                                  <div class="swiper-caption">
+                                    {item.caption}
+                                  </div>
+                                </div>
+                              </div>
+                            ),
+                          )
+                        }
+                      </div>
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
                     </div>
                   </div>
-
                   <div
                     class="content-row small row_padding_top row_padding_bottom dark-section"
                     data-bgcolor="#0c0c0c"
@@ -234,7 +241,7 @@ import '@styles/testing.css'
                       <div class="next-project-image">
                         <div
                           class="next-project-image-bg"
-                          style="background-image:url(images/02hero.jpg)"
+                          style="background-image:url(/images/02hero.jpg)"
                         >
                         </div>
                       </div>
@@ -259,6 +266,90 @@ import '@styles/testing.css'
 </div>
 <div id="rotate-device"></div>
 
- 
-<script is:inline src="/scripts/scripts.js" type="module" "client:load": true;></script>
- 
+<script is:inline src="/scripts/scripts.js" type="module" "client:load": true;
+></script>
+
+<script>
+  import Swiper from 'swiper'
+  import { Navigation, Zoom } from 'swiper/modules'
+
+  const galleryItems = document.querySelectorAll<HTMLElement>('.gallery-item')
+  const swiperContainer =
+    document.querySelector<HTMLElement>('.fullscreen-swiper')
+  let swiper: Swiper | undefined
+
+  if (swiperContainer) {
+    galleryItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        const index = parseInt(item.dataset.index || '0')
+        swiperContainer.style.display = 'block'
+
+        swiper = new Swiper('.fullscreen-swiper', {
+          modules: [Navigation, Zoom],
+          initialSlide: index,
+          zoom: true,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        })
+      })
+    })
+  }
+</script>
+
+<style>
+  .fullscreen-swiper {
+    z-index: 10000;
+  }
+
+  .fullscreen-mode #nav-button {
+    display: none;
+  }
+
+  .gallery-item {
+    cursor: pointer;
+  }
+
+  .fullscreen-swiper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 1, 18);
+    z-index: 10000;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    max-height: 800px;
+    width: auto;
+     
+  }
+
+  .swiper-caption {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    text-align: center;
+    color: white;
+  }
+
+
+
+  .swiper-button-prev, .swiper-button-next {
+    color: rgba(145, 145, 145, 0.694);
+    max-width: 1rem;
+    width: 0.5rem;
+    height: auto;
+  }
+
+
+</style>
